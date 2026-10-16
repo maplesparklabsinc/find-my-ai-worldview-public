@@ -1,0 +1,321 @@
+{
+  "taxonomy_version": "0.2.2",
+  "status": "Working labels and descriptions. Hypotheses, not validated segments. Names must pass the nametag and outsider-fairness tests in cognitive interviews before launch.",
+  "notes": "prototype: position on each scored construct on the -3..+3 scale; weight: how much that construct defines the perspective (0 = not part of it). signatures: item IDs with the raw direction (agree or disagree) a typical holder would give, used for common-ground and difference copy.",
+  "perspectives": [
+    {
+      "id": "accelerators",
+      "name": "Accelerators",
+      "tagline": "Move faster; the cost of waiting is real.",
+      "card_summary": "Expects big benefits from AI and sees real costs in waiting. Get it to people sooner and improve safeguards as we go.",
+      "description": "You expect AI to bring major benefits, and you think delay has real costs that are easy to overlook. You'd generally rather get useful AI into people's hands sooner and improve the safeguards through testing, monitoring and experience. To you, the risks of moving too slowly deserve as much attention as the risks of moving too fast.",
+      "strongest_objection": "Some harms can't be undone after release. Critics argue that learning from mistakes works only when the mistakes can be fixed.",
+      "discussion_prompt": "What is one AI risk you would want handled before release rather than after?",
+      "prototype": {
+        "C1": 2,
+        "C2": -1,
+        "C3": -2,
+        "C4": -1,
+        "C5": -0.5,
+        "C6": 0
+      },
+      "weight": {
+        "C1": 1,
+        "C2": 0.5,
+        "C3": 2,
+        "C4": 0.5,
+        "C5": 0.5,
+        "C6": 0
+      },
+      "signatures": [
+        {
+          "item": "C3-10",
+          "direction": "agree"
+        },
+        {
+          "item": "C3-06",
+          "direction": "agree"
+        },
+        {
+          "item": "C1-01",
+          "direction": "agree"
+        },
+        {
+          "item": "C3-01",
+          "direction": "disagree"
+        },
+        {
+          "item": "C1-05",
+          "direction": "disagree"
+        }
+      ]
+    },
+    {
+      "id": "stewards",
+      "name": "Stewards",
+      "tagline": "Build it, with rules that have teeth.",
+      "card_summary": "Wants powerful AI under clear, enforceable rules: independent checks, legal responsibility and ways to put things right.",
+      "description": "You think powerful AI should operate within clear rules that can be enforced. Independent checks, legal responsibility and ways to put things right when they go wrong matter to you. You may welcome fast progress, but you want rules that apply even when companies would rather set their own.",
+      "strongest_objection": "Regulators may move too slowly, lack specialist knowledge, or write requirements that are easier for large companies to meet than for smaller ones.",
+      "discussion_prompt": "Which institution would you trust to test AI before it is used on people, and why that one?",
+      "prototype": {
+        "C1": 1,
+        "C2": 1,
+        "C3": 0,
+        "C4": 2,
+        "C5": 1,
+        "C6": 0.5
+      },
+      "weight": {
+        "C1": 0.5,
+        "C2": 0.5,
+        "C3": 0.5,
+        "C4": 2,
+        "C5": 0.5,
+        "C6": 0.25
+      },
+      "signatures": [
+        {
+          "item": "C4-02",
+          "direction": "agree"
+        },
+        {
+          "item": "C4-03",
+          "direction": "agree"
+        },
+        {
+          "item": "C4-09",
+          "direction": "agree"
+        },
+        {
+          "item": "C4-05",
+          "direction": "disagree"
+        },
+        {
+          "item": "C4-06",
+          "direction": "disagree"
+        }
+      ]
+    },
+    {
+      "id": "precautionists",
+      "name": "Precautionists",
+      "tagline": "Test powerful AI before it goes wide.",
+      "card_summary": "Worries some AI harms would be hard to undo. Wants stronger evidence of safety before powerful systems go wide.",
+      "description": "You think some advanced AI could cause serious harm that would be hard to reverse. You want stronger evidence of safety before powerful systems are widely released, even if that delays the benefits. You're not necessarily against AI progress; you think the care taken should match what's at stake if it goes wrong.",
+      "strongest_objection": "Delay has costs too: useful advances arrive later, and limits in one country may move development elsewhere rather than reduce the risk.",
+      "discussion_prompt": "What evidence would convince you that a powerful AI system is safe enough to release?",
+      "prototype": {
+        "C1": 0,
+        "C2": 2,
+        "C3": 2,
+        "C4": 1.5,
+        "C5": 1,
+        "C6": 0
+      },
+      "weight": {
+        "C1": 0,
+        "C2": 1.5,
+        "C3": 2,
+        "C4": 1,
+        "C5": 0.5,
+        "C6": 0
+      },
+      "signatures": [
+        {
+          "item": "C3-01",
+          "direction": "agree"
+        },
+        {
+          "item": "C3-09",
+          "direction": "agree"
+        },
+        {
+          "item": "C2-04",
+          "direction": "agree"
+        },
+        {
+          "item": "C3-06",
+          "direction": "disagree"
+        },
+        {
+          "item": "C2-05",
+          "direction": "disagree"
+        }
+      ]
+    },
+    {
+      "id": "human_control",
+      "name": "Human-Control Defenders",
+      "tagline": "People decide about people.",
+      "card_summary": "AI can advise, but a person who can be held to account should make the final call on decisions about people.",
+      "description": "You think people should keep real authority over AI-assisted decisions that can seriously affect someone's life. AI can help gather evidence, spot patterns and recommend, but you want an accountable person to have the final say. For you, responsibility and the chance to challenge a decision matter alongside accuracy.",
+      "strongest_objection": "Human reviewers can add delay, inconsistency or bias, especially when an AI system has been shown to make more reliable decisions.",
+      "discussion_prompt": "Is there any decision about you that you would rather an AI made? Why or why not?",
+      "prototype": {
+        "C1": 0,
+        "C2": 0.5,
+        "C3": 0.5,
+        "C4": 0.5,
+        "C5": 2.5,
+        "C6": 0
+      },
+      "weight": {
+        "C1": 0.25,
+        "C2": 0.25,
+        "C3": 0.25,
+        "C4": 0.25,
+        "C5": 2.5,
+        "C6": 0
+      },
+      "signatures": [
+        {
+          "item": "C5-02",
+          "direction": "agree"
+        },
+        {
+          "item": "C5-09",
+          "direction": "agree"
+        },
+        {
+          "item": "C5-10",
+          "direction": "agree"
+        },
+        {
+          "item": "C5-05",
+          "direction": "disagree"
+        },
+        {
+          "item": "C5-11",
+          "direction": "disagree"
+        }
+      ]
+    },
+    {
+      "id": "fair_share",
+      "name": "Shared-Gains Advocates",
+      "tagline": "If AI pays off, everyone should share in it.",
+      "card_summary": "Expects AI to create a lot of value and wants workers and communities to share in it, not just the owners.",
+      "description": "You expect AI to create a lot of economic value, and you think the benefits should reach workers and communities, not only the organizations that build or own the technology. You support clear responsibilities for helping people whose work AI changes. You may also see competition and new businesses as ways to create and spread those gains.",
+      "strongest_objection": "Required payments and new obligations could reduce investment, raise costs or make it harder for small businesses to compete. Critics would rather rely on competition and existing employment protections.",
+      "discussion_prompt": "If AI made your own job unnecessary, what would you think you were owed, and by whom?",
+      "prototype": {
+        "C1": 1,
+        "C2": 0.5,
+        "C3": 0,
+        "C4": 0.5,
+        "C5": 0.5,
+        "C6": 2.5
+      },
+      "weight": {
+        "C1": 0.5,
+        "C2": 0.25,
+        "C3": 0,
+        "C4": 0.25,
+        "C5": 0.25,
+        "C6": 2.5
+      },
+      "signatures": [
+        {
+          "item": "C6-01",
+          "direction": "agree"
+        },
+        {
+          "item": "C6-02",
+          "direction": "agree"
+        },
+        {
+          "item": "C6-04",
+          "direction": "agree"
+        },
+        {
+          "item": "C6-06",
+          "direction": "disagree"
+        },
+        {
+          "item": "C6-09",
+          "direction": "disagree"
+        }
+      ]
+    },
+    {
+      "id": "pragmatists",
+      "name": "Pragmatists",
+      "tagline": "Match the rules to the risk.",
+      "card_summary": "Judges each use on its own: let low-risk uses move quickly, ask for more proof where mistakes could hurt people.",
+      "description": "You think decisions about AI should depend on the particular use: what it's for, how much good it could do, and how bad it would be if it went wrong. You'd let low-risk uses move quickly and ask for stronger evidence and safeguards where mistakes could seriously affect people. Large surveys keep finding that a conditional view like this is common.",
+      "strongest_objection": "Case-by-case decisions can be inconsistent and hard to enforce unless clear standards are set in advance, and by the time a use proves risky it may be hard to pull back.",
+      "discussion_prompt": "Name one use of AI you would say yes to and one you would say no to. What is the difference?",
+      "evidence_refs": [
+        "N3",
+        "N9",
+        "R8b"
+      ],
+      "prototype": {
+        "C1": 1,
+        "C2": 0.5,
+        "C3": 0,
+        "C4": 0.75,
+        "C5": 0.75,
+        "C6": 0.5
+      },
+      "weight": {
+        "C1": 1,
+        "C2": 1,
+        "C3": 1,
+        "C4": 1,
+        "C5": 1,
+        "C6": 1
+      },
+      "signatures": [
+        {
+          "item": "C3-02",
+          "direction": "agree"
+        },
+        {
+          "item": "C4-09",
+          "direction": "agree"
+        },
+        {
+          "item": "C1-02",
+          "direction": "agree"
+        },
+        {
+          "item": "C4-05",
+          "direction": "disagree"
+        },
+        {
+          "item": "C1-05",
+          "direction": "disagree"
+        }
+      ]
+    }
+  ],
+  "candidates_not_scored": [
+    {
+      "id": "rights_first",
+      "name": "Rights-First",
+      "note": "Candidate. Depends on research dimension R1 (rights and privacy), which is not in the standard form. Working copy: 'Rights-First: AI must respect individual rights.' Promote only if the pilot shows R1 is a separate factor that tells people apart."
+    },
+    {
+      "id": "open_access",
+      "name": "Open Access Advocates",
+      "note": "Candidate from the 2026-10-13 external review. Depends on R2 (openness). Test in the pilot before adding."
+    },
+    {
+      "id": "sovereignty",
+      "name": "Strategic Sovereignty Advocates",
+      "note": "Candidate from the 2026-10-13 external review. Depends on C4b (sovereignty). Test in the pilot before adding."
+    },
+    {
+      "id": "frontier_risk",
+      "name": "Frontier Risk Guardians",
+      "note": "Candidate from the 2026-10-13 external review. Depends on R4 (frontier risk). Test in the pilot before adding."
+    },
+    {
+      "id": "human_connection",
+      "name": "Human Connection Advocates",
+      "note": "Candidate from the 2026-10-13 external review. Depends on R3 (human boundaries). Test in the pilot before adding."
+    }
+  ]
+}

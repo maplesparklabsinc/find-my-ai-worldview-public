@@ -1,0 +1,425 @@
+{
+  "copy_version": "0.12.2",
+  "note": "Short site copy, moved from docs/04-methodology-and-disclosure.md and docs/01-product-spec.md section 5. Long pages are in content/pages/*.md. Inline links use markdown. {placeholders} are filled from `placeholders`; a null value must be set before launch.",
+  "placeholders": {
+    "contact_email": "findmyaiworldview@maplesparklabs.com",
+    "public_repo_url": null,
+    "scoring_rules_url": "{public_repo_url}/blob/main/docs/02-scoring-spec.md",
+    "sources_url": "{public_repo_url}/blob/main/research/evidence-ledger.csv",
+    "privacy_last_updated": "October 14, 2026"
+  },
+  "site": {
+    "name": "Find My AI Worldview",
+    "maker": "A Maple Spark Labs project"
+  },
+  "nav": {
+    "back_to_quiz": "← Back to the quiz",
+    "back_to_start": "← Back to the start"
+  },
+  "resume": {
+    "in_progress": "You have a quiz in progress.",
+    "continue": "Pick up where you left off",
+    "start_over": "Start over"
+  },
+  "countries": [
+    {
+      "d11_option": "Canada",
+      "code": "CA",
+      "name": "Canada"
+    },
+    {
+      "d11_option": "United States",
+      "code": "US",
+      "name": "the United States"
+    },
+    {
+      "d11_option": "United Kingdom",
+      "code": "GB",
+      "name": "the United Kingdom"
+    },
+    {
+      "d11_option": "Australia",
+      "code": "AU",
+      "name": "Australia"
+    }
+  ],
+  "landing": {
+    "headline": "What do you actually think about AI?",
+    "lede": "See where you land, find the perspective your answers are closest to, and compare with your friends.",
+    "facts": [
+      "{n} quick questions",
+      "Around 10 minutes",
+      "No sign-up",
+      "No right answers"
+    ],
+    "start_button": "Start",
+    "completions": {
+      "text": "{n} people have taken this so far",
+      "show_from": 500
+    },
+    "steps_heading": "How it goes",
+    "steps": [
+      "Answer {n} quick questions. Go with how you lean, or skip any you'd rather not answer.",
+      "See where you land on six questions people disagree about, and which perspective your answers are closest to.",
+      "Share your result and compare with friends to see where you agree and where you don't."
+    ],
+    "perspectives_heading": "Seven perspectives on AI",
+    "perspectives_intro": "People can look at AI's opportunities and risks in very different ways. Your answers may be closest to one of these perspectives. Or you may fall between them, have your own combination, or still be forming your view.",
+    "perspectives_note": "These perspectives are conversation starters, not fixed personality types. Your result may be closest to one, between two, your own combination, still forming, or “AI isn't high on your list.”",
+    "second_start_button": "Start the quiz"
+  },
+  "start": {
+    "heading": "Before you start",
+    "paragraphs": [
+      "By \"AI\" we mean the tools around today: chatbots and assistants, image and voice tools, recommendation feeds, and software that helps make decisions about people. A few questions ask about more powerful AI in the future, and they'll say so.",
+      "There are no right answers. If you're not sure, go with how you lean. You can skip anything."
+    ],
+    "privacy_note": "We save an anonymous copy of your answers so we can count results. No name, no email, nothing that identifies you. [Privacy](/privacy)",
+    "button": "Let's go",
+    "footnote": "{n} quick questions, about 10 minutes"
+  },
+  "quiz": {
+    "about_you_intro": "Last few. These don't change your result; they help us understand everyone's answers.",
+    "progress": "Question {n} of {total}",
+    "scenario_label": "A situation",
+    "section_end": "That's one part done. One quick question about it before the next.",
+    "about_you_heading": "A few about you",
+    "grid_count": "{n} of {total}",
+    "grid_change": "Change",
+    "free_text_hint": "Optional. Please leave out names and contact details.",
+    "free_text_limit": "Up to {n} characters",
+    "free_text_max": 280,
+    "finish_button": "See my result"
+  },
+  "prediction": {
+    "heading": "Before you see your result, where do you think your answers landed?",
+    "body": "Pick the perspective you think you're closest to, or two if you think you're between them. Or skip this. Your guess won't change your result.",
+    "group_label": "Your guess",
+    "options": {
+      "own_combination": "My own combination",
+      "forming": "My views are still forming",
+      "not_priority": "AI isn't high on my list"
+    },
+    "picked": "{n} of 2 picked",
+    "submit": "See my result",
+    "skip": "No guess, skip this"
+  },
+  "reflection": {
+    "heading": "Your guess",
+    "expected": {
+      "perspective": "You expected **{p1}**.",
+      "between": "You expected to sit between **{p1}** and **{p2}**.",
+      "own_combination": "You expected your own combination.",
+      "forming": "You expected your views to be still forming.",
+      "not_priority": "You expected AI not to be high on your list."
+    },
+    "same": {
+      "perspective": "You expected **{p1}**, and that's where your answers landed closest.",
+      "between": "You expected to sit between **{p1}** and **{p2}**, and that's where your answers landed.",
+      "own_combination": "You expected your own combination, and that's where your answers landed.",
+      "forming": "You expected your views to be still forming, and that's what your answers suggest.",
+      "not_priority": "You expected AI not to be high on your list, and that's what your answers suggest."
+    },
+    "actual": {
+      "matched": "Your answers landed closest to **{p1}**.",
+      "mixed_between": "Your answers landed between **{p1}** and **{p2}**.",
+      "mixed_unmatched": "Your answers made your own combination, not close to any one of the seven.",
+      "undecided": "Your answers suggest your views are still forming.",
+      "undecided_middle": "Your answers sit in the middle on every question.",
+      "undecided_coverage": "You skipped enough questions that we can't place your answers yet.",
+      "indifferent": "Your answers suggest AI isn't high on your list."
+    },
+    "prompt": "What feels right about that? What surprised you?"
+  },
+  "footer": {
+    "ai_disclosure": "Built with help from AI. [How this works](/how-it-works)"
+  },
+  "quick_check": {
+    "show_share": 0.25,
+    "own_share": 0.5,
+    "heading": "One quick thing before your result",
+    "intro": "Does this sound like you? It helps us check our descriptions, and it won't change your result.",
+    "question": "How well does this describe you?",
+    "options": [
+      "Not at all",
+      "A little",
+      "Somewhat",
+      "Very well",
+      "Extremely well"
+    ],
+    "result_note": "Before your result, you rated a short description. It was {which}, picked at random to check that our descriptions say something real.",
+    "which_own": "your closest perspective's",
+    "which_other": "a different perspective's"
+  },
+  "research_consent": {
+    "consent_version": "0.1.0",
+    "heading": "Want to help shape this?",
+    "body": "We're still working out whether these perspectives hold up. If you leave your email, we may get in touch to invite you to a short follow-up, like retaking the quiz in a few weeks or a quick chat about the questions. That's it. No newsletter, no marketing.",
+    "email_label": "Your email",
+    "checkbox": "I'm 18 or older and I'm OK with Find My AI Worldview keeping my email, linked to my anonymous answers, so they can contact me about this project. I can ask to be removed at any time.",
+    "button": "Count me in",
+    "thanks": "Thanks, you're on the list. To be removed, email {contact_email} from the same address.",
+    "error": "We couldn't save that just now. Please try again."
+  },
+  "feedback": {
+    "heading": "Think we got something wrong? Tell us.",
+    "problem_label": "What's the problem?",
+    "problem_options": [
+      {
+        "id": "confusing_question",
+        "label": "A question is confusing"
+      },
+      {
+        "id": "loaded_question",
+        "label": "A question feels loaded or one-sided"
+      },
+      {
+        "id": "unfair_perspective",
+        "label": "A perspective is described unfairly"
+      },
+      {
+        "id": "missing_perspective",
+        "label": "There's a perspective missing"
+      },
+      {
+        "id": "result_does_not_fit",
+        "label": "My result doesn't fit me"
+      },
+      {
+        "id": "number_or_source",
+        "label": "A number or source looks wrong"
+      },
+      {
+        "id": "hard_to_use",
+        "label": "Something's hard to use or read"
+      },
+      {
+        "id": "other",
+        "label": "Something else"
+      }
+    ],
+    "target_label": "Which question or perspective? (optional)",
+    "details_label": "What's wrong, and what would be better?",
+    "evidence_label": "Any links or evidence? (optional)",
+    "email_label": "Your email, if you'd like a reply (optional)",
+    "quote_consent": "It's OK to quote this, without my name, on the What's changed page",
+    "attach_result": "Attach my result",
+    "button": "Send",
+    "thanks_heading": "Thanks for telling us",
+    "thanks": "We read everything. When feedback leads to a change, it's listed on [What's changed](/changes).",
+    "error": "We couldn't send that just now. Please try again.",
+    "back_to_result": "Back to your result"
+  },
+  "changelog": {
+    "heading": "What's changed",
+    "intro": "Every change to the questions, the perspectives or how results are worked out is listed here, newest first.",
+    "labels": {
+      "version": "Version {version} · {date}",
+      "what": "What changed:",
+      "why": "Why:",
+      "based_on": "Based on:",
+      "past_results": "Does it change past results?",
+      "version_unreleased": "Version {version}"
+    },
+    "entries": [
+      {
+        "version": "0.1.0",
+        "date": null,
+        "what": "First version. Six things we ask about, seven perspectives, and three other results (still forming, in between, not a priority).",
+        "why": "An early AI-drafted plan had ten \"tribes\". After checking it against published research, we cut it to what the evidence supports.",
+        "based_on": "a review of 43 published sources and a critical outside review of the questions and perspectives by another AI model (ChatGPT); no quiz answers yet.",
+        "past_results": "No, this is the first version."
+      }
+    ]
+  },
+  "results": {
+    "closest_label": "Your closest perspective",
+    "other_label": "Your result",
+    "what_stands_out": "What stands out",
+    "six_answers": "Your six answers",
+    "six_intro": "Where your answers put you on each question. The middle mark is in between.",
+    "go_deeper": "Go deeper",
+    "go_deeper_intro": "More about your result and the perspectives near you. Open whatever interests you.",
+    "about_perspective": "About {perspective}",
+    "strongest_objection": "The strongest objection to this view",
+    "something_to_talk_about": "Something to talk about",
+    "elsewhere": "Elsewhere you might hear",
+    "you_and_others": "You and others",
+    "polls_note": "These come from published polls, not from this quiz.",
+    "source_line": "{source}, {year} · {population}",
+    "other_country": "From {country}",
+    "common_ground": "Common ground",
+    "why": "Why did I get this?",
+    "missing": "We couldn't find your answers in this browser. They're kept only until you close the tab.",
+    "tip_heading": "The question that might tip you"
+  },
+  "saving": {
+    "heading": "Saving your result",
+    "failed": "We couldn't save your result just now. Your answers are still here in this tab.",
+    "retry": "Try again",
+    "view_unsaved": "See my result without saving",
+    "unsaved_note": "This result isn't saved, so there's no link to share or compare. It'll be gone when you close the tab.",
+    "too_quick": "You finished faster than we can count as a considered answer, so we can't save this result. You can still see it here; it just won't have a link to share.",
+    "too_quick_compare": "Without a saved result we can't show the comparison either. To compare, start again and take a little more time over each question.",
+    "outdated": "We updated the quiz while you were taking it, so we can't save these answers. Sorry about that. Please start again with the new version.",
+    "start_again": "Start again",
+    "rate_limited": "A lot of results have been saved from here in the last few minutes. Please wait a few minutes, then try again."
+  },
+  "result_page": {
+    "title": "A result on {site}",
+    "shared_anonymous": "Someone shared this result with you.",
+    "old_version": "This result was worked out with an earlier version of the quiz. We've changed things since, so it might look different if you took it today. [What's changed](/changes)",
+    "missing_version": "This result was made with an earlier version of the quiz, and we can no longer show it in full. [What's changed](/changes)",
+    "loading": "Loading the result",
+    "not_found_heading": "We couldn't find that result",
+    "not_found_body": "The link may be mistyped or cut off. Check it and try again.",
+    "error_heading": "Something went wrong",
+    "error_body": "We couldn't load this page. Give it a moment and try again.",
+    "retry": "Try again",
+    "take_it_heading": "Where would you land?",
+    "take_it_body": "{n} quick questions, about 10 minutes. No sign-up, no right answers.",
+    "take_it_button": "Take the quiz yourself",
+    "compare_body": "Take the quiz ({n} questions, about 10 minutes) and see where you and the person who shared this agree and differ.",
+    "compare_button": "Take the quiz and compare",
+    "again_link": "Take the quiz again",
+    "again_unsaved": "Your current result isn't saved, so it will be gone. Start again?",
+    "again_confirm": "Start again",
+    "again_keep": "Keep my result"
+  },
+  "fit": {
+    "section_heading": "Help us get this right",
+    "section_body": "Optional. Anything you answer here is saved with your result, with nothing that identifies you. It shows us whether the results describe people well.",
+    "heading": "Does this fit you?",
+    "quick_note": "One tap. It tells us whether the results describe people well.",
+    "options": [
+      "Not at all",
+      "A little",
+      "Somewhat",
+      "Very well",
+      "Extremely well"
+    ],
+    "better_heading": "Which fits you better?",
+    "better_none": "None of these",
+    "better_own_mix": "My own mix",
+    "check_heading": "Check your six answers",
+    "check_question": "Is this about right?",
+    "check_about_right": "About right",
+    "check_further": "I'm further toward \"{end}\"",
+    "thanks": "Thanks. That helps us check whether these descriptions work.",
+    "quick_thanks": "Thanks. There's more you can tell us under \"Help us get this right\" below.",
+    "error": "We couldn't save that. Please try again.",
+    "something_off": "Something off? [Tell us]({feedback_link})"
+  },
+  "share": {
+    "heading": "Share your result",
+    "note": "Anyone with this link can see your result as it appears on this page. It never shows your email or anything that identifies you.",
+    "text": {
+      "matched": "I'm closest to {perspective} on {site}. What do you think about AI?",
+      "mixed_between": "I landed between {p1} and {p2} on {site}. What do you think about AI?",
+      "mixed_unmatched": "I got my own combination on {site}. What do you think about AI?",
+      "undecided": "My views on AI are still forming, according to {site}. Where do you land?",
+      "undecided_middle": "I landed in the middle on every question on {site}. Where do you land?",
+      "indifferent": "Turns out AI isn't high on my list, according to {site}. What do you think about AI?"
+    },
+    "share_button": "Share",
+    "copy_link": "Copy link",
+    "copied": "Link copied",
+    "download_image": "Download image",
+    "card": {
+      "alt": "A result from {site}: {title}",
+      "label_matched": "My closest perspective",
+      "label_other": "My result",
+      "title": {
+        "mixed_between": "Between {p1} and {p2}",
+        "mixed_unmatched": "My own combination",
+        "undecided": "Still forming",
+        "undecided_middle": "In the middle",
+        "indifferent": "Not a priority"
+      },
+      "subtitle": {
+        "mixed_between": "Close to two perspectives about equally.",
+        "mixed_unmatched": "A mix of views that are rarely held together.",
+        "undecided": "My views on AI are still taking shape.",
+        "undecided_middle": "Close to the middle on every question.",
+        "indifferent": "AI isn't high on my list."
+      },
+      "ask": "What do you think about AI?",
+      "ends": {
+        "C1": [
+          "Little good",
+          "A lot of good"
+        ],
+        "C2": [
+          "Little harm",
+          "Serious harm"
+        ],
+        "C3": [
+          "Move faster",
+          "Slow down"
+        ],
+        "C4": [
+          "Industry rules",
+          "Public rules"
+        ],
+        "C5": [
+          "AI can decide",
+          "Humans decide"
+        ],
+        "C6": [
+          "Markets share gains",
+          "Share deliberately"
+        ]
+      }
+    }
+  },
+  "compare": {
+    "heading": "Compare with a friend",
+    "invite_anonymous": "Someone shared this with you and wants to compare. Take the quiz (about 10 minutes) to see where you agree and where you don't. When you're done, you can send the comparison back.",
+    "invite_button": "Take the quiz",
+    "section_heading": "You and {name}",
+    "friend_fallback": "your friend",
+    "you_label": "You",
+    "same_place": "You both land closest to {perspective}, and you're furthest apart on this one: {question}",
+    "different_places": "You land in different places, and you're furthest apart on this one: {question}",
+    "no_gap": "You answered too few of the same questions to say where you're furthest apart.",
+    "no_difference": "You land in the same place on every question we could compare, so there's nowhere you're furthest apart.",
+    "side_by_side": "Side by side",
+    "agree_heading": "Where you agree",
+    "split_heading": "Where you split",
+    "send_back_button": "Send this to {name}",
+    "send_back_text": "I took {site} too. Here's how we compare.",
+    "full_result": "See your full result",
+    "your_result": "Your own result",
+    "track_label": "{you_label}: {you}. {them_label}: {them}."
+  },
+  "evidence_sources": {
+    "note": "Source lines for figures quoted in narratives.json outcome copy, keyed by evidence-ledger ID (research/evidence-ledger.csv).",
+    "sources": {
+      "N8": {
+        "source": "Leger",
+        "year": 2025,
+        "population": "1,518 Canadian adults, online panel"
+      },
+      "N11": {
+        "source": "Kieslich, Lünich and Došenović",
+        "year": 2022,
+        "population": "14,988 German adults, surveyed 2020 to 2021"
+      },
+      "N3": {
+        "source": "Kelley et al. (Google and Ipsos)",
+        "year": 2021,
+        "population": "10,005 adults in 8 countries including Canada, surveyed 2019"
+      },
+      "N9": {
+        "source": "Rafe, Baitullah and Das",
+        "year": 2026,
+        "population": "5,255 US adults, Pew panel, surveyed 2024"
+      },
+      "R8b": {
+        "source": "Pew Research Center",
+        "year": 2026,
+        "population": "5,119 US adults, surveyed February 2026"
+      }
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "scoring_version": "0.2.0",
+  "status": "editorial v0: thresholds and prototypes are design choices, not estimates. Recalibrate on pilot data (docs/02-scoring-spec.md section 8).",
+  "likert": {
+    "min": 1,
+    "max": 7,
+    "center": 4
+  },
+  "scored_constructs": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6"
+  ],
+  "form": "S",
+  "min_items_per_construct": 3,
+  "min_scored_constructs": 4,
+  "bands": [
+    {
+      "id": "strong_low",
+      "max_exclusive": -1.5
+    },
+    {
+      "id": "lean_low",
+      "max_exclusive": -0.5
+    },
+    {
+      "id": "between",
+      "max_exclusive": 0.5
+    },
+    {
+      "id": "lean_high",
+      "max_exclusive": 1.5
+    },
+    {
+      "id": "strong_high",
+      "max_exclusive": null
+    }
+  ],
+  "undecided": {
+    "confidence_item": "D3",
+    "unsettled_options": [
+      2,
+      3
+    ],
+    "min_unsettled_share": 0.5,
+    "max_mean_abs_score": 0.75
+  },
+  "indifferent": {
+    "salience_item": "D8",
+    "low_salience_options": [
+      2,
+      3
+    ],
+    "max_C1": 0,
+    "max_C2": 0
+  },
+  "match": {
+    "distance": "weighted_euclidean_normalized",
+    "min_weight_share_evaluable": 0.5,
+    "max_distance_for_match": 1.6,
+    "tie_margin": 0.2
+  },
+  "tension": {
+    "min_strength": 1
+  },
+  "statements": {
+    "min_abs_raw_for_signal": 1
+  },
+  "trust_strength": {
+    "0": 0,
+    "1": 0,
+    "2": 1.5,
+    "3": 3
+  }
+}

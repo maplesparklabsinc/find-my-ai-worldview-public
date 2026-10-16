@@ -1,0 +1,5054 @@
+{
+ "generated_by": "reference/make_test_vectors.py",
+ "note": "Synthetic personas for testing the scoring rules only. Not data about real people.",
+ "versions": {
+  "scoring": "0.4.0",
+  "taxonomy": "0.3.1",
+  "item_bank": "0.8.0",
+  "narratives": "0.7.0"
+ },
+ "score_cases": [
+  {
+   "id": "accelerator",
+   "description": "Clear Accelerator",
+   "answers": {
+    "C1-01": 6,
+    "C1-02": 6,
+    "C1-04": 6,
+    "C1-05": 2,
+    "C1-08": 2,
+    "D3:C1": 1,
+    "C2-01": 3,
+    "C2-03": 3,
+    "C2-04": 3,
+    "C2-05": 5,
+    "C2-06": 5,
+    "D3:C2": 1,
+    "C3-01": 2,
+    "C3-02": 2,
+    "C3-09": 2,
+    "C3-10": 6,
+    "C3-06": 6,
+    "D3:C3": 1,
+    "C4-09": 2,
+    "C4-02": 2,
+    "C4-03": 2,
+    "C4-05": 6,
+    "C4-06": 6,
+    "D3:C4": 1,
+    "C5-02": 3,
+    "C5-10": 3,
+    "C5-05": 5,
+    "C5-11": 5,
+    "C5-09": 3,
+    "D3:C5": 1,
+    "C6-01": 4,
+    "C6-02": 4,
+    "C6-04": 4,
+    "C6-09": 4,
+    "C6-06": 4,
+    "D3:C6": 1,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": 2.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": -1.0,
+      "band": "lean_low",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": -2.0,
+      "band": "strong_low",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": -2.0,
+      "band": "strong_low",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": -1.0,
+      "band": "lean_low",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "matched",
+     "ranked": [
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 0.3727
+      },
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 1.7381
+      },
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 2.2398
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 3.0122
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 3.1764
+      },
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 3.2146
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 3.32
+      }
+     ],
+     "unsettled": false
+    },
+    "tension": {
+     "id": "none",
+     "text": "Your answers pull in one direction more than most: Who sets the rules is where you stand out most clearly.",
+     "strength": 0.0,
+     "strongest_construct": "C4"
+    },
+    "statements": {
+     "common_ground": [
+      {
+       "perspective": "accelerators",
+       "item": "C3-10",
+       "direction": "agree"
+      },
+      {
+       "perspective": "accelerators",
+       "item": "C3-06",
+       "direction": "agree"
+      }
+     ],
+     "differences": [],
+     "unexpected": {
+      "perspective": "pragmatists",
+      "item": "C1-02",
+      "direction": "agree"
+     }
+    }
+   }
+  },
+  {
+   "id": "steward",
+   "description": "Clear Steward: public rules, middle pace",
+   "answers": {
+    "C1-01": 5,
+    "C1-02": 5,
+    "C1-04": 5,
+    "C1-05": 3,
+    "C1-08": 3,
+    "D3:C1": 1,
+    "C2-01": 5,
+    "C2-03": 5,
+    "C2-04": 5,
+    "C2-05": 3,
+    "C2-06": 3,
+    "D3:C2": 1,
+    "C3-01": 4,
+    "C3-02": 4,
+    "C3-09": 4,
+    "C3-10": 4,
+    "C3-06": 4,
+    "D3:C3": 1,
+    "C4-09": 6,
+    "C4-02": 6,
+    "C4-03": 6,
+    "C4-05": 2,
+    "C4-06": 2,
+    "D3:C4": 1,
+    "C5-02": 5,
+    "C5-10": 5,
+    "C5-05": 3,
+    "C5-11": 3,
+    "C5-09": 5,
+    "D3:C5": 1,
+    "C6-01": 4,
+    "C6-02": 4,
+    "C6-04": 4,
+    "C6-09": 4,
+    "C6-06": 4,
+    "D3:C6": 1,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": 2.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "matched",
+     "ranked": [
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 0.1213
+      },
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 0.5951
+      },
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 1.291
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 1.3693
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 1.7901
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 1.9221
+      },
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 2.0857
+      }
+     ],
+     "unsettled": false
+    },
+    "tension": {
+     "id": "benefit_and_harm",
+     "text": "You expect AI to bring both large benefits and serious harms. Many people hold both views at once; the question that matters for you is which arrives first.",
+     "strength": 1.0
+    },
+    "statements": {
+     "common_ground": [
+      {
+       "perspective": "stewards",
+       "item": "C4-02",
+       "direction": "agree"
+      },
+      {
+       "perspective": "stewards",
+       "item": "C4-03",
+       "direction": "agree"
+      }
+     ],
+     "differences": [],
+     "unexpected": {
+      "perspective": "accelerators",
+      "item": "C1-01",
+      "direction": "agree"
+     }
+    }
+   }
+  },
+  {
+   "id": "precautionist",
+   "description": "Clear Precautionist with high expected benefit",
+   "answers": {
+    "C1-01": 6,
+    "C1-02": 6,
+    "C1-04": 6,
+    "C1-05": 2,
+    "C1-08": 2,
+    "D3:C1": 1,
+    "C2-01": 6,
+    "C2-03": 6,
+    "C2-04": 6,
+    "C2-05": 2,
+    "C2-06": 2,
+    "D3:C2": 1,
+    "C3-01": 7,
+    "C3-02": 7,
+    "C3-09": 7,
+    "C3-10": 1,
+    "C3-06": 1,
+    "D3:C3": 1,
+    "C4-09": 6,
+    "C4-02": 6,
+    "C4-03": 6,
+    "C4-05": 2,
+    "C4-06": 2,
+    "D3:C4": 1,
+    "C5-02": 5,
+    "C5-10": 5,
+    "C5-05": 3,
+    "C5-11": 3,
+    "C5-09": 5,
+    "D3:C5": 1,
+    "C6-01": 4,
+    "C6-02": 4,
+    "C6-04": 4,
+    "C6-09": 4,
+    "C6-06": 4,
+    "D3:C6": 1,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": 2.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": 2.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": 3.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": 2.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "matched",
+     "ranked": [
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 0.866
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 1.144
+      },
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 1.5343
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 1.6312
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 2.116
+      },
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 2.1486
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 3.6553
+      }
+     ],
+     "unsettled": false
+    },
+    "tension": {
+     "id": "benefit_but_slow",
+     "text": "You expect AI to bring large benefits, and you still want more testing before powerful AI is widely released. You're willing to wait for gains you believe in.",
+     "strength": 2.0
+    },
+    "statements": {
+     "common_ground": [
+      {
+       "perspective": "precautionists",
+       "item": "C3-01",
+       "direction": "agree"
+      },
+      {
+       "perspective": "precautionists",
+       "item": "C3-09",
+       "direction": "agree"
+      }
+     ],
+     "differences": [],
+     "unexpected": {
+      "perspective": "accelerators",
+      "item": "C1-01",
+      "direction": "agree"
+     }
+    }
+   }
+  },
+  {
+   "id": "human_control",
+   "description": "Clear Human-Control Defender",
+   "answers": {
+    "C1-01": 4,
+    "C1-02": 4,
+    "C1-04": 4,
+    "C1-05": 4,
+    "C1-08": 4,
+    "D3:C1": 1,
+    "C2-01": 4,
+    "C2-03": 4,
+    "C2-04": 4,
+    "C2-05": 4,
+    "C2-06": 4,
+    "D3:C2": 1,
+    "C3-01": 4,
+    "C3-02": 4,
+    "C3-09": 4,
+    "C3-10": 4,
+    "C3-06": 4,
+    "D3:C3": 1,
+    "C4-09": 4,
+    "C4-02": 4,
+    "C4-03": 4,
+    "C4-05": 4,
+    "C4-06": 4,
+    "D3:C4": 1,
+    "C5-02": 7,
+    "C5-10": 7,
+    "C5-05": 1,
+    "C5-11": 1,
+    "C5-09": 7,
+    "D3:C5": 1,
+    "C6-01": 4,
+    "C6-02": 4,
+    "C6-04": 4,
+    "C6-09": 4,
+    "C6-06": 4,
+    "D3:C6": 1,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": 3.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "matched",
+     "ranked": [
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 0.4818
+      },
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 1.0897
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 1.6134
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 1.6855
+      },
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 1.7559
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 2.0616
+      },
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 2.1794
+      }
+     ],
+     "unsettled": false
+    },
+    "tension": {
+     "id": "none",
+     "text": "Your answers pull in one direction more than most: Final say is where you stand out most clearly.",
+     "strength": 0.0,
+     "strongest_construct": "C5"
+    },
+    "statements": {
+     "common_ground": [
+      {
+       "perspective": "human_control",
+       "item": "C5-02",
+       "direction": "agree"
+      },
+      {
+       "perspective": "human_control",
+       "item": "C5-09",
+       "direction": "agree"
+      }
+     ],
+     "differences": [],
+     "unexpected": null
+    }
+   }
+  },
+  {
+   "id": "fair_share",
+   "description": "Clear Fair-Share Advocate who wants speed",
+   "answers": {
+    "C1-01": 5,
+    "C1-02": 5,
+    "C1-04": 5,
+    "C1-05": 3,
+    "C1-08": 3,
+    "D3:C1": 1,
+    "C2-01": 4,
+    "C2-03": 4,
+    "C2-04": 4,
+    "C2-05": 4,
+    "C2-06": 4,
+    "D3:C2": 1,
+    "C3-01": 3,
+    "C3-02": 3,
+    "C3-09": 3,
+    "C3-10": 5,
+    "C3-06": 5,
+    "D3:C3": 1,
+    "C4-09": 4,
+    "C4-02": 4,
+    "C4-03": 4,
+    "C4-05": 4,
+    "C4-06": 4,
+    "D3:C4": 1,
+    "C5-02": 4,
+    "C5-10": 4,
+    "C5-05": 4,
+    "C5-11": 4,
+    "C5-09": 4,
+    "D3:C5": 1,
+    "C6-01": 7,
+    "C6-02": 7,
+    "C6-04": 7,
+    "C6-09": 1,
+    "C6-06": 1,
+    "D3:C6": 1,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": -1.0,
+      "band": "lean_low",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 3.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "matched",
+     "ranked": [
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 0.4655
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 0.9574
+      },
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 1.199
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 1.6134
+      },
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 2.1213
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 2.1753
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 2.2411
+      }
+     ],
+     "unsettled": false
+    },
+    "tension": {
+     "id": "fast_and_shared",
+     "text": "You want new AI released quickly and its gains shared widely. Speed and sharing usually come from different camps; you're asking for both.",
+     "strength": 1.0
+    },
+    "statements": {
+     "common_ground": [
+      {
+       "perspective": "fair_share",
+       "item": "C6-01",
+       "direction": "agree"
+      },
+      {
+       "perspective": "fair_share",
+       "item": "C6-02",
+       "direction": "agree"
+      }
+     ],
+     "differences": [],
+     "unexpected": {
+      "perspective": "pragmatists",
+      "item": "C1-02",
+      "direction": "agree"
+     }
+    }
+   }
+  },
+  {
+   "id": "pragmatist",
+   "description": "Clear Pragmatist, settled views",
+   "answers": {
+    "C1-01": 5,
+    "C1-02": 5,
+    "C1-04": 5,
+    "C1-05": 3,
+    "C1-08": 3,
+    "D3:C1": 0,
+    "C2-01": 5,
+    "C2-03": 5,
+    "C2-04": 5,
+    "C2-05": 3,
+    "C2-06": 3,
+    "D3:C2": 0,
+    "C3-01": 4,
+    "C3-02": 4,
+    "C3-09": 4,
+    "C3-10": 4,
+    "C3-06": 4,
+    "D3:C3": 0,
+    "C4-09": 5,
+    "C4-02": 5,
+    "C4-03": 5,
+    "C4-05": 3,
+    "C4-06": 3,
+    "D3:C4": 0,
+    "C5-02": 5,
+    "C5-10": 5,
+    "C5-05": 3,
+    "C5-11": 3,
+    "C5-09": 5,
+    "D3:C5": 0,
+    "C6-01": 4,
+    "C6-02": 4,
+    "C6-04": 4,
+    "C6-09": 4,
+    "C6-06": 4,
+    "D3:C6": 0,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "matched",
+     "ranked": [
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 0.3227
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 0.6966
+      },
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 1.291
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 1.3161
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 1.7717
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 1.8153
+      },
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 2.0535
+      }
+     ],
+     "unsettled": false
+    },
+    "tension": {
+     "id": "benefit_and_harm",
+     "text": "You expect AI to bring both large benefits and serious harms. Many people hold both views at once; the question that matters for you is which arrives first.",
+     "strength": 1.0
+    },
+    "statements": {
+     "common_ground": [
+      {
+       "perspective": "pragmatists",
+       "item": "C4-09",
+       "direction": "agree"
+      },
+      {
+       "perspective": "pragmatists",
+       "item": "C1-02",
+       "direction": "agree"
+      }
+     ],
+     "differences": [],
+     "unexpected": {
+      "perspective": "skeptics",
+      "item": "C2-04",
+      "direction": "agree"
+     }
+    }
+   }
+  },
+  {
+   "id": "oversight_no_trust",
+   "description": "Steward who distrusts regulators",
+   "answers": {
+    "C1-01": 5,
+    "C1-02": 5,
+    "C1-04": 5,
+    "C1-05": 3,
+    "C1-08": 3,
+    "D3:C1": 1,
+    "C2-01": 5,
+    "C2-03": 5,
+    "C2-04": 5,
+    "C2-05": 3,
+    "C2-06": 3,
+    "D3:C2": 1,
+    "C3-01": 4,
+    "C3-02": 4,
+    "C3-09": 4,
+    "C3-10": 4,
+    "C3-06": 4,
+    "D3:C3": 1,
+    "C4-09": 6,
+    "C4-02": 6,
+    "C4-03": 6,
+    "C4-05": 2,
+    "C4-06": 2,
+    "D3:C4": 1,
+    "C5-02": 5,
+    "C5-10": 5,
+    "C5-05": 3,
+    "C5-11": 3,
+    "C5-09": 5,
+    "D3:C5": 1,
+    "C6-01": 4,
+    "C6-02": 4,
+    "C6-04": 4,
+    "C6-09": 4,
+    "C6-06": 4,
+    "D3:C6": 1,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 3,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": 2.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "matched",
+     "ranked": [
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 0.1213
+      },
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 0.5951
+      },
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 1.291
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 1.3693
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 1.7901
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 1.9221
+      },
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 2.0857
+      }
+     ],
+     "unsettled": false
+    },
+    "tension": {
+     "id": "oversight_without_trust",
+     "text": "You want public oversight of AI, but you do not trust today's regulators to act in the public interest. Your position depends on oversight institutions that would have to be built or reformed.",
+     "strength": 2.0
+    },
+    "statements": {
+     "common_ground": [
+      {
+       "perspective": "stewards",
+       "item": "C4-02",
+       "direction": "agree"
+      },
+      {
+       "perspective": "stewards",
+       "item": "C4-03",
+       "direction": "agree"
+      }
+     ],
+     "differences": [],
+     "unexpected": {
+      "perspective": "accelerators",
+      "item": "C1-01",
+      "direction": "agree"
+     }
+    }
+   }
+  },
+  {
+   "id": "caution_then_speed",
+   "description": "Leans precaution on statements but picks speed in the trade-off",
+   "answers": {
+    "C1-01": 5,
+    "C1-02": 5,
+    "C1-04": 5,
+    "C1-05": 3,
+    "C1-08": 3,
+    "D3:C1": 1,
+    "C2-01": 6,
+    "C2-03": 6,
+    "C2-04": 6,
+    "C2-05": 2,
+    "C2-06": 2,
+    "D3:C2": 1,
+    "C3-01": 6,
+    "C3-02": 6,
+    "C3-09": 6,
+    "C3-10": 2,
+    "C3-06": 2,
+    "D3:C3": 1,
+    "C4-09": 5,
+    "C4-02": 5,
+    "C4-03": 5,
+    "C4-05": 3,
+    "C4-06": 3,
+    "D3:C4": 1,
+    "C5-02": 5,
+    "C5-10": 5,
+    "C5-05": 3,
+    "C5-11": 3,
+    "C5-09": 5,
+    "D3:C5": 1,
+    "C6-01": 4,
+    "C6-02": 4,
+    "C6-04": 4,
+    "C6-09": 4,
+    "C6-06": 4,
+    "D3:C6": 1,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "C3-T1": {
+     "choice": 1,
+     "strength": "strongly"
+    },
+    "CX-T1": {
+     "choice": 0,
+     "strength": "slightly"
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": 2.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": 2.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "matched",
+     "ranked": [
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 0.2887
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 1.0361
+      },
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 1.0508
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 1.4205
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 1.5448
+      },
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 2.0857
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 3.0046
+      }
+     ],
+     "unsettled": false
+    },
+    "tension": {
+     "id": "caution_then_speed",
+     "text": "On the general questions you lean toward more testing before release, but when you had to choose, you picked earlier access with monitoring. Your view may depend on exactly what is being traded.",
+     "strength": 2.0
+    },
+    "statements": {
+     "common_ground": [
+      {
+       "perspective": "precautionists",
+       "item": "C3-01",
+       "direction": "agree"
+      },
+      {
+       "perspective": "precautionists",
+       "item": "C3-09",
+       "direction": "agree"
+      }
+     ],
+     "differences": [],
+     "unexpected": {
+      "perspective": "accelerators",
+      "item": "C1-01",
+      "direction": "agree"
+     }
+    }
+   }
+  },
+  {
+   "id": "indifferent",
+   "description": "Low benefit, low harm, low salience",
+   "answers": {
+    "C1-01": 3,
+    "C1-02": 3,
+    "C1-04": 3,
+    "C1-05": 5,
+    "C1-08": 5,
+    "D3:C1": 1,
+    "C2-01": 3,
+    "C2-03": 3,
+    "C2-04": 3,
+    "C2-05": 5,
+    "C2-06": 5,
+    "D3:C2": 1,
+    "C3-01": 4,
+    "C3-02": 4,
+    "C3-09": 4,
+    "C3-10": 4,
+    "C3-06": 4,
+    "D3:C3": 1,
+    "C4-09": 4,
+    "C4-02": 4,
+    "C4-03": 4,
+    "C4-05": 4,
+    "C4-06": 4,
+    "D3:C4": 1,
+    "C5-02": 4,
+    "C5-10": 4,
+    "C5-05": 4,
+    "C5-11": 4,
+    "C5-09": 4,
+    "D3:C5": 1,
+    "C6-01": 4,
+    "C6-02": 4,
+    "C6-04": 4,
+    "C6-09": 4,
+    "C6-06": 4,
+    "D3:C6": 1,
+    "D8": 3,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": -1.0,
+      "band": "lean_low",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": -1.0,
+      "band": "lean_low",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "indifferent",
+     "ranked": [
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 1.1273
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 1.7193
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 1.8647
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 1.9791
+      },
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 2.1016
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 2.1753
+      },
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 2.2098
+      }
+     ]
+    },
+    "tension": {
+     "id": "none",
+     "text": "Your answers pull in one direction more than most: Expected harm is where you stand out most clearly.",
+     "strength": 0.0,
+     "strongest_construct": "C2"
+    },
+    "statements": {
+     "common_ground": [],
+     "differences": [
+      {
+       "perspective": "pragmatists",
+       "item": "C1-02",
+       "direction": "disagree"
+      }
+     ],
+     "unexpected": {
+      "perspective": "skeptics",
+      "item": "C1-05",
+      "direction": "agree"
+     }
+    }
+   }
+  },
+  {
+   "id": "undecided_confidence",
+   "description": "Near the middle and unsettled",
+   "answers": {
+    "C1-01": 4,
+    "C1-02": 4,
+    "C1-04": 4,
+    "C1-05": 4,
+    "C1-08": 4,
+    "D3:C1": 2,
+    "C2-01": 4,
+    "C2-03": 5,
+    "C2-04": 5,
+    "C2-05": 3,
+    "C2-06": 3,
+    "D3:C2": 2,
+    "C3-01": 4,
+    "C3-02": 4,
+    "C3-09": 4,
+    "C3-10": 4,
+    "C3-06": 4,
+    "D3:C3": 2,
+    "C4-09": 4,
+    "C4-02": 4,
+    "C4-03": 4,
+    "C4-05": 4,
+    "C4-06": 4,
+    "D3:C4": 2,
+    "C5-02": 4,
+    "C5-10": 4,
+    "C5-05": 4,
+    "C5-11": 4,
+    "C5-09": 4,
+    "D3:C5": 2,
+    "C6-01": 4,
+    "C6-02": 4,
+    "C6-04": 4,
+    "C6-09": 4,
+    "C6-06": 4,
+    "D3:C6": 2,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": 0.8,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "undecided",
+     "reason": "confidence",
+     "ranked": [
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 0.641
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 1.4619
+      },
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 1.481
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 1.6273
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 1.7792
+      },
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 2.0831
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 2.1228
+      }
+     ]
+    },
+    "tension": {
+     "id": "none",
+     "text": "Your answers pull in one direction more than most: Expected harm is where you stand out most clearly.",
+     "strength": 0.0,
+     "strongest_construct": "C2"
+    },
+    "statements": {
+     "common_ground": [],
+     "differences": [],
+     "unexpected": {
+      "perspective": "skeptics",
+      "item": "C2-04",
+      "direction": "agree"
+     }
+    }
+   }
+  },
+  {
+   "id": "undecided_coverage",
+   "description": "Skipped most items",
+   "answers": {
+    "C1-01": 6,
+    "C1-02": 6,
+    "C1-04": 6,
+    "C1-05": 2,
+    "C1-08": 2,
+    "D3:C1": 1,
+    "C2-01": 6,
+    "C2-03": 6,
+    "C2-04": 6,
+    "C2-05": 2,
+    "C2-06": 2,
+    "D3:C2": 1,
+    "D3:C3": 1,
+    "D3:C4": 1,
+    "D3:C5": 1,
+    "C6-01": 6,
+    "C6-02": 6,
+    "C6-04": 6,
+    "C6-09": 2,
+    "C6-06": 2,
+    "D3:C6": 1,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": 2.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": 2.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": null,
+      "band": null,
+      "answered": 0,
+      "expected": 5
+     },
+     "C4": {
+      "score": null,
+      "band": null,
+      "answered": 0,
+      "expected": 5
+     },
+     "C5": {
+      "score": null,
+      "band": null,
+      "answered": 0,
+      "expected": 5
+     },
+     "C6": {
+      "score": 2.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "undecided",
+     "reason": "coverage",
+     "ranked": [
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 0.7206
+      },
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 1.354
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 2.4568
+      }
+     ]
+    },
+    "tension": {
+     "id": "benefit_and_harm",
+     "text": "You expect AI to bring both large benefits and serious harms. Many people hold both views at once; the question that matters for you is which arrives first.",
+     "strength": 2.0
+    },
+    "statements": {
+     "common_ground": [
+      {
+       "perspective": "fair_share",
+       "item": "C6-01",
+       "direction": "agree"
+      },
+      {
+       "perspective": "fair_share",
+       "item": "C6-02",
+       "direction": "agree"
+      }
+     ],
+     "differences": [],
+     "unexpected": {
+      "perspective": "skeptics",
+      "item": "C2-04",
+      "direction": "agree"
+     }
+    }
+   }
+  },
+  {
+   "id": "unsettled_but_strong",
+   "description": "Unsettled but strong answers still gets a perspective",
+   "answers": {
+    "C1-01": 6,
+    "C1-02": 6,
+    "C1-04": 6,
+    "C1-05": 2,
+    "C1-08": 2,
+    "D3:C1": 2,
+    "C2-01": 3,
+    "C2-03": 3,
+    "C2-04": 3,
+    "C2-05": 5,
+    "C2-06": 5,
+    "D3:C2": 2,
+    "C3-01": 2,
+    "C3-02": 2,
+    "C3-09": 2,
+    "C3-10": 6,
+    "C3-06": 6,
+    "D3:C3": 2,
+    "C4-09": 2,
+    "C4-02": 2,
+    "C4-03": 2,
+    "C4-05": 6,
+    "C4-06": 6,
+    "D3:C4": 2,
+    "C5-02": 3,
+    "C5-10": 3,
+    "C5-05": 5,
+    "C5-11": 5,
+    "C5-09": 3,
+    "D3:C5": 2,
+    "C6-01": 4,
+    "C6-02": 4,
+    "C6-04": 4,
+    "C6-09": 4,
+    "C6-06": 4,
+    "D3:C6": 2,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": 2.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": -1.0,
+      "band": "lean_low",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": -2.0,
+      "band": "strong_low",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": -2.0,
+      "band": "strong_low",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": -1.0,
+      "band": "lean_low",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "matched",
+     "ranked": [
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 0.3727
+      },
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 1.7381
+      },
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 2.2398
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 3.0122
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 3.1764
+      },
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 3.2146
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 3.32
+      }
+     ],
+     "unsettled": true
+    },
+    "tension": {
+     "id": "none",
+     "text": "Your answers pull in one direction more than most: Who sets the rules is where you stand out most clearly.",
+     "strength": 0.0,
+     "strongest_construct": "C4"
+    },
+    "statements": {
+     "common_ground": [
+      {
+       "perspective": "accelerators",
+       "item": "C3-10",
+       "direction": "agree"
+      },
+      {
+       "perspective": "accelerators",
+       "item": "C3-06",
+       "direction": "agree"
+      }
+     ],
+     "differences": [],
+     "unexpected": {
+      "perspective": "pragmatists",
+      "item": "C1-02",
+      "direction": "agree"
+     }
+    }
+   }
+  },
+  {
+   "id": "mixed_between",
+   "description": "Between Precautionists and Human-Control Defenders",
+   "answers": {
+    "C1-01": 4,
+    "C1-02": 4,
+    "C1-04": 4,
+    "C1-05": 4,
+    "C1-08": 4,
+    "D3:C1": 1,
+    "C2-01": 6,
+    "C2-03": 6,
+    "C2-04": 6,
+    "C2-05": 2,
+    "C2-06": 2,
+    "D3:C2": 1,
+    "C3-01": 6,
+    "C3-02": 6,
+    "C3-09": 6,
+    "C3-10": 2,
+    "C3-06": 2,
+    "D3:C3": 1,
+    "C4-09": 5,
+    "C4-02": 5,
+    "C4-03": 5,
+    "C4-05": 3,
+    "C4-06": 3,
+    "D3:C4": 1,
+    "C5-02": 7,
+    "C5-10": 7,
+    "C5-05": 1,
+    "C5-11": 1,
+    "C5-09": 7,
+    "D3:C5": 1,
+    "C6-01": 4,
+    "C6-02": 4,
+    "C6-04": 4,
+    "C6-09": 4,
+    "C6-06": 4,
+    "D3:C6": 1,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": 2.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": 2.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": 3.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "mixed_between",
+     "ranked": [
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 0.6455
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 0.7196
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 1.0553
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 1.2891
+      },
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 1.4506
+      },
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 2.2098
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 3.2872
+      }
+     ],
+     "unsettled": false
+    },
+    "tension": {
+     "id": "none",
+     "text": "Your answers pull in one direction more than most: Final say is where you stand out most clearly.",
+     "strength": 0.0,
+     "strongest_construct": "C5"
+    },
+    "statements": {
+     "common_ground": [
+      {
+       "perspective": "precautionists",
+       "item": "C3-01",
+       "direction": "agree"
+      },
+      {
+       "perspective": "precautionists",
+       "item": "C3-09",
+       "direction": "agree"
+      }
+     ],
+     "differences": [],
+     "unexpected": {
+      "perspective": "pragmatists",
+      "item": "C3-02",
+      "direction": "agree"
+     }
+    }
+   }
+  },
+  {
+   "id": "mixed_unmatched",
+   "description": "Rare combination: fast, no public rules, humans decide, shared gains, high harm",
+   "answers": {
+    "C1-01": 2,
+    "C1-02": 2,
+    "C1-04": 2,
+    "C1-05": 6,
+    "C1-08": 6,
+    "D3:C1": 1,
+    "C2-01": 7,
+    "C2-03": 7,
+    "C2-04": 7,
+    "C2-05": 1,
+    "C2-06": 1,
+    "D3:C2": 1,
+    "C3-01": 1,
+    "C3-02": 1,
+    "C3-09": 1,
+    "C3-10": 7,
+    "C3-06": 7,
+    "D3:C3": 1,
+    "C4-09": 1,
+    "C4-02": 1,
+    "C4-03": 1,
+    "C4-05": 7,
+    "C4-06": 7,
+    "D3:C4": 1,
+    "C5-02": 7,
+    "C5-10": 7,
+    "C5-05": 1,
+    "C5-11": 1,
+    "C5-09": 7,
+    "D3:C5": 1,
+    "C6-01": 7,
+    "C6-02": 7,
+    "C6-04": 7,
+    "C6-09": 1,
+    "C6-06": 1,
+    "D3:C6": 1,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": -2.0,
+      "band": "strong_low",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": 3.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": -3.0,
+      "band": "strong_low",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": -3.0,
+      "band": "strong_low",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": 3.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 3.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "mixed_unmatched",
+     "ranked": [
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 1.6312
+      },
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 1.7369
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 2.7178
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 2.7538
+      },
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 2.8759
+      },
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 3.6515
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 3.8976
+      }
+     ],
+     "unsettled": false
+    },
+    "tension": {
+     "id": "fast_and_shared",
+     "text": "You want new AI released quickly and its gains shared widely. Speed and sharing usually come from different camps; you're asking for both.",
+     "strength": 3.0
+    },
+    "statements": {
+     "common_ground": [
+      {
+       "perspective": "human_control",
+       "item": "C5-02",
+       "direction": "agree"
+      },
+      {
+       "perspective": "human_control",
+       "item": "C5-09",
+       "direction": "agree"
+      }
+     ],
+     "differences": [],
+     "unexpected": {
+      "perspective": "precautionists",
+      "item": "C2-04",
+      "direction": "agree"
+     }
+    }
+   }
+  },
+  {
+   "id": "tie_exactly_0_2",
+   "description": "Two closest distances 1.1699 and 1.3699: a gap of exactly 0.2 after rounding is a match",
+   "answers": {
+    "C1-01": 6,
+    "C1-02": 6,
+    "C1-04": 7,
+    "C1-05": 2,
+    "C1-08": 2,
+    "D3:C1": 1,
+    "C2-01": 5,
+    "C2-03": 5,
+    "C2-04": 4,
+    "C2-05": 3,
+    "C2-06": 2,
+    "D3:C2": 1,
+    "C3-01": 1,
+    "C3-02": 2,
+    "C3-09": 1,
+    "C3-10": 7,
+    "C3-06": 7,
+    "D3:C3": 1,
+    "C4-09": 5,
+    "C4-02": 5,
+    "C4-03": 5,
+    "C4-05": 3,
+    "C4-06": 3,
+    "D3:C4": 1,
+    "C5-02": 1,
+    "C5-10": 1,
+    "C5-05": 7,
+    "C5-11": 7,
+    "C5-09": 1,
+    "D3:C5": 1,
+    "C6-01": 6,
+    "C6-02": 6,
+    "C6-04": 6,
+    "C6-09": 3,
+    "C6-06": 2,
+    "D3:C6": 1,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": 2.2,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": -2.8,
+      "band": "strong_low",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": -3.0,
+      "band": "strong_low",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 1.8,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "matched",
+     "ranked": [
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 1.1699
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 1.3699
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 1.8826
+      },
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 2.0553
+      },
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 3.1284
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 3.3266
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 4.7714
+      }
+     ],
+     "unsettled": false
+    },
+    "tension": {
+     "id": "fast_and_shared",
+     "text": "You want new AI released quickly and its gains shared widely. Speed and sharing usually come from different camps; you're asking for both.",
+     "strength": 1.8
+    },
+    "statements": {
+     "common_ground": [
+      {
+       "perspective": "fair_share",
+       "item": "C6-01",
+       "direction": "agree"
+      },
+      {
+       "perspective": "fair_share",
+       "item": "C6-02",
+       "direction": "agree"
+      }
+     ],
+     "differences": [],
+     "unexpected": {
+      "perspective": "precautionists",
+      "item": "C2-05",
+      "direction": "disagree"
+     }
+    }
+   }
+  },
+  {
+   "id": "tie_just_under",
+   "description": "Two closest distances 1.1091 and 1.3090: a gap of 0.1999 is in between",
+   "answers": {
+    "C1-01": 5,
+    "C1-02": 5,
+    "C1-04": 6,
+    "C1-05": 4,
+    "C1-08": 3,
+    "D3:C1": 1,
+    "C2-01": 7,
+    "C2-03": 7,
+    "C2-04": 7,
+    "C2-05": 1,
+    "C2-06": 1,
+    "D3:C2": 1,
+    "C3-01": 4,
+    "C3-02": 4,
+    "C3-09": 3,
+    "C3-10": 5,
+    "C3-06": 4,
+    "D3:C3": 1,
+    "C4-09": 6,
+    "C4-02": 6,
+    "C4-03": 7,
+    "C4-05": 1,
+    "C4-06": 1,
+    "D3:C4": 1,
+    "C5-02": 3,
+    "C5-10": 1,
+    "C5-05": 6,
+    "C5-11": 5,
+    "C5-09": 2,
+    "D3:C5": 1,
+    "C6-01": 6,
+    "C6-02": 7,
+    "C6-04": 6,
+    "C6-09": 3,
+    "C6-06": 2,
+    "D3:C6": 1,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": 3.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": -0.4,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": 2.6,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": -1.8,
+      "band": "strong_low",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 2.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "mixed_between",
+     "ranked": [
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 1.1091
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 1.309
+      },
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 1.7512
+      },
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 1.76
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 2.1013
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 2.183
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 3.7547
+      }
+     ],
+     "unsettled": false
+    },
+    "tension": {
+     "id": "benefit_and_harm",
+     "text": "You expect AI to bring both large benefits and serious harms. Many people hold both views at once; the question that matters for you is which arrives first.",
+     "strength": 1.0
+    },
+    "statements": {
+     "common_ground": [
+      {
+       "perspective": "fair_share",
+       "item": "C6-01",
+       "direction": "agree"
+      },
+      {
+       "perspective": "fair_share",
+       "item": "C6-02",
+       "direction": "agree"
+      }
+     ],
+     "differences": [],
+     "unexpected": {
+      "perspective": "accelerators",
+      "item": "C3-10",
+      "direction": "agree"
+     }
+    }
+   }
+  },
+  {
+   "id": "somewhat_important_low_c1_c2",
+   "description": "Low benefit and harm, but AI is \"Somewhat important\": goes on to matching",
+   "answers": {
+    "C1-01": 3,
+    "C1-02": 3,
+    "C1-04": 3,
+    "C1-05": 5,
+    "C1-08": 5,
+    "D3:C1": 1,
+    "C2-01": 3,
+    "C2-03": 3,
+    "C2-04": 3,
+    "C2-05": 5,
+    "C2-06": 5,
+    "D3:C2": 1,
+    "C3-01": 4,
+    "C3-02": 4,
+    "C3-09": 4,
+    "C3-10": 4,
+    "C3-06": 4,
+    "D3:C3": 1,
+    "C4-09": 4,
+    "C4-02": 4,
+    "C4-03": 4,
+    "C4-05": 4,
+    "C4-06": 4,
+    "D3:C4": 1,
+    "C5-02": 4,
+    "C5-10": 4,
+    "C5-05": 4,
+    "C5-11": 4,
+    "C5-09": 4,
+    "D3:C5": 1,
+    "C6-01": 4,
+    "C6-02": 4,
+    "C6-04": 4,
+    "C6-09": 4,
+    "C6-06": 4,
+    "D3:C6": 1,
+    "D8": 2,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": -1.0,
+      "band": "lean_low",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": -1.0,
+      "band": "lean_low",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "matched",
+     "ranked": [
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 1.1273
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 1.7193
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 1.8647
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 1.9791
+      },
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 2.1016
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 2.1753
+      },
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 2.2098
+      }
+     ],
+     "unsettled": false
+    },
+    "tension": {
+     "id": "none",
+     "text": "Your answers pull in one direction more than most: Expected harm is where you stand out most clearly.",
+     "strength": 0.0,
+     "strongest_construct": "C2"
+    },
+    "statements": {
+     "common_ground": [],
+     "differences": [
+      {
+       "perspective": "pragmatists",
+       "item": "C1-02",
+       "direction": "disagree"
+      }
+     ],
+     "unexpected": {
+      "perspective": "skeptics",
+      "item": "C1-05",
+      "direction": "agree"
+     }
+    }
+   }
+  },
+  {
+   "id": "not_very_important_low_c1_c2",
+   "description": "Low benefit and harm, and AI is \"Not very important\": not a priority",
+   "answers": {
+    "C1-01": 3,
+    "C1-02": 3,
+    "C1-04": 3,
+    "C1-05": 5,
+    "C1-08": 5,
+    "D3:C1": 1,
+    "C2-01": 3,
+    "C2-03": 3,
+    "C2-04": 3,
+    "C2-05": 5,
+    "C2-06": 5,
+    "D3:C2": 1,
+    "C3-01": 4,
+    "C3-02": 4,
+    "C3-09": 4,
+    "C3-10": 4,
+    "C3-06": 4,
+    "D3:C3": 1,
+    "C4-09": 4,
+    "C4-02": 4,
+    "C4-03": 4,
+    "C4-05": 4,
+    "C4-06": 4,
+    "D3:C4": 1,
+    "C5-02": 4,
+    "C5-10": 4,
+    "C5-05": 4,
+    "C5-11": 4,
+    "C5-09": 4,
+    "D3:C5": 1,
+    "C6-01": 4,
+    "C6-02": 4,
+    "C6-04": 4,
+    "C6-09": 4,
+    "C6-06": 4,
+    "D3:C6": 1,
+    "D8": 3,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": -1.0,
+      "band": "lean_low",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": -1.0,
+      "band": "lean_low",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "indifferent",
+     "ranked": [
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 1.1273
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 1.7193
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 1.8647
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 1.9791
+      },
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 2.1016
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 2.1753
+      },
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 2.2098
+      }
+     ]
+    },
+    "tension": {
+     "id": "none",
+     "text": "Your answers pull in one direction more than most: Expected harm is where you stand out most clearly.",
+     "strength": 0.0,
+     "strongest_construct": "C2"
+    },
+    "statements": {
+     "common_ground": [],
+     "differences": [
+      {
+       "perspective": "pragmatists",
+       "item": "C1-02",
+       "direction": "disagree"
+      }
+     ],
+     "unexpected": {
+      "perspective": "skeptics",
+      "item": "C1-05",
+      "direction": "agree"
+     }
+    }
+   }
+  },
+  {
+   "id": "all_neither_settled",
+   "description": "\"Neither\" to every statement, views settled: in the middle on every question",
+   "answers": {
+    "C1-01": 4,
+    "C1-02": 4,
+    "C1-04": 4,
+    "C1-05": 4,
+    "C1-08": 4,
+    "D3:C1": 0,
+    "C2-01": 4,
+    "C2-03": 4,
+    "C2-04": 4,
+    "C2-05": 4,
+    "C2-06": 4,
+    "D3:C2": 0,
+    "C3-01": 4,
+    "C3-02": 4,
+    "C3-09": 4,
+    "C3-10": 4,
+    "C3-06": 4,
+    "D3:C3": 0,
+    "C4-09": 4,
+    "C4-02": 4,
+    "C4-03": 4,
+    "C4-05": 4,
+    "C4-06": 4,
+    "D3:C4": 0,
+    "C5-02": 4,
+    "C5-10": 4,
+    "C5-05": 4,
+    "C5-11": 4,
+    "C5-09": 4,
+    "D3:C5": 0,
+    "C6-01": 4,
+    "C6-02": 4,
+    "C6-04": 4,
+    "C6-09": 4,
+    "C6-06": 4,
+    "D3:C6": 0,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "undecided",
+     "reason": "middle",
+     "ranked": [
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 0.6614
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 1.5
+      },
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 1.6833
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 1.7078
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 1.7645
+      },
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 2.0857
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 2.1255
+      }
+     ]
+    },
+    "tension": {
+     "id": "none",
+     "text": "Your answers pull in one direction more than most: Who benefits is where you stand out most clearly.",
+     "strength": 0.0,
+     "strongest_construct": "C6"
+    },
+    "statements": {
+     "common_ground": [],
+     "differences": [],
+     "unexpected": null
+    }
+   }
+  },
+  {
+   "id": "all_neither_unsettled",
+   "description": "\"Neither\" to every statement, views still forming: the confidence check comes first",
+   "answers": {
+    "C1-01": 4,
+    "C1-02": 4,
+    "C1-04": 4,
+    "C1-05": 4,
+    "C1-08": 4,
+    "D3:C1": 2,
+    "C2-01": 4,
+    "C2-03": 4,
+    "C2-04": 4,
+    "C2-05": 4,
+    "C2-06": 4,
+    "D3:C2": 2,
+    "C3-01": 4,
+    "C3-02": 4,
+    "C3-09": 4,
+    "C3-10": 4,
+    "C3-06": 4,
+    "D3:C3": 2,
+    "C4-09": 4,
+    "C4-02": 4,
+    "C4-03": 4,
+    "C4-05": 4,
+    "C4-06": 4,
+    "D3:C4": 2,
+    "C5-02": 4,
+    "C5-10": 4,
+    "C5-05": 4,
+    "C5-11": 4,
+    "C5-09": 4,
+    "D3:C5": 2,
+    "C6-01": 4,
+    "C6-02": 4,
+    "C6-04": 4,
+    "C6-09": 4,
+    "C6-06": 4,
+    "D3:C6": 2,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "undecided",
+     "reason": "confidence",
+     "ranked": [
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 0.6614
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 1.5
+      },
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 1.6833
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 1.7078
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 1.7645
+      },
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 2.0857
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 2.1255
+      }
+     ]
+    },
+    "tension": {
+     "id": "none",
+     "text": "Your answers pull in one direction more than most: Who benefits is where you stand out most clearly.",
+     "strength": 0.0,
+     "strongest_construct": "C6"
+    },
+    "statements": {
+     "common_ground": [],
+     "differences": [],
+     "unexpected": null
+    }
+   }
+  },
+  {
+   "id": "low_interest",
+   "description": "Not very important, benefit and harm both in the middle band: not a priority",
+   "answers": {
+    "C1-01": 3,
+    "C1-02": 4,
+    "C1-04": 4,
+    "C1-05": 4,
+    "C1-08": 4,
+    "D3:C1": 1,
+    "C2-01": 5,
+    "C2-03": 4,
+    "C2-04": 4,
+    "C2-05": 4,
+    "C2-06": 4,
+    "D3:C2": 1,
+    "C3-01": 4,
+    "C3-02": 4,
+    "C3-09": 4,
+    "C3-10": 4,
+    "C3-06": 4,
+    "D3:C3": 1,
+    "C4-09": 4,
+    "C4-02": 4,
+    "C4-03": 4,
+    "C4-05": 4,
+    "C4-06": 4,
+    "D3:C4": 1,
+    "C5-02": 4,
+    "C5-10": 4,
+    "C5-05": 4,
+    "C5-11": 4,
+    "C5-09": 4,
+    "D3:C5": 1,
+    "C6-01": 4,
+    "C6-02": 4,
+    "C6-04": 4,
+    "C6-09": 4,
+    "C6-06": 4,
+    "D3:C6": 1,
+    "D8": 3,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": -0.2,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": 0.2,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "indifferent",
+     "ranked": [
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 0.6958
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 1.5031
+      },
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 1.6381
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 1.6758
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 1.7754
+      },
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 2.0971
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 2.1235
+      }
+     ]
+    },
+    "tension": {
+     "id": "none",
+     "text": "Your answers pull in one direction more than most: Expected harm is where you stand out most clearly.",
+     "strength": 0.0,
+     "strongest_construct": "C2"
+    },
+    "statements": {
+     "common_ground": [],
+     "differences": [],
+     "unexpected": null
+    }
+   }
+  },
+  {
+   "id": "low_interest_harm_high",
+   "description": "Not very important, but expected harm 0.6: not \"Not a priority\"",
+   "answers": {
+    "C1-01": 3,
+    "C1-02": 4,
+    "C1-04": 4,
+    "C1-05": 4,
+    "C1-08": 4,
+    "D3:C1": 1,
+    "C2-01": 5,
+    "C2-03": 5,
+    "C2-04": 5,
+    "C2-05": 4,
+    "C2-06": 4,
+    "D3:C2": 1,
+    "C3-01": 4,
+    "C3-02": 4,
+    "C3-09": 4,
+    "C3-10": 4,
+    "C3-06": 4,
+    "D3:C3": 1,
+    "C4-09": 4,
+    "C4-02": 4,
+    "C4-03": 4,
+    "C4-05": 4,
+    "C4-06": 4,
+    "D3:C4": 1,
+    "C5-02": 4,
+    "C5-10": 4,
+    "C5-05": 4,
+    "C5-11": 4,
+    "C5-09": 4,
+    "D3:C5": 1,
+    "C6-01": 4,
+    "C6-02": 4,
+    "C6-04": 4,
+    "C6-09": 4,
+    "C6-06": 4,
+    "D3:C6": 1,
+    "D8": 3,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": -0.2,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": 0.6,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "matched",
+     "ranked": [
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 0.6862
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 1.4842
+      },
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 1.5373
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 1.6048
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 1.8102
+      },
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 2.0959
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 2.1222
+      }
+     ],
+     "unsettled": false
+    },
+    "tension": {
+     "id": "none",
+     "text": "Your answers pull in one direction more than most: Expected harm is where you stand out most clearly.",
+     "strength": 0.0,
+     "strongest_construct": "C2"
+    },
+    "statements": {
+     "common_ground": [],
+     "differences": [],
+     "unexpected": {
+      "perspective": "skeptics",
+      "item": "C2-04",
+      "direction": "agree"
+     }
+    }
+   }
+  },
+  {
+   "id": "unconsidered_four",
+   "description": "Four themes \"Not something I have thought about\", mild agreement everywhere: still forming",
+   "answers": {
+    "C1-01": 5,
+    "C1-02": 5,
+    "C1-04": 5,
+    "C1-05": 3,
+    "C1-08": 3,
+    "D3:C1": 3,
+    "C2-01": 5,
+    "C2-03": 5,
+    "C2-04": 5,
+    "C2-05": 3,
+    "C2-06": 3,
+    "D3:C2": 3,
+    "C3-01": 5,
+    "C3-02": 5,
+    "C3-09": 5,
+    "C3-10": 3,
+    "C3-06": 3,
+    "D3:C3": 3,
+    "C4-09": 5,
+    "C4-02": 5,
+    "C4-03": 5,
+    "C4-05": 3,
+    "C4-06": 3,
+    "D3:C4": 3,
+    "C5-02": 5,
+    "C5-10": 5,
+    "C5-05": 3,
+    "C5-11": 3,
+    "C5-09": 5,
+    "D3:C5": 1,
+    "C6-01": 5,
+    "C6-02": 5,
+    "C6-04": 5,
+    "C6-09": 3,
+    "C6-06": 3,
+    "D3:C6": 1,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "undecided",
+     "reason": "confidence",
+     "ranked": [
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 0.5204
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 0.7765
+      },
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 0.8165
+      },
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 1.245
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 1.3161
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 1.5739
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 2.3154
+      }
+     ]
+    },
+    "tension": {
+     "id": "benefit_but_slow",
+     "text": "You expect AI to bring large benefits, and you still want more testing before powerful AI is widely released. You're willing to wait for gains you believe in.",
+     "strength": 1.0
+    },
+    "statements": {
+     "common_ground": [
+      {
+       "perspective": "pragmatists",
+       "item": "C3-02",
+       "direction": "agree"
+      },
+      {
+       "perspective": "pragmatists",
+       "item": "C4-09",
+       "direction": "agree"
+      }
+     ],
+     "differences": [],
+     "unexpected": {
+      "perspective": "accelerators",
+      "item": "C1-01",
+      "direction": "agree"
+     }
+    }
+   }
+  },
+  {
+   "id": "unconsidered_three",
+   "description": "Three themes \"Not something I have thought about\", otherwise the same: goes on to matching",
+   "answers": {
+    "C1-01": 5,
+    "C1-02": 5,
+    "C1-04": 5,
+    "C1-05": 3,
+    "C1-08": 3,
+    "D3:C1": 3,
+    "C2-01": 5,
+    "C2-03": 5,
+    "C2-04": 5,
+    "C2-05": 3,
+    "C2-06": 3,
+    "D3:C2": 3,
+    "C3-01": 5,
+    "C3-02": 5,
+    "C3-09": 5,
+    "C3-10": 3,
+    "C3-06": 3,
+    "D3:C3": 3,
+    "C4-09": 5,
+    "C4-02": 5,
+    "C4-03": 5,
+    "C4-05": 3,
+    "C4-06": 3,
+    "D3:C4": 1,
+    "C5-02": 5,
+    "C5-10": 5,
+    "C5-05": 3,
+    "C5-11": 3,
+    "C5-09": 5,
+    "D3:C5": 1,
+    "C6-01": 5,
+    "C6-02": 5,
+    "C6-04": 5,
+    "C6-09": 3,
+    "C6-06": 3,
+    "D3:C6": 1,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "matched",
+     "ranked": [
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 0.5204
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 0.7765
+      },
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 0.8165
+      },
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 1.245
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 1.3161
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 1.5739
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 2.3154
+      }
+     ],
+     "unsettled": true
+    },
+    "tension": {
+     "id": "benefit_but_slow",
+     "text": "You expect AI to bring large benefits, and you still want more testing before powerful AI is widely released. You're willing to wait for gains you believe in.",
+     "strength": 1.0
+    },
+    "statements": {
+     "common_ground": [
+      {
+       "perspective": "pragmatists",
+       "item": "C3-02",
+       "direction": "agree"
+      },
+      {
+       "perspective": "pragmatists",
+       "item": "C4-09",
+       "direction": "agree"
+      }
+     ],
+     "differences": [],
+     "unexpected": {
+      "perspective": "accelerators",
+      "item": "C1-01",
+      "direction": "agree"
+     }
+    }
+   }
+  },
+  {
+   "id": "cx_depends",
+   "description": "Pragmatist who says low-risk AI should be left mostly alone (CX-T1, strongly)",
+   "answers": {
+    "C1-01": 5,
+    "C1-02": 5,
+    "C1-04": 5,
+    "C1-05": 3,
+    "C1-08": 3,
+    "D3:C1": 0,
+    "C2-01": 5,
+    "C2-03": 5,
+    "C2-04": 5,
+    "C2-05": 3,
+    "C2-06": 3,
+    "D3:C2": 0,
+    "C3-01": 4,
+    "C3-02": 4,
+    "C3-09": 4,
+    "C3-10": 4,
+    "C3-06": 4,
+    "D3:C3": 0,
+    "C4-09": 5,
+    "C4-02": 5,
+    "C4-03": 5,
+    "C4-05": 3,
+    "C4-06": 3,
+    "D3:C4": 0,
+    "C5-02": 5,
+    "C5-10": 5,
+    "C5-05": 3,
+    "C5-11": 3,
+    "C5-09": 5,
+    "D3:C5": 0,
+    "C6-01": 4,
+    "C6-02": 4,
+    "C6-04": 4,
+    "C6-09": 4,
+    "C6-06": 4,
+    "D3:C6": 0,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "CX-T1": {
+     "choice": 0,
+     "strength": "strongly"
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "matched",
+     "ranked": [
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 0.3227
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 0.6966
+      },
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 1.291
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 1.3161
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 1.7717
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 1.8153
+      },
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 2.0535
+      }
+     ],
+     "unsettled": false
+    },
+    "tension": {
+     "id": "benefit_and_harm",
+     "text": "You expect AI to bring both large benefits and serious harms. Many people hold both views at once; the question that matters for you is which arrives first.",
+     "strength": 1.0
+    },
+    "statements": {
+     "common_ground": [
+      {
+       "perspective": "pragmatists",
+       "item": "C4-09",
+       "direction": "agree"
+      },
+      {
+       "perspective": "pragmatists",
+       "item": "C1-02",
+       "direction": "agree"
+      }
+     ],
+     "differences": [],
+     "unexpected": {
+      "perspective": "skeptics",
+      "item": "C2-04",
+      "direction": "agree"
+     }
+    }
+   }
+  },
+  {
+   "id": "cx_basic_rules",
+   "description": "Same answers, but a basic set of rules for all AI (CX-T1, strongly)",
+   "answers": {
+    "C1-01": 5,
+    "C1-02": 5,
+    "C1-04": 5,
+    "C1-05": 3,
+    "C1-08": 3,
+    "D3:C1": 0,
+    "C2-01": 5,
+    "C2-03": 5,
+    "C2-04": 5,
+    "C2-05": 3,
+    "C2-06": 3,
+    "D3:C2": 0,
+    "C3-01": 4,
+    "C3-02": 4,
+    "C3-09": 4,
+    "C3-10": 4,
+    "C3-06": 4,
+    "D3:C3": 0,
+    "C4-09": 5,
+    "C4-02": 5,
+    "C4-03": 5,
+    "C4-05": 3,
+    "C4-06": 3,
+    "D3:C4": 0,
+    "C5-02": 5,
+    "C5-10": 5,
+    "C5-05": 3,
+    "C5-11": 3,
+    "C5-09": 5,
+    "D3:C5": 0,
+    "C6-01": 4,
+    "C6-02": 4,
+    "C6-04": 4,
+    "C6-09": 4,
+    "C6-06": 4,
+    "D3:C6": 0,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "CX-T1": {
+     "choice": 1,
+     "strength": "strongly"
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "matched",
+     "ranked": [
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 0.3227
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 0.6966
+      },
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 1.291
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 1.3161
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 1.7717
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 1.8153
+      },
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 2.0535
+      }
+     ],
+     "unsettled": false
+    },
+    "tension": {
+     "id": "benefit_and_harm",
+     "text": "You expect AI to bring both large benefits and serious harms. Many people hold both views at once; the question that matters for you is which arrives first.",
+     "strength": 1.0
+    },
+    "statements": {
+     "common_ground": [
+      {
+       "perspective": "pragmatists",
+       "item": "C4-09",
+       "direction": "agree"
+      },
+      {
+       "perspective": "pragmatists",
+       "item": "C1-02",
+       "direction": "agree"
+      }
+     ],
+     "differences": [],
+     "unexpected": {
+      "perspective": "skeptics",
+      "item": "C2-04",
+      "direction": "agree"
+     }
+    }
+   }
+  },
+  {
+   "id": "cx_skipped",
+   "description": "Same answers, CX-T1 skipped",
+   "answers": {
+    "C1-01": 5,
+    "C1-02": 5,
+    "C1-04": 5,
+    "C1-05": 3,
+    "C1-08": 3,
+    "D3:C1": 0,
+    "C2-01": 5,
+    "C2-03": 5,
+    "C2-04": 5,
+    "C2-05": 3,
+    "C2-06": 3,
+    "D3:C2": 0,
+    "C3-01": 4,
+    "C3-02": 4,
+    "C3-09": 4,
+    "C3-10": 4,
+    "C3-06": 4,
+    "D3:C3": 0,
+    "C4-09": 5,
+    "C4-02": 5,
+    "C4-03": 5,
+    "C4-05": 3,
+    "C4-06": 3,
+    "D3:C4": 0,
+    "C5-02": 5,
+    "C5-10": 5,
+    "C5-05": 3,
+    "C5-11": 3,
+    "C5-09": 5,
+    "D3:C5": 0,
+    "C6-01": 4,
+    "C6-02": 4,
+    "C6-04": 4,
+    "C6-09": 4,
+    "C6-06": 4,
+    "D3:C6": 0,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 0.0,
+      "band": "between",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "matched",
+     "ranked": [
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 0.3227
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 0.6966
+      },
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 1.291
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 1.3161
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 1.7717
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 1.8153
+      },
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 2.0535
+      }
+     ],
+     "unsettled": false
+    },
+    "tension": {
+     "id": "benefit_and_harm",
+     "text": "You expect AI to bring both large benefits and serious harms. Many people hold both views at once; the question that matters for you is which arrives first.",
+     "strength": 1.0
+    },
+    "statements": {
+     "common_ground": [
+      {
+       "perspective": "pragmatists",
+       "item": "C4-09",
+       "direction": "agree"
+      },
+      {
+       "perspective": "pragmatists",
+       "item": "C1-02",
+       "direction": "agree"
+      }
+     ],
+     "differences": [],
+     "unexpected": {
+      "perspective": "skeptics",
+      "item": "C2-04",
+      "direction": "agree"
+     }
+    }
+   }
+  },
+  {
+   "id": "skeptic",
+   "description": "Clear Skeptic: little benefit expected, real costs now",
+   "answers": {
+    "C1-01": 2,
+    "C1-02": 2,
+    "C1-04": 2,
+    "C1-05": 6,
+    "C1-08": 6,
+    "D3:C1": 0,
+    "C2-01": 6,
+    "C2-03": 5,
+    "C2-04": 6,
+    "C2-05": 3,
+    "C2-06": 2,
+    "D3:C2": 0,
+    "C3-01": 6,
+    "C3-02": 5,
+    "C3-09": 6,
+    "C3-10": 3,
+    "C3-06": 2,
+    "D3:C3": 0,
+    "C4-09": 5,
+    "C4-02": 5,
+    "C4-03": 5,
+    "C4-05": 3,
+    "C4-06": 3,
+    "D3:C4": 0,
+    "C5-02": 5,
+    "C5-10": 5,
+    "C5-05": 3,
+    "C5-11": 3,
+    "C5-09": 5,
+    "D3:C5": 0,
+    "C6-01": 5,
+    "C6-02": 5,
+    "C6-04": 5,
+    "C6-09": 3,
+    "C6-06": 3,
+    "D3:C6": 0,
+    "D8": 0,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": -2.0,
+      "band": "strong_low",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": 1.6,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": 1.6,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "matched",
+     "ranked": [
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 0.7317
+      },
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 1.0847
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 1.3739
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 1.4435
+      },
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 1.4801
+      },
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 1.6775
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 3.2804
+      }
+     ],
+     "unsettled": false
+    },
+    "tension": {
+     "id": "none",
+     "text": "Your answers pull in one direction more than most: Expected benefit is where you stand out most clearly.",
+     "strength": 0.0,
+     "strongest_construct": "C1"
+    },
+    "statements": {
+     "common_ground": [
+      {
+       "perspective": "skeptics",
+       "item": "C1-05",
+       "direction": "agree"
+      },
+      {
+       "perspective": "skeptics",
+       "item": "C1-08",
+       "direction": "agree"
+      }
+     ],
+     "differences": [],
+     "unexpected": {
+      "perspective": "fair_share",
+      "item": "C6-01",
+      "direction": "agree"
+     }
+    }
+   }
+  },
+  {
+   "id": "precautionist_not_skeptic",
+   "description": "Worried but still expects some benefit: Precautionists, not Skeptics",
+   "answers": {
+    "C1-01": 5,
+    "C1-02": 4,
+    "C1-04": 5,
+    "C1-05": 4,
+    "C1-08": 3,
+    "D3:C1": 1,
+    "C2-01": 6,
+    "C2-03": 6,
+    "C2-04": 6,
+    "C2-05": 2,
+    "C2-06": 2,
+    "D3:C2": 1,
+    "C3-01": 6,
+    "C3-02": 6,
+    "C3-09": 6,
+    "C3-10": 2,
+    "C3-06": 2,
+    "D3:C3": 1,
+    "C4-09": 6,
+    "C4-02": 5,
+    "C4-03": 6,
+    "C4-05": 3,
+    "C4-06": 2,
+    "D3:C4": 1,
+    "C5-02": 5,
+    "C5-10": 5,
+    "C5-05": 3,
+    "C5-11": 3,
+    "C5-09": 5,
+    "D3:C5": 1,
+    "C6-01": 5,
+    "C6-02": 4,
+    "C6-04": 5,
+    "C6-09": 4,
+    "C6-06": 3,
+    "D3:C6": 1,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": 0.6,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": 2.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": 2.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": 1.6,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": 1.0,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 0.6,
+      "band": "lean_high",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "matched",
+     "ranked": [
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 0.0577
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 0.8264
+      },
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 1.0958
+      },
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 1.2362
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 1.4285
+      },
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 1.6356
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 3.0899
+      }
+     ],
+     "unsettled": false
+    },
+    "tension": {
+     "id": "none",
+     "text": "Your answers pull in one direction more than most: Release pace is where you stand out most clearly.",
+     "strength": 0.0,
+     "strongest_construct": "C3"
+    },
+    "statements": {
+     "common_ground": [
+      {
+       "perspective": "precautionists",
+       "item": "C3-01",
+       "direction": "agree"
+      },
+      {
+       "perspective": "precautionists",
+       "item": "C3-09",
+       "direction": "agree"
+      }
+     ],
+     "differences": [],
+     "unexpected": {
+      "perspective": "accelerators",
+      "item": "C1-01",
+      "direction": "agree"
+     }
+    }
+   }
+  },
+  {
+   "id": "skeptic_protective",
+   "description": "Skeptic who concedes narrow uses and is strongly protective on everything else",
+   "answers": {
+    "C1-01": 3,
+    "C1-02": 3,
+    "C1-04": 3,
+    "C1-05": 5,
+    "C1-08": 5,
+    "D3:C1": 0,
+    "C2-01": 6,
+    "C2-03": 6,
+    "C2-04": 6,
+    "C2-05": 2,
+    "C2-06": 2,
+    "D3:C2": 0,
+    "C3-01": 6,
+    "C3-02": 6,
+    "C3-09": 6,
+    "C3-10": 2,
+    "C3-06": 2,
+    "D3:C3": 0,
+    "C4-09": 6,
+    "C4-02": 6,
+    "C4-03": 6,
+    "C4-05": 2,
+    "C4-06": 2,
+    "D3:C4": 0,
+    "C5-02": 6,
+    "C5-10": 6,
+    "C5-05": 2,
+    "C5-11": 2,
+    "C5-09": 6,
+    "D3:C5": 0,
+    "C6-01": 6,
+    "C6-02": 6,
+    "C6-04": 6,
+    "C6-09": 2,
+    "C6-06": 2,
+    "D3:C6": 0,
+    "D8": 0,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "versions": {
+     "scoring": "0.4.0",
+     "taxonomy": "0.3.1",
+     "item_bank": "0.8.0",
+     "narratives": "0.7.0"
+    },
+    "constructs": {
+     "C1": {
+      "score": -1.0,
+      "band": "lean_low",
+      "answered": 5,
+      "expected": 5
+     },
+     "C2": {
+      "score": 2.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C3": {
+      "score": 2.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C4": {
+      "score": 2.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C5": {
+      "score": 2.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     },
+     "C6": {
+      "score": 2.0,
+      "band": "strong_high",
+      "answered": 5,
+      "expected": 5
+     }
+    },
+    "outcome": {
+     "type": "matched",
+     "ranked": [
+      {
+       "id": "skeptics",
+       "name": "Skeptics",
+       "distance": 0.1508
+      },
+      {
+       "id": "precautionists",
+       "name": "Precautionists",
+       "distance": 0.7071
+      },
+      {
+       "id": "human_control",
+       "name": "Human-Control Defenders",
+       "distance": 0.8557
+      },
+      {
+       "id": "fair_share",
+       "name": "Shared-Gains Advocates",
+       "distance": 1.0724
+      },
+      {
+       "id": "stewards",
+       "name": "Stewards",
+       "distance": 1.144
+      },
+      {
+       "id": "pragmatists",
+       "name": "Pragmatists",
+       "distance": 1.6137
+      },
+      {
+       "id": "accelerators",
+       "name": "Accelerators",
+       "distance": 3.4359
+      }
+     ],
+     "unsettled": false
+    },
+    "tension": {
+     "id": "none",
+     "text": "Your answers pull in one direction more than most: Who benefits is where you stand out most clearly.",
+     "strength": 0.0,
+     "strongest_construct": "C6"
+    },
+    "statements": {
+     "common_ground": [
+      {
+       "perspective": "skeptics",
+       "item": "C1-05",
+       "direction": "agree"
+      },
+      {
+       "perspective": "skeptics",
+       "item": "C1-08",
+       "direction": "agree"
+      }
+     ],
+     "differences": [],
+     "unexpected": {
+      "perspective": "pragmatists",
+      "item": "C3-02",
+      "direction": "agree"
+     }
+    }
+   }
+  }
+ ],
+ "compare_cases": [
+  {
+   "id": "accelerator_vs_precautionist",
+   "a": {
+    "C1-01": 6,
+    "C1-02": 6,
+    "C1-04": 6,
+    "C1-05": 2,
+    "C1-08": 2,
+    "D3:C1": 1,
+    "C2-01": 3,
+    "C2-03": 3,
+    "C2-04": 3,
+    "C2-05": 5,
+    "C2-06": 5,
+    "D3:C2": 1,
+    "C3-01": 2,
+    "C3-02": 2,
+    "C3-09": 2,
+    "C3-10": 6,
+    "C3-06": 6,
+    "D3:C3": 1,
+    "C4-09": 2,
+    "C4-02": 2,
+    "C4-03": 2,
+    "C4-05": 6,
+    "C4-06": 6,
+    "D3:C4": 1,
+    "C5-02": 3,
+    "C5-10": 3,
+    "C5-05": 5,
+    "C5-11": 5,
+    "C5-09": 3,
+    "D3:C5": 1,
+    "C6-01": 4,
+    "C6-02": 4,
+    "C6-04": 4,
+    "C6-09": 4,
+    "C6-06": 4,
+    "D3:C6": 1,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "b": {
+    "C1-01": 6,
+    "C1-02": 6,
+    "C1-04": 6,
+    "C1-05": 2,
+    "C1-08": 2,
+    "D3:C1": 1,
+    "C2-01": 6,
+    "C2-03": 6,
+    "C2-04": 6,
+    "C2-05": 2,
+    "C2-06": 2,
+    "D3:C2": 1,
+    "C3-01": 7,
+    "C3-02": 7,
+    "C3-09": 7,
+    "C3-10": 1,
+    "C3-06": 1,
+    "D3:C3": 1,
+    "C4-09": 6,
+    "C4-02": 6,
+    "C4-03": 6,
+    "C4-05": 2,
+    "C4-06": 2,
+    "D3:C4": 1,
+    "C5-02": 5,
+    "C5-10": 5,
+    "C5-05": 3,
+    "C5-11": 3,
+    "C5-09": 5,
+    "D3:C5": 1,
+    "C6-01": 4,
+    "C6-02": 4,
+    "C6-04": 4,
+    "C6-09": 4,
+    "C6-06": 4,
+    "D3:C6": 1,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "gaps": {
+     "C1": 0.0,
+     "C2": 3.0,
+     "C3": 5.0,
+     "C4": 4.0,
+     "C5": 2.0,
+     "C6": 0.0
+    },
+    "biggest_gap": "C3",
+    "agree": [
+     {
+      "item": "C1-01",
+      "a": "agree",
+      "b": "agree",
+      "strength": 4
+     },
+     {
+      "item": "C1-02",
+      "a": "agree",
+      "b": "agree",
+      "strength": 4
+     },
+     {
+      "item": "C1-04",
+      "a": "agree",
+      "b": "agree",
+      "strength": 4
+     }
+    ],
+    "disagree": [
+     {
+      "item": "C3-01",
+      "a": "disagree",
+      "b": "agree",
+      "strength": 5
+     },
+     {
+      "item": "C3-02",
+      "a": "disagree",
+      "b": "agree",
+      "strength": 5
+     },
+     {
+      "item": "C3-06",
+      "a": "agree",
+      "b": "disagree",
+      "strength": 5
+     }
+    ]
+   }
+  },
+  {
+   "id": "identical_answers",
+   "a": {
+    "C1-01": 6,
+    "C1-02": 6,
+    "C1-04": 6,
+    "C1-05": 2,
+    "C1-08": 2,
+    "D3:C1": 1,
+    "C2-01": 3,
+    "C2-03": 3,
+    "C2-04": 3,
+    "C2-05": 5,
+    "C2-06": 5,
+    "D3:C2": 1,
+    "C3-01": 2,
+    "C3-02": 2,
+    "C3-09": 2,
+    "C3-10": 6,
+    "C3-06": 6,
+    "D3:C3": 1,
+    "C4-09": 2,
+    "C4-02": 2,
+    "C4-03": 2,
+    "C4-05": 6,
+    "C4-06": 6,
+    "D3:C4": 1,
+    "C5-02": 3,
+    "C5-10": 3,
+    "C5-05": 5,
+    "C5-11": 5,
+    "C5-09": 3,
+    "D3:C5": 1,
+    "C6-01": 4,
+    "C6-02": 4,
+    "C6-04": 4,
+    "C6-09": 4,
+    "C6-06": 4,
+    "D3:C6": 1,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "b": {
+    "C1-01": 6,
+    "C1-02": 6,
+    "C1-04": 6,
+    "C1-05": 2,
+    "C1-08": 2,
+    "D3:C1": 1,
+    "C2-01": 3,
+    "C2-03": 3,
+    "C2-04": 3,
+    "C2-05": 5,
+    "C2-06": 5,
+    "D3:C2": 1,
+    "C3-01": 2,
+    "C3-02": 2,
+    "C3-09": 2,
+    "C3-10": 6,
+    "C3-06": 6,
+    "D3:C3": 1,
+    "C4-09": 2,
+    "C4-02": 2,
+    "C4-03": 2,
+    "C4-05": 6,
+    "C4-06": 6,
+    "D3:C4": 1,
+    "C5-02": 3,
+    "C5-10": 3,
+    "C5-05": 5,
+    "C5-11": 5,
+    "C5-09": 3,
+    "D3:C5": 1,
+    "C6-01": 4,
+    "C6-02": 4,
+    "C6-04": 4,
+    "C6-09": 4,
+    "C6-06": 4,
+    "D3:C6": 1,
+    "D8": 1,
+    "D4": {
+     "AI companies": 1,
+     "Government regulators": 1,
+     "Universities and independent researchers": 1,
+     "International organizations, such as the UN": 1
+    },
+    "D11": 0
+   },
+   "expected": {
+    "gaps": {
+     "C1": 0.0,
+     "C2": 0.0,
+     "C3": 0.0,
+     "C4": 0.0,
+     "C5": 0.0,
+     "C6": 0.0
+    },
+    "biggest_gap": null,
+    "agree": [
+     {
+      "item": "C1-01",
+      "a": "agree",
+      "b": "agree",
+      "strength": 4
+     },
+     {
+      "item": "C1-02",
+      "a": "agree",
+      "b": "agree",
+      "strength": 4
+     },
+     {
+      "item": "C1-04",
+      "a": "agree",
+      "b": "agree",
+      "strength": 4
+     }
+    ],
+    "disagree": []
+   }
+  }
+ ]
+}

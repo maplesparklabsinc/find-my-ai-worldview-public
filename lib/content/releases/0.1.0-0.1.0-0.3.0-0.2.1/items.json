@@ -1,0 +1,1655 @@
+{
+  "item_bank_version": "0.3.0",
+  "likert_labels": [
+    "Strongly disagree",
+    "Disagree",
+    "Somewhat disagree",
+    "Neither agree nor disagree",
+    "Somewhat agree",
+    "Agree",
+    "Strongly agree"
+  ],
+  "tradeoff_strength_labels": [
+    "Slightly",
+    "Strongly"
+  ],
+  "definition_text": "When we say AI, we mean the systems in use today: chatbots and assistants, image and voice tools, recommendation systems, and software that makes or supports decisions about people. A few questions ask about more capable future AI; those say so. There are no right answers. If you are unsure, pick the answer closest to how you lean; at the end of each section we will ask how settled your views are.",
+  "forms": {
+    "S": {
+      "intro": [],
+      "blocks": [
+        {
+          "construct": "C1",
+          "confidence_probe": "D3",
+          "items": [
+            "C1-01",
+            "C1-02",
+            "C1-04",
+            "C1-05",
+            "C1-06"
+          ]
+        },
+        {
+          "construct": "C2",
+          "confidence_probe": "D3",
+          "items": [
+            "C2-01",
+            "C2-03",
+            "C2-04",
+            "C2-05",
+            "C2-06"
+          ]
+        },
+        {
+          "construct": "C3",
+          "confidence_probe": "D3",
+          "items": [
+            "C3-01",
+            "C3-02",
+            "C3-03",
+            "C3-05",
+            "C3-06"
+          ]
+        },
+        {
+          "construct": "C4",
+          "confidence_probe": "D3",
+          "items": [
+            "C4-01",
+            "C4-02",
+            "C4-03",
+            "C4-05",
+            "C4-06"
+          ]
+        },
+        {
+          "construct": "C5",
+          "confidence_probe": "D3",
+          "items": [
+            "C5-01",
+            "C5-02",
+            "C5-03",
+            "C5-05",
+            "C5-07"
+          ]
+        },
+        {
+          "construct": "C6",
+          "confidence_probe": "D3",
+          "items": [
+            "C6-01",
+            "C6-02",
+            "C6-04",
+            "C6-05",
+            "C6-06"
+          ]
+        }
+      ],
+      "pinned_before_block": {
+        "C3": [
+          "S1"
+        ]
+      },
+      "after_blocks": [
+        "C3-T1",
+        "C4-T1",
+        "C5-T1",
+        "S3",
+        "S4"
+      ],
+      "outro": [
+        "D11",
+        "D1",
+        "D2",
+        "D4",
+        "D6",
+        "D7",
+        "D8",
+        "D9"
+      ]
+    }
+  },
+  "items": [
+    {
+      "id": "C1-01",
+      "construct": "C1",
+      "pole": "+",
+      "stem": "Over the next ten years, AI will make important medical and scientific discoveries happen sooner.",
+      "options": [],
+      "rows": [],
+      "short": "AI will speed up important medical and scientific discoveries",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Handoff A01; Anthropic hopes (R11)"
+    },
+    {
+      "id": "C1-02",
+      "construct": "C1",
+      "pole": "+",
+      "stem": "AI will give ordinary people access to expert help, such as legal, medical or financial advice, that they cannot afford today.",
+      "options": [],
+      "rows": [],
+      "short": "AI will give ordinary people affordable access to expert help",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Handoff A02"
+    },
+    {
+      "id": "C1-03",
+      "construct": "C1",
+      "pole": "+",
+      "stem": "In my own life, AI tools are likely to save me real time or money.",
+      "options": [],
+      "rows": [],
+      "short": "AI tools will save you real time or money",
+      "format": "L7",
+      "forms": [
+        "P"
+      ],
+      "priority": 2,
+      "flags": [
+        "CTX"
+      ],
+      "source": "GAAIS personal usefulness items (R5)"
+    },
+    {
+      "id": "C1-04",
+      "construct": "C1",
+      "pole": "+",
+      "stem": "Over the next ten years, AI will raise living standards for most people in my country.",
+      "options": [],
+      "rows": [],
+      "short": "AI will raise living standards for most people in your country",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Pew AICHANGE wording (R8)"
+    },
+    {
+      "id": "C1-05",
+      "construct": "C1",
+      "pole": "-",
+      "stem": "Most of what is promised about AI's benefits will never actually arrive.",
+      "options": [],
+      "rows": [],
+      "short": "most of AI's promised benefits will never arrive",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Anthropic 'AI hasn't delivered' 18.9% (R11)"
+    },
+    {
+      "id": "C1-06",
+      "construct": "C1",
+      "pole": "-",
+      "stem": "AI mostly makes existing products a little more convenient; it will not change much that matters.",
+      "options": [],
+      "rows": [],
+      "short": "AI will mostly make products a little more convenient, not change much that matters",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Zhang 2021 'AI effect' (N12)"
+    },
+    {
+      "id": "C1-07",
+      "construct": "C1",
+      "pole": "-",
+      "stem": "For most people, AI will make daily life harder rather than easier.",
+      "options": [],
+      "rows": [],
+      "short": "AI will make daily life harder for most people",
+      "format": "L7",
+      "forms": [
+        "P"
+      ],
+      "priority": 2,
+      "flags": [
+        "XLOAD"
+      ],
+      "source": "Pew 2026 personal impact 31% negative (R8b)"
+    },
+    {
+      "id": "C1-08",
+      "construct": "C1",
+      "pole": "-",
+      "stem": "I expect AI to disappoint in the areas where it is supposed to help most, such as health and education.",
+      "options": [],
+      "rows": [],
+      "short": "AI will disappoint where it is supposed to help most, such as health and education",
+      "format": "L7",
+      "forms": [
+        "P"
+      ],
+      "priority": 2,
+      "flags": [],
+      "source": "Kelley 'depends what happens' (N3)"
+    },
+    {
+      "id": "C2-01",
+      "construct": "C2",
+      "pole": "+",
+      "stem": "AI will eliminate more jobs than it creates in my country over the next ten years.",
+      "options": [],
+      "rows": [],
+      "short": "AI will eliminate more jobs than it creates",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Pew AIJOBS 64% (R8); Abacus 62% (N8)"
+    },
+    {
+      "id": "C2-02",
+      "construct": "C2",
+      "pole": "+",
+      "stem": "AI will make it harder to know what is true, because fake text, images and video will be everywhere.",
+      "options": [],
+      "rows": [],
+      "short": "AI will make it harder to know what is true",
+      "format": "L7",
+      "forms": [
+        "P"
+      ],
+      "priority": 2,
+      "flags": [
+        "CEIL"
+      ],
+      "source": "Pew 2025 76% (R8b)"
+    },
+    {
+      "id": "C2-03",
+      "construct": "C2",
+      "pole": "+",
+      "stem": "AI will widen the gap between rich and poor even if the economy as a whole grows.",
+      "options": [],
+      "rows": [],
+      "short": "AI will widen the gap between rich and poor",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [
+        "XLOAD"
+      ],
+      "source": "Handoff A04"
+    },
+    {
+      "id": "C2-04",
+      "construct": "C2",
+      "pole": "+",
+      "stem": "Some harms from AI will be impossible to undo once they have happened.",
+      "options": [],
+      "rows": [],
+      "short": "some harms from AI will be impossible to undo",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Handoff A03"
+    },
+    {
+      "id": "C2-05",
+      "construct": "C2",
+      "pole": "-",
+      "stem": "Worries about AI are mostly exaggerated by the media.",
+      "options": [],
+      "rows": [],
+      "short": "worries about AI are mostly exaggerated by the media",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Bao 'Indifferent' class (R6)"
+    },
+    {
+      "id": "C2-06",
+      "construct": "C2",
+      "pole": "-",
+      "stem": "Society will adapt to AI the way it adapted to the internet, without lasting damage.",
+      "options": [],
+      "rows": [],
+      "short": "society will adapt to AI without lasting damage",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Kelley (N3)"
+    },
+    {
+      "id": "C2-07",
+      "construct": "C2",
+      "pole": "-",
+      "stem": "The risks of AI can be handled with ordinary laws and common sense.",
+      "options": [],
+      "rows": [],
+      "short": "AI's risks can be handled with ordinary laws and common sense",
+      "format": "L7",
+      "forms": [
+        "P"
+      ],
+      "priority": 2,
+      "flags": [
+        "XLOAD"
+      ],
+      "source": "GovAI review (N2)"
+    },
+    {
+      "id": "C2-08",
+      "construct": "C2",
+      "pole": "-",
+      "stem": "Fears that AI will escape human control belong in science fiction, not public policy.",
+      "options": [],
+      "rows": [],
+      "short": "fears of AI escaping human control belong in science fiction",
+      "format": "L7",
+      "forms": [
+        "P"
+      ],
+      "priority": 2,
+      "flags": [
+        "LEAD",
+        "XLOAD"
+      ],
+      "source": "AP-NORC human control 81% (R10)"
+    },
+    {
+      "id": "C3-01",
+      "construct": "C3",
+      "pole": "+",
+      "stem": "It is better to slow down AI development and get the rules right, even if useful tools arrive years later.",
+      "options": [],
+      "rows": [],
+      "short": "it's better to slow AI down and get the rules right, even if useful tools arrive later",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Gallup 80/9 (N13); AP-NORC 64/8 (R10)"
+    },
+    {
+      "id": "C3-02",
+      "construct": "C3",
+      "pole": "+",
+      "stem": "When a new AI capability is powerful but hard to evaluate, it should be released in stages rather than all at once.",
+      "options": [],
+      "rows": [],
+      "short": "powerful but hard-to-evaluate AI should be released in stages",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Handoff A05"
+    },
+    {
+      "id": "C3-03",
+      "construct": "C3",
+      "pole": "+",
+      "stem": "If experts cannot agree whether a new AI system is safe, it should not be released until they can.",
+      "options": [],
+      "rows": [],
+      "short": "AI shouldn't be released while experts disagree about whether it is safe",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Handoff S01"
+    },
+    {
+      "id": "C3-04",
+      "construct": "C3",
+      "pole": "+",
+      "stem": "Governments should be able to pause the development of the most powerful AI systems while risks are unclear.",
+      "options": [],
+      "rows": [],
+      "short": "governments should be able to pause the most powerful AI while risks are unclear",
+      "format": "L7",
+      "forms": [
+        "P"
+      ],
+      "priority": 2,
+      "flags": [
+        "FUT"
+      ],
+      "source": "FLI 64% (N18); ControlAI (N18)"
+    },
+    {
+      "id": "C3-05",
+      "construct": "C3",
+      "pole": "-",
+      "stem": "Delaying AI also causes harm, by postponing cures and discoveries that could help people now.",
+      "options": [],
+      "rows": [],
+      "short": "delaying AI has real costs, because it postpones useful discoveries",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Handoff A06"
+    },
+    {
+      "id": "C3-06",
+      "construct": "C3",
+      "pole": "-",
+      "stem": "Companies should be free to release new AI tools and fix problems as they appear, rather than wait for approval.",
+      "options": [],
+      "rows": [],
+      "short": "companies should be free to release AI tools and fix problems as they appear",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [
+        "XLOAD"
+      ],
+      "source": "Research Co. 24% 'as fast as possible' (N8)"
+    },
+    {
+      "id": "C3-07",
+      "construct": "C3",
+      "pole": "-",
+      "stem": "The best way to find out whether an AI tool is safe is to let people use it.",
+      "options": [],
+      "rows": [],
+      "short": "the best way to learn whether AI is safe is to let people use it",
+      "format": "L7",
+      "forms": [
+        "P"
+      ],
+      "priority": 2,
+      "flags": [],
+      "source": "Accelerator position (handoff 01)"
+    },
+    {
+      "id": "C3-08",
+      "construct": "C3",
+      "pole": "-",
+      "stem": "Countries that slow down AI will be left behind by those that do not.",
+      "options": [],
+      "rows": [],
+      "short": "countries that slow down on AI will be left behind",
+      "format": "L7",
+      "forms": [
+        "P"
+      ],
+      "priority": 2,
+      "flags": [
+        "XLOAD"
+      ],
+      "source": "Gallup 79% 'important to lead' (N13)"
+    },
+    {
+      "id": "C3-T1",
+      "construct": "C3",
+      "pole": "+",
+      "stem": "Which is closer to your view?",
+      "options": [
+        "Keep safety rules for AI even if development is slower.",
+        "Develop AI as fast as possible even if some rules are loosened."
+      ],
+      "rows": [],
+      "short": "safety rules should stay even if AI development is slower",
+      "format": "TO",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Gallup-SCSP 2025 (N13)"
+    },
+    {
+      "id": "C4-01",
+      "construct": "C4",
+      "pole": "+",
+      "stem": "Before an AI system is used for important decisions about people, it should be tested by an independent body that does not work for the company.",
+      "options": [],
+      "rows": [],
+      "short": "AI used for important decisions about people should be tested by an independent body first",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [
+        "CEIL"
+      ],
+      "source": "Handoff A09; Gallup 72% (N13)"
+    },
+    {
+      "id": "C4-02",
+      "construct": "C4",
+      "pole": "+",
+      "stem": "Governments should set binding rules for AI rather than leave it to industry codes of conduct.",
+      "options": [],
+      "rows": [],
+      "short": "governments should set binding rules for AI",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Ada Lovelace 58% regulator (N4); Gallup 54/53 (N13)"
+    },
+    {
+      "id": "C4-03",
+      "construct": "C4",
+      "pole": "+",
+      "stem": "Even well-run AI companies need an outside regulator checking their work.",
+      "options": [],
+      "rows": [],
+      "short": "even well-run AI companies need an outside regulator",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "GPO-AI 21% trust self-regulation (N6)"
+    },
+    {
+      "id": "C4-04",
+      "construct": "C4",
+      "pole": "+",
+      "stem": "AI companies should be legally responsible when their systems cause harm.",
+      "options": [],
+      "rows": [],
+      "short": "AI companies should be legally responsible for harms their systems cause",
+      "format": "L7",
+      "forms": [
+        "P"
+      ],
+      "priority": 2,
+      "flags": [
+        "CEIL"
+      ],
+      "source": "ControlAI 82% (N18)"
+    },
+    {
+      "id": "C4-05",
+      "construct": "C4",
+      "pole": "-",
+      "stem": "The people who build AI understand it best, so they should be the ones setting the rules for it.",
+      "options": [],
+      "rows": [],
+      "short": "the people who build AI should set the rules for it",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Ada: 18-24s prefer companies 79% (N4)"
+    },
+    {
+      "id": "C4-06",
+      "construct": "C4",
+      "pole": "-",
+      "stem": "Strict government rules on AI will mostly protect big companies that can afford lawyers and hurt smaller ones.",
+      "options": [],
+      "rows": [],
+      "short": "strict AI rules mostly protect big companies",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Handoff A10"
+    },
+    {
+      "id": "C4-07",
+      "construct": "C4",
+      "pole": "-",
+      "stem": "Rules written by regulators today will be out of date before they take effect.",
+      "options": [],
+      "rows": [],
+      "short": "AI rules will be out of date before they take effect",
+      "format": "L7",
+      "forms": [
+        "P"
+      ],
+      "priority": 2,
+      "flags": [],
+      "source": "Petry Substack lesson; Stewards vs Precautionists split"
+    },
+    {
+      "id": "C4-08",
+      "construct": "C4",
+      "pole": "-",
+      "stem": "Competition between AI companies will do more to keep AI safe than government rules will.",
+      "options": [],
+      "rows": [],
+      "short": "competition will do more to keep AI safe than government rules",
+      "format": "L7",
+      "forms": [
+        "P"
+      ],
+      "priority": 2,
+      "flags": [],
+      "source": "Handoff A12 adapted"
+    },
+    {
+      "id": "C4-T1",
+      "construct": "C4",
+      "pole": "+",
+      "stem": "Which is closer to your view?",
+      "options": [
+        "Rules for AI should be written by government and enforced by law.",
+        "Rules for AI should be agreed and enforced by the companies themselves."
+      ],
+      "rows": [],
+      "short": "rules for AI should be written by government and enforced by law",
+      "format": "TO",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Gallup 54% government / 53% joint company rules (N13)"
+    },
+    {
+      "id": "C4b-01",
+      "construct": "C4b",
+      "pole": "+",
+      "stem": "International agreements on the most capable AI systems are worth pursuing even if rival countries benefit from them too.",
+      "options": [],
+      "rows": [],
+      "short": "international agreements on the most capable AI are worth pursuing even if rivals benefit",
+      "format": "L7",
+      "forms": [
+        "P",
+        "R"
+      ],
+      "priority": 2,
+      "flags": [
+        "FUT"
+      ],
+      "source": "Handoff A18; Lundgren and Tallberg (N15)"
+    },
+    {
+      "id": "C4b-02",
+      "construct": "C4b",
+      "pole": "+",
+      "stem": "My country should develop AI together with allies rather than on its own.",
+      "options": [],
+      "rows": [],
+      "short": "your country should develop AI together with allies",
+      "format": "L7",
+      "forms": [
+        "P",
+        "R"
+      ],
+      "priority": 2,
+      "flags": [],
+      "source": "Gallup 42% allies / 14% independent (N13)"
+    },
+    {
+      "id": "C4b-03",
+      "construct": "C4b",
+      "pole": "-",
+      "stem": "My country should build its own AI capability rather than depend on foreign companies or governments.",
+      "options": [],
+      "rows": [],
+      "short": "your country should build its own AI capability",
+      "format": "L7",
+      "forms": [
+        "P",
+        "R"
+      ],
+      "priority": 2,
+      "flags": [],
+      "source": "Handoff A17"
+    },
+    {
+      "id": "C4b-04",
+      "construct": "C4b",
+      "pole": "-",
+      "stem": "Having more advanced AI than other countries matters more than having international rules.",
+      "options": [],
+      "rows": [],
+      "short": "being ahead in AI matters more than international rules",
+      "format": "L7",
+      "forms": [
+        "P",
+        "R"
+      ],
+      "priority": 2,
+      "flags": [],
+      "source": "Gallup 79% (N13)"
+    },
+    {
+      "id": "C5-01",
+      "construct": "C5",
+      "pole": "+",
+      "stem": "When AI influences an important decision about a person, such as a loan, a job or a medical treatment, that person should be able to appeal to a human.",
+      "options": [],
+      "rows": [],
+      "short": "people should be able to appeal AI-influenced decisions to a human",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [
+        "CEIL"
+      ],
+      "source": "Handoff A13; Ada appeal 65% (N4)"
+    },
+    {
+      "id": "C5-02",
+      "construct": "C5",
+      "pole": "+",
+      "stem": "Some decisions should always be made by a human, even if an AI would make them more accurately.",
+      "options": [],
+      "rows": [],
+      "short": "some decisions should always be made by a human, even at some cost in accuracy",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Ada 62% explanation over accuracy (N4)"
+    },
+    {
+      "id": "C5-03",
+      "construct": "C5",
+      "pole": "+",
+      "stem": "I would rather have a human explain a decision I disagree with than an AI that gets it right more often.",
+      "options": [],
+      "rows": [],
+      "short": "a human who can explain a decision is better than a more accurate AI",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Ada (N4); Kieslich explainability (N10)"
+    },
+    {
+      "id": "C5-04",
+      "construct": "C5",
+      "pole": "+",
+      "stem": "A decision that could change someone's life should not be left to an AI, even with a human checking afterwards.",
+      "options": [],
+      "rows": [],
+      "short": "life-changing decisions shouldn't be left to AI, even with a human checking",
+      "format": "L7",
+      "forms": [
+        "P"
+      ],
+      "priority": 2,
+      "flags": [],
+      "source": "Rutgers <1 in 10 unsupervised (N17)"
+    },
+    {
+      "id": "C5-05",
+      "construct": "C5",
+      "pole": "-",
+      "stem": "If evidence showed an AI made fairer decisions than human judges or managers, I would support letting it decide.",
+      "options": [],
+      "rows": [],
+      "short": "AI should decide if evidence shows it's fairer than people",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Handoff A14 (de-conflated)"
+    },
+    {
+      "id": "C5-06",
+      "construct": "C5",
+      "pole": "-",
+      "stem": "Insisting on a human in every decision will mean slower, more expensive and more biased outcomes.",
+      "options": [],
+      "rows": [],
+      "short": "insisting on a human in every decision makes outcomes worse",
+      "format": "L7",
+      "forms": [
+        "P"
+      ],
+      "priority": 2,
+      "flags": [
+        "DB"
+      ],
+      "source": "Kieslich accuracy vs autonomy (N10)"
+    },
+    {
+      "id": "C5-07",
+      "construct": "C5",
+      "pole": "-",
+      "stem": "For everyday choices with little at stake, I am happy to let AI decide for me without checking.",
+      "options": [],
+      "rows": [],
+      "short": "AI can make low-stakes everyday choices without being checked",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [
+        "CTX"
+      ],
+      "source": "Handoff A30 reliance is task-dependent"
+    },
+    {
+      "id": "C5-08",
+      "construct": "C5",
+      "pole": "-",
+      "stem": "In many situations, a human reviewing an AI's decision adds cost without adding safety.",
+      "options": [],
+      "rows": [],
+      "short": "human review of AI decisions often adds cost without adding safety",
+      "format": "L7",
+      "forms": [
+        "P"
+      ],
+      "priority": 2,
+      "flags": [],
+      "source": "Baumann 'human only' rising (N16)"
+    },
+    {
+      "id": "C5-T1",
+      "construct": "C5",
+      "pole": "+",
+      "stem": "For a decision about you, which would you choose?",
+      "options": [
+        "A human decision-maker who is less accurate but can explain the decision.",
+        "An AI system that is more accurate but cannot explain its decisions."
+      ],
+      "rows": [],
+      "short": "a human who can explain a decision is preferable to a more accurate AI that cannot",
+      "format": "TO",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Ada Lovelace 2025 62/25/8 (N4)"
+    },
+    {
+      "id": "C6-01",
+      "construct": "C6",
+      "pole": "+",
+      "stem": "Companies that replace workers with AI should pay toward retraining or supporting those workers.",
+      "options": [],
+      "rows": [],
+      "short": "companies that replace workers with AI should help support them",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Handoff A11; UK 64% new rules (N2)"
+    },
+    {
+      "id": "C6-02",
+      "construct": "C6",
+      "pole": "+",
+      "stem": "If AI makes the economy much more productive, governments should make sure the gains reach people whose work was replaced.",
+      "options": [],
+      "rows": [],
+      "short": "governments should make sure AI's gains reach people whose work was replaced",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "AP-NORC protect workers 77% (R10)"
+    },
+    {
+      "id": "C6-03",
+      "construct": "C6",
+      "pole": "+",
+      "stem": "Workers should have a say before AI is introduced into their workplace.",
+      "options": [],
+      "rows": [],
+      "short": "workers should have a say before AI comes into their workplace",
+      "format": "L7",
+      "forms": [
+        "P"
+      ],
+      "priority": 2,
+      "flags": [
+        "CEIL"
+      ],
+      "source": "Eurobarometer 77% (N2)"
+    },
+    {
+      "id": "C6-04",
+      "construct": "C6",
+      "pole": "+",
+      "stem": "Public money spent on AI research should come with conditions that the results benefit the public, not only investors.",
+      "options": [],
+      "rows": [],
+      "short": "publicly funded AI research should benefit the public, not only investors",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Open Commons reclassification (handoff 03)"
+    },
+    {
+      "id": "C6-05",
+      "construct": "C6",
+      "pole": "-",
+      "stem": "The best way to spread the benefits of AI is to let new companies and services compete.",
+      "options": [],
+      "rows": [],
+      "short": "competition is the best way to spread AI's benefits",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [
+        "XLOAD"
+      ],
+      "source": "Handoff A12"
+    },
+    {
+      "id": "C6-06",
+      "construct": "C6",
+      "pole": "-",
+      "stem": "Businesses have no special obligation to workers replaced by AI beyond what the law already requires.",
+      "options": [],
+      "rows": [],
+      "short": "businesses owe nothing extra to workers replaced by AI",
+      "format": "L7",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Handoff 06 contrast"
+    },
+    {
+      "id": "C6-07",
+      "construct": "C6",
+      "pole": "-",
+      "stem": "Trying to share AI's gains through taxes or rules would slow the economy and leave everyone worse off.",
+      "options": [],
+      "rows": [],
+      "short": "sharing AI's gains through taxes or rules would leave everyone worse off",
+      "format": "L7",
+      "forms": [
+        "P"
+      ],
+      "priority": 2,
+      "flags": [],
+      "source": "Handoff distribution axis"
+    },
+    {
+      "id": "C6-08",
+      "construct": "C6",
+      "pole": "-",
+      "stem": "People whose jobs change because of AI should adapt, as workers have with every past technology.",
+      "options": [],
+      "rows": [],
+      "short": "people whose jobs change because of AI should adapt",
+      "format": "L7",
+      "forms": [
+        "P"
+      ],
+      "priority": 2,
+      "flags": [],
+      "source": "Kelley jobs 53/22 (N3)"
+    },
+    {
+      "id": "R1-01",
+      "construct": "R1",
+      "pole": "+",
+      "stem": "Using AI to monitor people in public places is unacceptable even if it reduces crime.",
+      "options": [],
+      "rows": [],
+      "short": "AI monitoring of public places is unacceptable even if it reduces crime",
+      "format": "L7",
+      "forms": [
+        "P",
+        "R"
+      ],
+      "priority": 2,
+      "flags": [],
+      "source": "Handoff A15; Zhang and Dafoe privacy top-tier (N1)"
+    },
+    {
+      "id": "R1-02",
+      "construct": "R1",
+      "pole": "-",
+      "stem": "Limited AI monitoring is justified when it prevents serious harm.",
+      "options": [],
+      "rows": [],
+      "short": "limited AI monitoring is justified to prevent serious harm",
+      "format": "L7",
+      "forms": [
+        "P",
+        "R"
+      ],
+      "priority": 2,
+      "flags": [],
+      "source": "Handoff A16"
+    },
+    {
+      "id": "R1-03",
+      "construct": "R1",
+      "pole": "+",
+      "stem": "People should be told, and able to object, whenever AI is used to make a decision about them.",
+      "options": [],
+      "rows": [],
+      "short": "people should be told, and able to object, when AI decides about them",
+      "format": "L7",
+      "forms": [
+        "P",
+        "R"
+      ],
+      "priority": 2,
+      "flags": [
+        "CEIL"
+      ],
+      "source": "Rutgers disclosure 76% (N17)"
+    },
+    {
+      "id": "R2-01",
+      "construct": "R2",
+      "pole": "+",
+      "stem": "The most capable AI models should be released openly so that anyone can study and build on them.",
+      "options": [],
+      "rows": [],
+      "short": "the most capable AI models should be released openly",
+      "format": "L7",
+      "forms": [
+        "P",
+        "R"
+      ],
+      "priority": 2,
+      "flags": [
+        "FUT",
+        "JARGON"
+      ],
+      "source": "AIPI 2023 23% support open-sourcing (N18)"
+    },
+    {
+      "id": "R2-02",
+      "construct": "R2",
+      "pole": "-",
+      "stem": "Some AI models are powerful enough that access should be restricted, even if that makes independent research harder.",
+      "options": [],
+      "rows": [],
+      "short": "some AI models should have restricted access",
+      "format": "L7",
+      "forms": [
+        "P",
+        "R"
+      ],
+      "priority": 2,
+      "flags": [
+        "FUT"
+      ],
+      "source": "Handoff A22"
+    },
+    {
+      "id": "R2-03",
+      "construct": "R2",
+      "pole": "+",
+      "stem": "It is more dangerous for a few companies to control the best AI than for those models to be freely available.",
+      "options": [],
+      "rows": [],
+      "short": "a few companies controlling the best AI is more dangerous than open release",
+      "format": "L7",
+      "forms": [
+        "P",
+        "R"
+      ],
+      "priority": 2,
+      "flags": [
+        "XLOAD"
+      ],
+      "source": "Handoff S02"
+    },
+    {
+      "id": "R3-01",
+      "construct": "R3",
+      "pole": "+",
+      "stem": "An AI companion can be a real source of comfort without replacing human relationships.",
+      "options": [],
+      "rows": [],
+      "short": "an AI companion can comfort without replacing human relationships",
+      "format": "L7",
+      "forms": [
+        "P",
+        "R"
+      ],
+      "priority": 2,
+      "flags": [],
+      "source": "Handoff A19; Anthropic wellbeing/dependency 11.2% (R11)"
+    },
+    {
+      "id": "R3-02",
+      "construct": "R3",
+      "pole": "-",
+      "stem": "Some parts of life, such as caring for children or for the dying, should stay human-led no matter how capable AI becomes.",
+      "options": [],
+      "rows": [],
+      "short": "some parts of life should always stay human-led",
+      "format": "L7",
+      "forms": [
+        "P",
+        "R"
+      ],
+      "priority": 2,
+      "flags": [
+        "CEIL"
+      ],
+      "source": "Handoff A20"
+    },
+    {
+      "id": "R3-03",
+      "construct": "R3",
+      "pole": "+",
+      "stem": "I would welcome AI that helps me think and remember better, even if I came to depend on it.",
+      "options": [],
+      "rows": [],
+      "short": "you'd welcome AI that helps you think and remember, even if you depended on it",
+      "format": "L7",
+      "forms": [
+        "P",
+        "R"
+      ],
+      "priority": 2,
+      "flags": [],
+      "source": "Anthropic cognitive atrophy 16.3%, autonomy 21.9% (R11)"
+    },
+    {
+      "id": "R4-01",
+      "construct": "R4",
+      "pole": "+",
+      "stem": "Within my lifetime, AI could become capable enough that humans lose the ability to control it.",
+      "options": [],
+      "rows": [],
+      "short": "AI could become impossible for humans to control within your lifetime",
+      "format": "L7",
+      "forms": [
+        "P",
+        "R"
+      ],
+      "priority": 2,
+      "flags": [
+        "FUT"
+      ],
+      "source": "AIPI 76% (N18); Anthropic existential 6.7% (R11)"
+    },
+    {
+      "id": "R4-02",
+      "construct": "R4",
+      "pole": "+",
+      "stem": "Governments should treat the most extreme possible risks from future AI as a top priority, even if that is expensive.",
+      "options": [],
+      "rows": [],
+      "short": "the most extreme possible risks from future AI should be a top government priority",
+      "format": "L7",
+      "forms": [
+        "P",
+        "R"
+      ],
+      "priority": 2,
+      "flags": [
+        "FUT"
+      ],
+      "source": "AIPI 70% (N18)"
+    },
+    {
+      "id": "R4-03",
+      "construct": "R4",
+      "pole": "-",
+      "stem": "Talk of AI ending humanity distracts from the real harms AI is causing today.",
+      "options": [],
+      "rows": [],
+      "short": "talk of AI ending humanity distracts from today's harms",
+      "format": "L7",
+      "forms": [
+        "P",
+        "R"
+      ],
+      "priority": 2,
+      "flags": [],
+      "source": "Handoff adversarial Q6"
+    },
+    {
+      "id": "D1",
+      "construct": "D",
+      "pole": null,
+      "stem": "How often do you use AI tools yourself, such as chatbots, image tools or AI assistants?",
+      "options": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Rarely",
+        "Never"
+      ],
+      "rows": [],
+      "short": null,
+      "format": "CAT",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Pew 2026 49% ever use (R8b); Abacus use drives trust (N8)"
+    },
+    {
+      "id": "D2",
+      "construct": "D",
+      "pole": null,
+      "stem": "How well do you feel you understand what today's AI can and cannot do?",
+      "options": [
+        "Very well",
+        "Fairly well",
+        "A little",
+        "Not at all"
+      ],
+      "rows": [],
+      "short": null,
+      "format": "CAT",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [
+        "SD"
+      ],
+      "source": "KPMG knowledge 38% Canada (N5)"
+    },
+    {
+      "id": "D3",
+      "construct": "D",
+      "pole": null,
+      "stem": "How settled are your views on the questions you just answered?",
+      "options": [
+        "Very settled",
+        "Fairly settled",
+        "Still forming",
+        "Not something I have thought about"
+      ],
+      "rows": [],
+      "short": null,
+      "format": "CAT",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Sturgis 2014 midpoint probe (M4); Krosnick (M4)"
+    },
+    {
+      "id": "D4",
+      "construct": "D",
+      "pole": null,
+      "stem": "How much do you trust each of these to act in the public interest on AI?",
+      "options": [
+        "A great deal",
+        "Some",
+        "Not much",
+        "None"
+      ],
+      "rows": [
+        "AI companies",
+        "Government regulators",
+        "Universities and independent researchers",
+        "International bodies"
+      ],
+      "short": null,
+      "format": "GRID",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Zhang and Dafoe (N1); Pew REGCONF (R8); Research Co. (N8)"
+    },
+    {
+      "id": "D5",
+      "construct": "D",
+      "pole": null,
+      "stem": "How worried are you that each of these will misuse AI?",
+      "options": [
+        "Very",
+        "Somewhat",
+        "Not very",
+        "Not at all"
+      ],
+      "rows": [
+        "AI companies",
+        "Government regulators",
+        "Universities and independent researchers",
+        "International bodies"
+      ],
+      "short": null,
+      "format": "GRID",
+      "forms": [
+        "P",
+        "R"
+      ],
+      "priority": 2,
+      "flags": [],
+      "source": "Scharowski trust and distrust separate (R14)"
+    },
+    {
+      "id": "D6",
+      "construct": "D",
+      "pole": null,
+      "stem": "Has AI already saved you time, money or effort in a way that mattered to you?",
+      "options": [
+        "Yes, a lot",
+        "Yes, a little",
+        "No",
+        "Not sure"
+      ],
+      "rows": [],
+      "short": null,
+      "format": "CAT",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Handoff A26; Anthropic 81% benefit (R11)"
+    },
+    {
+      "id": "D7",
+      "construct": "D",
+      "pole": null,
+      "stem": "Have you personally been harmed by someone else's use of AI, for example a wrong automated decision, a scam, or lost work?",
+      "options": [
+        "Yes",
+        "No",
+        "Not sure"
+      ],
+      "rows": [],
+      "short": null,
+      "format": "CAT",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Handoff A27"
+    },
+    {
+      "id": "D8",
+      "construct": "D",
+      "pole": null,
+      "stem": "How important is the future of AI compared with other issues facing your country?",
+      "options": [
+        "Among the most important",
+        "Important",
+        "Somewhat important",
+        "Not very important"
+      ],
+      "rows": [],
+      "short": null,
+      "format": "CAT",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Handoff A29; AI Impacts <1% top issue (N18)"
+    },
+    {
+      "id": "D9",
+      "construct": "D",
+      "pole": null,
+      "stem": "In a few words, how would you describe your view of AI?",
+      "options": [],
+      "rows": [],
+      "short": null,
+      "format": "TXT",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Petry free-text self-ID caught mislabelling (R3)"
+    },
+    {
+      "id": "D10",
+      "construct": "D",
+      "pole": null,
+      "stem": "Does your work or study involve building or deploying AI?",
+      "options": [
+        "Yes",
+        "Somewhat",
+        "No"
+      ],
+      "rows": [],
+      "short": null,
+      "format": "CAT",
+      "forms": [
+        "P",
+        "R"
+      ],
+      "priority": 2,
+      "flags": [],
+      "source": "Zhang and Dafoe CS degree effect (N1)"
+    },
+    {
+      "id": "D11",
+      "construct": "D",
+      "pole": null,
+      "stem": "Where do you live?",
+      "options": [
+        "Canada",
+        "United States",
+        "United Kingdom",
+        "Australia",
+        "Somewhere else"
+      ],
+      "rows": [],
+      "short": null,
+      "format": "CAT",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Invariance gate (Stage 0 section 9)"
+    },
+    {
+      "id": "S1",
+      "construct": "S",
+      "pole": null,
+      "stem": "A new AI tool could speed up cancer research, but independent experts cannot fully check how it reaches its conclusions. What should happen?",
+      "options": [
+        "Make it available widely now.",
+        "Use it in supervised trials first.",
+        "Hold it back until independent checks are possible.",
+        "I am not sure."
+      ],
+      "rows": [],
+      "short": null,
+      "format": "SC",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Handoff S01 rebalanced"
+    },
+    {
+      "id": "S2",
+      "construct": "S",
+      "pole": null,
+      "stem": "A small number of companies control the most capable AI systems. Which concerns you most?",
+      "options": [
+        "Innovation will slow.",
+        "Too much economic and political power in a few hands.",
+        "Opening access would increase misuse.",
+        "It depends on how accountable those companies are."
+      ],
+      "rows": [],
+      "short": null,
+      "format": "SC",
+      "forms": [
+        "P",
+        "R"
+      ],
+      "priority": 2,
+      "flags": [],
+      "source": "Handoff S02"
+    },
+    {
+      "id": "S3",
+      "construct": "S",
+      "pole": null,
+      "stem": "A company could do the work of 30 people with 5 by using AI. Which comes closest to your view?",
+      "options": [
+        "Allow it; the economy will adjust.",
+        "Allow it only if the company funds retraining or income support for the people replaced.",
+        "Keep the human jobs even if products cost more.",
+        "Allow it only after a required review of the impact on workers."
+      ],
+      "rows": [],
+      "short": null,
+      "format": "SC",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [],
+      "source": "Handoff S03 rewritten to balance options"
+    },
+    {
+      "id": "S4",
+      "construct": "S",
+      "pole": null,
+      "stem": "Twenty years from now, which role for AI would you prefer?",
+      "options": [
+        "AI handles most complex decisions.",
+        "People and AI decide together, with people holding the final say.",
+        "AI stays a tool that people direct.",
+        "It depends on how things go."
+      ],
+      "rows": [],
+      "short": null,
+      "format": "SC",
+      "forms": [
+        "P",
+        "S"
+      ],
+      "priority": 1,
+      "flags": [
+        "FUT"
+      ],
+      "source": "Handoff S04"
+    },
+    {
+      "id": "S5",
+      "construct": "S",
+      "pole": null,
+      "stem": "Suppose your country is behind others in advanced AI. Which response do you prefer?",
+      "options": [
+        "Invest to catch up.",
+        "Lead on international safety agreements.",
+        "Fund open, shared research.",
+        "Focus on using proven AI to improve everyday services."
+      ],
+      "rows": [],
+      "short": null,
+      "format": "SC",
+      "forms": [
+        "P",
+        "R"
+      ],
+      "priority": 2,
+      "flags": [],
+      "source": "Handoff S05"
+    }
+  ]
+}

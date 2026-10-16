@@ -1,0 +1,276 @@
+{
+  "narratives_version": "0.5.0",
+  "voice": "Second person, plain English, grade 8 reading level. Describe, never judge. No percentages presented as probabilities. Every claim about other people cites a base rate from base-rates.json with its source, date and population.",
+  "constructs": {
+    "C1": {
+      "name": "Expected benefit",
+      "question": "How much good will AI do?",
+      "topic": "how much good AI will do",
+      "low": "Expects little benefit",
+      "high": "Expects large benefits"
+    },
+    "C2": {
+      "name": "Expected harm",
+      "question": "How much harm will AI do?",
+      "topic": "how much harm AI will do",
+      "low": "Expects little harm",
+      "high": "Expects serious harm"
+    },
+    "C3": {
+      "name": "Release pace",
+      "question": "How fast should new AI be released?",
+      "topic": "how fast new AI should be released",
+      "low": "Release sooner and learn as we go",
+      "high": "Test more before wide release"
+    },
+    "C4": {
+      "name": "Who sets the rules",
+      "question": "Who should set and enforce the rules?",
+      "topic": "who sets the rules",
+      "low": "AI developers and industry",
+      "high": "Public regulators"
+    },
+    "C5": {
+      "name": "Final say",
+      "question": "Who should have the final say on decisions about people?",
+      "topic": "who has the final say on decisions about people",
+      "low": "AI can decide when it's proven better",
+      "high": "A person must have the final say"
+    },
+    "C6": {
+      "name": "Who benefits",
+      "question": "Who should share in the gains?",
+      "topic": "who should share in the gains",
+      "low": "Markets spread the gains",
+      "high": "Gains should be shared deliberately"
+    }
+  },
+  "bands": {
+    "strong_low": "Strongly toward \"{low}\"",
+    "lean_low": "Leaning toward \"{low}\"",
+    "between": "In between",
+    "lean_high": "Leaning toward \"{high}\"",
+    "strong_high": "Strongly toward \"{high}\""
+  },
+  "unmeasured": "Not enough answers to place you here ({answered} of {expected} answered).",
+  "unsettled_note": "You told us your views on several of these questions are still taking shape, but your answers lean clearly. Treat this result as where you stand today, not a fixed label.",
+  "outcomes": {
+    "matched": {
+      "headline": "Your closest perspective: {p1}",
+      "visitor_headline": "Their closest perspective: {p1}",
+      "subhead": "Closest of the six perspectives we describe, not an exact match. You are also near {p2} and {p3}."
+    },
+    "mixed_between": {
+      "headline": "You sit between {p1} and {p2}",
+      "visitor_headline": "They sit between {p1} and {p2}",
+      "body": "Your answers fit two perspectives about equally well. Here is what you share with each, and the question that would tip you one way or the other."
+    },
+    "mixed_unmatched": {
+      "headline": "Your own combination",
+      "visitor_headline": "Their own combination",
+      "body": "Your answers do not sit close to any of the six perspectives we describe. That usually means you combine views that are rarely held together, which is worth knowing. Here is what is distinctive about your profile. If you think we are missing a perspective, tell us.",
+      "distinctive_heading": "What's distinctive",
+      "overlap": "Your answers line up with {pairs}. None of the six captures your mix completely.",
+      "overlap_pair": "{perspective} on {topic}",
+      "overlap_and": "and",
+      "nearest_label": "Nearest of the six, though not close:",
+      "missing_link": "Think we're missing a perspective? Tell us"
+    },
+    "undecided": {
+      "headline": "Your views are still forming",
+      "visitor_headline": "Their views are still forming",
+      "body": "You told us your views on several of these questions are still taking shape, and your answers do not lean strongly in one direction. That is a common place to be: in one 2025 Canadian poll, nearly a third of adults said they were not sure whether AI would be good or bad for society. Here is where you lean so far, and three questions worth thinking about.",
+      "evidence_refs": [
+        "N8"
+      ],
+      "coverage_body": "You skipped enough questions that we cannot place you with confidence. Here is what we can say from the answers you gave.",
+      "middle_headline": "Your answers sit in the middle",
+      "middle_visitor_headline": "Their answers sit in the middle",
+      "middle_body": "Your answers land close to the middle on every question we scored, so none of the six perspectives fits you better than the others. That can mean your views are still taking shape, or that you see real weight on both sides of each question. Here is where you lean, if anywhere, and three questions worth thinking about.",
+      "lean_heading": "Where you lean so far",
+      "lean_none": "You're in between on all six questions so far.",
+      "prompts_heading": "Three questions worth thinking about"
+    },
+    "indifferent": {
+      "headline": "AI is not high on your list",
+      "visitor_headline": "AI is not high on their list",
+      "body": "You do not expect AI to change much for better or worse, and it is not among the issues you care most about. That is a legitimate position and a common one: in a large German study run over fifteen months, about half of adults named no AI concern at all. Here is how your views compare on the questions that divide people who do care.",
+      "evidence_refs": [
+        "N11"
+      ],
+      "section_heading": "Where you'd land if it came up",
+      "section_body": "Your six answers are on your full result. You're close to the middle on most of them, which is where a lot of people sit when AI isn't on their mind."
+    }
+  },
+  "tensions": [
+    {
+      "id": "benefit_but_slow",
+      "when": [
+        {
+          "construct": "C1",
+          "op": ">=",
+          "value": 1
+        },
+        {
+          "construct": "C3",
+          "op": ">=",
+          "value": 1
+        }
+      ],
+      "text": "You expect AI to bring large benefits, and you still want more testing before powerful AI is widely released. You're willing to wait for gains you believe in."
+    },
+    {
+      "id": "benefit_and_harm",
+      "when": [
+        {
+          "construct": "C1",
+          "op": ">=",
+          "value": 1
+        },
+        {
+          "construct": "C2",
+          "op": ">=",
+          "value": 1
+        }
+      ],
+      "text": "You expect AI to bring both large benefits and serious harms. Many people hold both views at once; the question that matters for you is which arrives first."
+    },
+    {
+      "id": "fast_with_public_rules",
+      "when": [
+        {
+          "construct": "C3",
+          "op": "<=",
+          "value": -1
+        },
+        {
+          "construct": "C4",
+          "op": ">=",
+          "value": 1
+        }
+      ],
+      "text": "You want new AI released quickly, and you want public regulators to have the final say on the rules. That combination works only if regulators can keep pace."
+    },
+    {
+      "id": "oversight_without_trust",
+      "when": [
+        {
+          "construct": "C4",
+          "op": ">=",
+          "value": 1
+        },
+        {
+          "trust_low": "Government regulators"
+        }
+      ],
+      "text": "You want public oversight of AI, but you do not trust today's regulators to act in the public interest. Your position depends on oversight institutions that would have to be built or reformed."
+    },
+    {
+      "id": "industry_rules_without_trust",
+      "when": [
+        {
+          "construct": "C4",
+          "op": "<=",
+          "value": -1
+        },
+        {
+          "trust_low": "AI companies"
+        }
+      ],
+      "text": "You would leave rule-setting to industry and markets, though you do not trust AI companies to act in the public interest. You may be betting on competition rather than on the companies themselves."
+    },
+    {
+      "id": "benefit_but_humans_decide",
+      "when": [
+        {
+          "construct": "C1",
+          "op": ">=",
+          "value": 1
+        },
+        {
+          "construct": "C5",
+          "op": ">=",
+          "value": 1
+        }
+      ],
+      "text": "You think AI will help a great deal, and you want humans to keep the final say on decisions about people. You are accepting some lost accuracy to keep accountability."
+    },
+    {
+      "id": "fast_and_shared",
+      "when": [
+        {
+          "construct": "C3",
+          "op": "<=",
+          "value": -1
+        },
+        {
+          "construct": "C6",
+          "op": ">=",
+          "value": 1
+        }
+      ],
+      "text": "You want new AI released quickly and its gains shared widely. Speed and sharing usually come from different camps; you're asking for both."
+    },
+    {
+      "id": "harm_but_fast",
+      "when": [
+        {
+          "construct": "C2",
+          "op": ">=",
+          "value": 1
+        },
+        {
+          "construct": "C3",
+          "op": "<=",
+          "value": -1
+        }
+      ],
+      "text": "You expect serious harms from AI and you still favour releasing it quickly. Perhaps you think holding back wouldn't prevent the harms, or that falling behind would be worse."
+    },
+    {
+      "id": "caution_then_speed",
+      "when": [
+        {
+          "construct": "C3",
+          "op": ">=",
+          "value": 1
+        },
+        {
+          "tradeoff": "C3-T1",
+          "option": 1
+        }
+      ],
+      "text": "On the general questions you lean toward more testing before release, but when you had to choose, you picked earlier access with monitoring. Your view may depend on exactly what is being traded."
+    },
+    {
+      "id": "speed_then_caution",
+      "when": [
+        {
+          "construct": "C3",
+          "op": "<=",
+          "value": -1
+        },
+        {
+          "tradeoff": "C3-T1",
+          "option": 0
+        }
+      ],
+      "text": "On the general questions you lean toward releasing AI sooner, but when you had to choose, you picked more testing first. Your view may depend on exactly what is being traded."
+    }
+  ],
+  "no_tension": "Your answers pull in one direction more than most: {strongest_construct_name} is where you stand out most clearly.",
+  "statements": {
+    "note": "Pick the template by the direction of the shared or differing answer: _agree when the person agreed with the statement, _disagree when they disagreed. {short} is the item's short statement.",
+    "common_ground_with_closest_agree": "Like {perspective}, you agree that {short}.",
+    "common_ground_with_closest_disagree": "Like {perspective}, you don't think {short}.",
+    "unexpected_common_ground_agree": "You and {perspective} are far apart overall, but you agree that {short}.",
+    "unexpected_common_ground_disagree": "You and {perspective} are far apart overall, but neither of you thinks {short}.",
+    "difference_with_closest_agree": "Unlike {perspective}, you think {short}.",
+    "difference_with_closest_disagree": "Unlike {perspective}, you don't think {short}.",
+    "friend_agree_agree": "You both agree that {short}.",
+    "friend_agree_disagree": "Neither of you thinks {short}.",
+    "friend_disagree_prompt": "You split on whether {short}. Ask each other: what would change your mind?"
+  },
+  "why_this_result": "Your result comes from your answers to {n_items} statements on six questions. For each question we averaged your answers (reversing the statements written from the other side), placed you on a scale from one side to the other, and found the perspective whose typical position is closest. The rules, the code and their known limits are published on the methodology page.",
+  "provisional": "This is an early version. Once more people have taken it, we'll fine-tune how results are worked out, and we'll say [what changed](/changes)."
+}

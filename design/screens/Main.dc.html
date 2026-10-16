@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Landing</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="min-height: 100vh; box-sizing: border-box; padding: 8px clamp(16px, 4vw, 24px) 24px; display: flex; flex-direction: column; background: #f6f7f5; color: #1b211f; font-family: 'Atkinson Hyperlegible Next', 'Noto Sans', system-ui, sans-serif; font-size: 19px; line-height: 28px;">
+  <header style="width: 100%; max-width: 1040px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px;">
+    <span style="font-size: 17px; line-height: 24px; font-weight: 700;">Find My AI Worldview</span>
+    <a href="#" style="display: flex; align-items: center; min-height: 48px; color: #2c6b64; font-size: 17px; line-height: 24px;">How this works</a>
+  </header>
+
+  <main style="width: 100%; max-width: 1040px; margin: 0 auto; flex: 1 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px 64px; align-items: center; padding: 24px 0 40px;">
+    <div style="display: flex; flex-direction: column; gap: 24px; max-width: 560px;">
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <h1 style="margin: 0; font-size: clamp(32px, 1.35vw + 26.7px, 44px); line-height: 1.18; font-weight: 700;">What do you actually think about AI?</h1>
+        <p style="margin: 0;">Answer some quick questions, see where you land, and compare with your friends.</p>
+        <p style="margin: 0; font-size: 16px; line-height: 24px; color: #545e5a;">About 10 minutes · No sign-up · No right answers</p>
+      </div>
+      <a href="Start.dc.html" style="display: flex; align-items: center; justify-content: center; width: 100%; max-width: 360px; min-height: 56px; box-sizing: border-box; padding: 0 24px; border-radius: 12px; background: #2c6b64; color: #ffffff; font-size: 19px; font-weight: 600; text-decoration: none;">Start</a>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 24px; padding: 24px 16px; border-radius: 12px; background: #ffffff; border: 1px solid #d5dbd8;">
+      <h2 style="margin: 0; font-size: 19px; line-height: 28px; font-weight: 700;">What you'll get</h2>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <span>How fast should AI move?</span>
+        <div style="position: relative; height: 20px;" aria-hidden="true">
+          <div style="position: absolute; left: 0; right: 0; top: 9px; height: 2px; border-radius: 999px; background: #d5dbd8;"></div>
+          <div style="position: absolute; left: 66%; top: 2px; width: 16px; height: 16px; margin-left: -8px; border-radius: 999px; background: #2c6b64;"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; gap: 16px; font-size: 16px; line-height: 24px; color: #545e5a;"><span>Move faster</span><span style="text-align: right;">Slow down until it's safe</span></div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <span>Who should make decisions about people?</span>
+        <div style="position: relative; height: 20px;" aria-hidden="true">
+          <div style="position: absolute; left: 0; right: 0; top: 9px; height: 2px; border-radius: 999px; background: #d5dbd8;"></div>
+          <div style="position: absolute; left: 84%; top: 2px; width: 16px; height: 16px; margin-left: -8px; border-radius: 999px; background: #2c6b64;"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; gap: 16px; font-size: 16px; line-height: 24px; color: #545e5a;"><span>AI, where it does better</span><span style="text-align: right;">Always a human</span></div>
+      </div>
+      <p style="margin: 0; font-size: 16px; line-height: 24px; color: #545e5a;">Six things people disagree about, the perspective you're closest to, and what stands out about your views.</p>
+    </div>
+  </main>
+
+  <footer style="width: 100%; max-width: 1040px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 0 24px; font-size: 16px; line-height: 24px; color: #545e5a;">
+    <a href="#" style="display: flex; align-items: center; min-height: 48px; color: #545e5a;">Privacy</a>
+    <span>Built with help from AI</span>
+    <span>A Maple Spark Labs project</span>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1100}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

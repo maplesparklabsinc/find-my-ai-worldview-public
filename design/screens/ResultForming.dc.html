@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Your result: still forming</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap">
+<style>
+body{margin:0}
+button:focus-visible,a:focus-visible,textarea:focus-visible{outline:2px solid #2c6b64;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 100vh; box-sizing: border-box; padding: 8px clamp(16px, 4vw, 24px) 32px; background: #f6f7f5; color: #1b211f; font-family: 'Atkinson Hyperlegible Next', 'Noto Sans', system-ui, sans-serif; font-size: 19px; line-height: 28px;">
+  <div style="width: 100%; max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px;">
+    <header style="display: flex; align-items: center; justify-content: space-between; min-height: 56px;">
+      <span style="font-size: 17px; line-height: 24px; font-weight: 700;">Find My AI Worldview</span>
+      <a href="ShareCard.dc.html" aria-label="Share" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; margin-right: -14px; color: #1b211f;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 12.5V3"/><path d="M6.5 6.5 10 3l3.5 3.5"/><path d="M4 10.5v5a1.5 1.5 0 0 0 1.5 1.5h9a1.5 1.5 0 0 0 1.5-1.5v-5"/></svg></a>
+    </header>
+    <div style="display: flex; flex-direction: column; gap: 12px; padding: 24px 16px; border-radius: 12px; background: #e2eeeb;">
+      <span style="font-size: 16px; line-height: 24px; color: #545e5a;">Your result</span>
+      <h1 style="margin: 0; font-size: clamp(32px, 1.35vw + 26.7px, 44px); line-height: 1.18; font-weight: 700;">Your views are still forming</h1>
+      <p style="margin: 0;">You told us your views on several of these questions are still taking shape, and your answers do not lean strongly in one direction. That is a common place to be: in one 2025 Canadian poll, nearly a third of adults said they were not sure whether AI would be good or bad for society. Here is where you lean so far, and three questions worth thinking about.</p>
+      <span style="font-size: 16px; line-height: 24px; color: #545e5a;">Leger, 2025 · 1,518 Canadian adults, online panel</span>
+    </div>
+    <section style="display: flex; flex-direction: column; gap: 12px;" aria-labelledby="lean">
+      <h2 id="lean" style="margin: 0; font-size: clamp(26px, 0.67vw + 23.4px, 32px); line-height: 1.24; font-weight: 700;">Where you lean so far</h2>
+      <p style="margin: 0;">Slightly toward "Public, independent oversight" on who should set the rules. On the other five questions you're in between.</p>
+    </section>
+    <section style="display: flex; flex-direction: column; gap: 12px;" aria-labelledby="think">
+      <h2 id="think" style="margin: 0; font-size: clamp(26px, 0.67vw + 23.4px, 32px); line-height: 1.24; font-weight: 700;">Three questions worth thinking about</h2>
+      <ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px;">
+        <li style="display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 12px; background: #ffffff; border: 1px solid #d5dbd8; flex-direction: row; gap: 12px;"><span style="flex: none; width: 28px; font-weight: 700; color: #2c6b64;">1</span><span>Name one use of AI you would say yes to and one you would say no to. What is the difference?</span></li>
+        <li style="display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 12px; background: #ffffff; border: 1px solid #d5dbd8; flex-direction: row; gap: 12px;"><span style="flex: none; width: 28px; font-weight: 700; color: #2c6b64;">2</span><span>Which institution would you trust to test AI before it is used on people, and why that one?</span></li>
+        <li style="display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 12px; background: #ffffff; border: 1px solid #d5dbd8; flex-direction: row; gap: 12px;"><span style="flex: none; width: 28px; font-weight: 700; color: #2c6b64;">3</span><span>What evidence would convince you that a powerful AI system is safe enough to release?</span></li>
+      </ol>
+    </section>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 8px;">
+      <a href="ShareCard.dc.html" style="display: flex; align-items: center; justify-content: center; min-height: 56px; border-radius: 12px; background: #2c6b64; color: #ffffff; font-size: 19px; font-weight: 600; text-decoration: none;">Share your result</a>
+      <a href="Compare.dc.html" style="display: flex; align-items: center; justify-content: center; min-height: 56px; box-sizing: border-box; border-radius: 12px; background: #ffffff; border: 1px solid #7f8985; color: #1b211f; font-size: 19px; font-weight: 600; text-decoration: none;">Compare with a friend</a>
+    </div>
+    <a href="Result.dc.html" style="align-self: center; display: flex; align-items: center; min-height: 48px; color: #2c6b64; font-size: 17px; line-height: 24px;">See your six answers</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1300}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = {}; }
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

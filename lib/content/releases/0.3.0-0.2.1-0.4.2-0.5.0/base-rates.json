@@ -1,0 +1,204 @@
+{
+  "base_rates_version": "0.1.1",
+  "rules": [
+    "Show a base rate only with its source, year, country and population, linked to the evidence ledger.",
+    "Where our wording differs from the source's, say 'a similar question'. Never imply the respondent answered the same question.",
+    "Prefer the respondent's country (D11). If none exists for their country, show one from another country and name it.",
+    "Figures marked approximate were read from published charts; display them with 'about'.",
+    "Re-check every figure against its source before launch and at each release; record the check date here."
+  ],
+  "last_checked": "2026-10-12",
+  "items": [
+    {
+      "construct": "C1",
+      "country": "CA",
+      "text": "about 4 in 10 Canadians said AI products and services have more benefits than drawbacks",
+      "value": 40,
+      "approximate": true,
+      "source": "Ipsos AI Monitor",
+      "year": 2025,
+      "population": "online adults, 30-country study",
+      "ledger": "R9"
+    },
+    {
+      "construct": "C1",
+      "country": "US",
+      "text": "16% of US adults expected AI to have a positive effect on society over the next 20 years, and 40% a negative one",
+      "value": 16,
+      "approximate": false,
+      "source": "Pew Research Center, Americans and AI",
+      "year": 2026,
+      "population": "5,119 US adults, probability panel",
+      "ledger": "R8b"
+    },
+    {
+      "construct": "C1",
+      "country": "GB",
+      "text": "about 4 in 10 adults in Great Britain said AI products and services have more benefits than drawbacks",
+      "value": 43,
+      "approximate": true,
+      "source": "Ipsos AI Monitor",
+      "year": 2025,
+      "population": "online adults, 30-country study",
+      "ledger": "R9"
+    },
+    {
+      "construct": "C1",
+      "country": "AU",
+      "text": "about half of Australians said AI products and services have more benefits than drawbacks",
+      "value": 47,
+      "approximate": true,
+      "source": "Ipsos AI Monitor",
+      "year": 2025,
+      "population": "online adults, 30-country study",
+      "ledger": "R9"
+    },
+    {
+      "construct": "C2",
+      "country": "CA",
+      "text": "62% of Canadians expected AI to eliminate more jobs than it creates",
+      "value": 62,
+      "approximate": false,
+      "source": "Abacus Data",
+      "year": 2025,
+      "population": "1,915 Canadian adults, online panel",
+      "ledger": "N8"
+    },
+    {
+      "construct": "C2",
+      "country": "US",
+      "text": "half of US adults said they were more concerned than excited about AI in daily life; 10% were more excited",
+      "value": 50,
+      "approximate": false,
+      "source": "Pew Research Center",
+      "year": 2025,
+      "population": "5,023 US adults, probability panel",
+      "ledger": "R8b"
+    },
+    {
+      "construct": "C3",
+      "country": "US",
+      "text": "64% of US adults said AI is developing too fast; 8% said not fast enough",
+      "value": 64,
+      "approximate": false,
+      "source": "AP-NORC",
+      "year": 2026,
+      "population": "2,140 US adults, probability panel",
+      "ledger": "R10"
+    },
+    {
+      "construct": "C3",
+      "country": "CA",
+      "text": "49% of Canadians wanted AI development slowed down, 24% wanted it as fast as possible, and 13% wanted it abandoned",
+      "value": 49,
+      "approximate": false,
+      "source": "Research Co.",
+      "year": 2025,
+      "population": "1,001 Canadian adults, online panel",
+      "ledger": "N8"
+    },
+    {
+      "construct": "C3",
+      "country": "US",
+      "item": "C3-T1",
+      "text": "In a similar question, 80% of US adults chose keeping safety rules even if development is slower; 9% chose developing as fast as possible",
+      "value": 80,
+      "approximate": false,
+      "source": "Gallup and SCSP",
+      "year": 2025,
+      "population": "3,128 US adults, probability panel",
+      "ledger": "N13",
+      "similar_question": true
+    },
+    {
+      "construct": "C4",
+      "country": "CA",
+      "text": "85% of Canadians said governments should regulate AI",
+      "value": 85,
+      "approximate": false,
+      "source": "Leger",
+      "year": 2025,
+      "population": "1,518 Canadian adults, online panel",
+      "ledger": "N8"
+    },
+    {
+      "construct": "C4",
+      "country": "GB",
+      "text": "58% of UK adults named an independent regulator among those who should be responsible for AI safety; 58% also named the companies developing it",
+      "value": 58,
+      "approximate": false,
+      "source": "Ada Lovelace Institute and Alan Turing Institute",
+      "year": 2025,
+      "population": "3,513 UK adults, nationally representative",
+      "ledger": "N4"
+    },
+    {
+      "construct": "C4",
+      "country": "US",
+      "text": "72% of US adults said independent experts should test AI before release",
+      "value": 72,
+      "approximate": false,
+      "source": "Gallup and SCSP",
+      "year": 2025,
+      "population": "3,128 US adults, probability panel",
+      "ledger": "N13"
+    },
+    {
+      "construct": "C5",
+      "country": "GB",
+      "text": "63% of UK adults said they were not comfortable with AI making decisions that affect their lives",
+      "value": 63,
+      "approximate": false,
+      "source": "Ada Lovelace Institute and Alan Turing Institute",
+      "year": 2025,
+      "population": "3,513 UK adults, nationally representative",
+      "ledger": "N4"
+    },
+    {
+      "construct": "C5",
+      "country": "GB",
+      "item": "C5-T1",
+      "text": "In a similar question, 62% of UK adults favoured explanations or human decisions even at some cost to accuracy; 8% said accuracy mattered more",
+      "value": 62,
+      "approximate": false,
+      "source": "Ada Lovelace Institute and Alan Turing Institute",
+      "year": 2025,
+      "population": "3,513 UK adults, nationally representative",
+      "ledger": "N4",
+      "similar_question": true
+    },
+    {
+      "construct": "C5",
+      "country": "US",
+      "text": "fewer than 1 in 10 US adults would let AI make the final call, unsupervised, on hiring, loans, admissions, parole or medical priority",
+      "value": 10,
+      "approximate": true,
+      "source": "Rutgers National AI Opinion Monitor",
+      "year": 2026,
+      "population": "5,154 US adults, non-probability panel, weighted",
+      "ledger": "N17"
+    },
+    {
+      "construct": "C6",
+      "country": "US",
+      "text": "77% of US adults said protecting US workers should be an extremely or very important priority for government on AI",
+      "value": 77,
+      "approximate": false,
+      "source": "AP-NORC",
+      "year": 2026,
+      "population": "2,140 US adults, probability panel",
+      "ledger": "R10"
+    },
+    {
+      "construct": "C6",
+      "country": "CA",
+      "text": "78% of Canadians said AI threatens jobs",
+      "value": 78,
+      "approximate": false,
+      "source": "Leger",
+      "year": 2025,
+      "population": "1,518 Canadian adults, online panel",
+      "ledger": "N8"
+    }
+  ]
+}

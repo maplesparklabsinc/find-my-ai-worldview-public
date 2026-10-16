@@ -1,0 +1,292 @@
+// Schema for content/copy.json (short site copy moved out of docs/04).
+import { z } from "zod";
+
+const text = z.string().min(1);
+const version = z.string().regex(/^\d+\.\d+\.\d+$/);
+
+export const copyFileSchema = z.strictObject({
+  copy_version: version,
+  note: z.string(),
+  placeholders: z.record(z.string().regex(/^[a-z_]+$/), z.string().min(1).nullable()),
+  site: z.strictObject({ name: text, maker: text }),
+  /** At the top of Privacy, How this works and What's changed (issue #37). */
+  nav: z.strictObject({ back_to_quiz: text, back_to_start: text }),
+  /** On / and /start when a quiz is in progress in this tab (issue #37). */
+  resume: z.strictObject({ in_progress: text, continue: text, start_over: text }),
+  countries: z
+    .array(z.strictObject({ d11_option: text, code: z.string().regex(/^[A-Z]{2}$/), name: text }))
+    .min(1),
+  landing: z.strictObject({
+    headline: text,
+    lede: text,
+    /** The commitment, said plainly before anyone starts (issue #24). */
+    /** {n} is the standard form's screen count, as in start.footnote (issue #37). */
+    facts: z.array(text).min(1),
+    start_button: text,
+    completions: z.strictObject({ text: z.string().includes("{n}"), show_from: z.number().int().positive() }),
+    steps_heading: text,
+    steps: z.array(text).length(3),
+    perspectives_heading: text,
+    perspectives_intro: text,
+    perspectives_note: text,
+    /** The start button after the perspective cards. */
+    second_start_button: text,
+  }),
+  start: z.strictObject({ heading: text, paragraphs: z.array(text).min(1), privacy_note: text, button: text, footnote: z.string().includes("{n}") }),
+  quiz: z.strictObject({
+    about_you_intro: text,
+    progress: z.string().includes("{n}").includes("{total}"),
+    scenario_label: text,
+    section_end: text,
+    about_you_heading: text,
+    grid_count: z.string().includes("{n}").includes("{total}"),
+    grid_change: text,
+    free_text_hint: text,
+    free_text_limit: z.string().includes("{n}"),
+    free_text_max: z.number().int().positive(),
+    finish_button: text,
+  }),
+  /** The optional guess after the last question, before the result (issue #24). */
+  prediction: z.strictObject({
+    heading: text,
+    body: text,
+    group_label: text,
+    options: z.strictObject({ own_combination: text, forming: text, not_priority: text }),
+    /** Live hint under the perspective cards: up to two can be picked (issue #37). */
+    picked: z.string().includes("{n}"),
+    submit: text,
+    skip: text,
+  }),
+  /** The guess set beside the result, for the person who made it (issue #24). */
+  reflection: z.strictObject({
+    heading: text,
+    expected: z.strictObject({
+      perspective: z.string().includes("{p1}"),
+      between: z.string().includes("{p1}").includes("{p2}"),
+      own_combination: text,
+      forming: text,
+      not_priority: text,
+    }),
+    same: z.strictObject({
+      perspective: z.string().includes("{p1}"),
+      between: z.string().includes("{p1}").includes("{p2}"),
+      own_combination: text,
+      forming: text,
+      not_priority: text,
+    }),
+    actual: z.strictObject({
+      matched: z.string().includes("{p1}"),
+      mixed_between: z.string().includes("{p1}").includes("{p2}"),
+      mixed_unmatched: text,
+      undecided: text,
+      undecided_middle: text,
+      undecided_coverage: text,
+      indifferent: text,
+    }),
+    prompt: text,
+  }),
+  results: z.strictObject({
+    closest_label: text,
+    other_label: text,
+    what_stands_out: text,
+    six_answers: text,
+    six_intro: text,
+    go_deeper: text,
+    go_deeper_intro: text,
+    about_perspective: z.string().includes("{perspective}"),
+    strongest_objection: text,
+    something_to_talk_about: text,
+    elsewhere: text,
+    you_and_others: text,
+    polls_note: text,
+    source_line: z.string().includes("{source}"),
+    other_country: z.string().includes("{country}"),
+    common_ground: text,
+    why: text,
+    missing: text,
+    tip_heading: text,
+  }),
+  saving: z.strictObject({
+    heading: text,
+    failed: text,
+    retry: text,
+    view_unsaved: text,
+    unsaved_note: text,
+    // Why a save was refused (issue #18).
+    too_quick: text,
+    /** Added to too_quick for someone who came from a shared result or compare link (issue #37). */
+    too_quick_compare: text,
+    outdated: text,
+    start_again: text,
+    rate_limited: text,
+  }),
+  result_page: z.strictObject({
+    title: z.string().includes("{site}"),
+    /** The banner a visitor sees on someone else's result (issue #21). */
+    shared_anonymous: text,
+    old_version: text,
+    missing_version: text,
+    loading: text,
+    not_found_heading: text,
+    not_found_body: text,
+    error_heading: text,
+    error_body: text,
+    retry: text,
+    take_it_heading: text,
+    take_it_body: text,
+    take_it_button: text,
+    /** The visitor's box at the top and end of a shared result, and the sticky bar on phones (issue #37). */
+    compare_body: z.string().includes("{n}"),
+    compare_button: text,
+    /** "Take the quiz again" at the end of your own result, with its confirmation when the result isn't saved. */
+    again_link: text,
+    again_unsaved: text,
+    again_confirm: text,
+    again_keep: text,
+  }),
+  fit: z.strictObject({
+    section_heading: text,
+    section_body: text,
+    heading: text,
+    /** Under the fit question near the top of the result page (issue #28). */
+    quick_note: text,
+    options: z.array(text).length(5),
+    better_heading: text,
+    better_none: text,
+    better_own_mix: text,
+    check_heading: text,
+    check_question: text,
+    check_about_right: text,
+    check_further: z.string().includes("{end}"),
+    thanks: text,
+    quick_thanks: text,
+    /** A result feedback answer that didn't save (issue #18). */
+    error: text,
+    something_off: z.string().includes("{feedback_link}"),
+  }),
+  share: z.strictObject({
+    heading: text,
+    /** Under the heading, before any button: who can see a shared result (issue #21). */
+    note: text,
+    text: z.strictObject({
+      matched: z.string().includes("{perspective}"),
+      mixed_between: z.string().includes("{p1}").includes("{p2}"),
+      mixed_unmatched: text,
+      undecided: text,
+      /** Still forming because every answer sits in the middle (scoring 0.3.0). */
+      undecided_middle: text,
+      indifferent: text,
+    }),
+    share_button: text,
+    copy_link: text,
+    copied: text,
+    download_image: text,
+    card: z.strictObject({
+      alt: z.string().includes("{title}"),
+      label_matched: text,
+      label_other: text,
+      title: z.strictObject({
+        mixed_between: z.string().includes("{p1}").includes("{p2}"),
+        mixed_unmatched: text,
+        undecided: text,
+        undecided_middle: text,
+        indifferent: text,
+      }),
+      subtitle: z.strictObject({ mixed_between: text, mixed_unmatched: text, undecided: text, undecided_middle: text, indifferent: text }),
+      ask: text,
+      ends: z.record(z.string().regex(/^C\d$/), z.tuple([text, text])),
+    }),
+  }),
+  /** Compare links (/c/{id}, made before issue #37) and the comparison view. */
+  compare: z.strictObject({
+    heading: text,
+    invite_anonymous: text,
+    invite_button: text,
+    section_heading: z.string().includes("{name}"),
+    friend_fallback: text,
+    you_label: text,
+    same_place: z.string().includes("{perspective}").includes("{question}"),
+    different_places: z.string().includes("{question}"),
+    no_gap: text,
+    no_difference: text,
+    side_by_side: text,
+    agree_heading: text,
+    split_heading: text,
+    send_back_button: z.string().includes("{name}"),
+    send_back_text: text,
+    full_result: text,
+    your_result: text,
+    track_label: z.string().includes("{you}").includes("{them}"),
+  }),
+  evidence_sources: z.strictObject({
+    note: z.string(),
+    sources: z.record(
+      z.string().regex(/^[A-Z][0-9A-Za-z]*$/),
+      z.strictObject({ source: text, year: z.number().int(), population: text }),
+    ),
+  }),
+  footer: z.strictObject({ ai_disclosure: text }),
+  quick_check: z.strictObject({
+    show_share: z.number().min(0).max(1),
+    own_share: z.number().min(0).max(1),
+    heading: text,
+    intro: text,
+    question: text,
+    options: z.array(text).length(5),
+    result_note: z.string().includes("{which}"),
+    which_own: text,
+    which_other: text,
+  }),
+  research_consent: z.strictObject({
+    consent_version: version,
+    heading: text,
+    body: text,
+    email_label: text,
+    checkbox: text,
+    button: text,
+    thanks: text,
+    error: text,
+  }),
+  feedback: z.strictObject({
+    heading: text,
+    problem_label: text,
+    problem_options: z.array(z.strictObject({ id: z.string().regex(/^[a-z_]+$/), label: text })).min(1),
+    target_label: text,
+    details_label: text,
+    evidence_label: text,
+    email_label: text,
+    quote_consent: text,
+    attach_result: text,
+    button: text,
+    thanks_heading: text,
+    thanks: text,
+    error: text,
+    back_to_result: text,
+  }),
+  changelog: z.strictObject({
+    heading: text,
+    intro: text,
+    labels: z.strictObject({
+      version: z.string().includes("{version}"),
+      version_unreleased: z.string().includes("{version}"),
+      what: text,
+      why: text,
+      based_on: text,
+      past_results: text,
+    }),
+    entries: z
+      .array(
+        z.strictObject({
+          version,
+          date: z.iso.date().nullable(),
+          what: text,
+          why: text,
+          based_on: text,
+          past_results: text,
+        }),
+      )
+      .min(1),
+  }),
+});
+
+export type CopyFile = z.infer<typeof copyFileSchema>;

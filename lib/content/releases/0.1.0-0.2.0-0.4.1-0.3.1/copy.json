@@ -1,0 +1,39 @@
+{
+  "countries": [
+    {
+      "d11_option": "Canada",
+      "code": "CA",
+      "name": "Canada"
+    },
+    {
+      "d11_option": "United States",
+      "code": "US",
+      "name": "the United States"
+    },
+    {
+      "d11_option": "United Kingdom",
+      "code": "GB",
+      "name": "the United Kingdom"
+    },
+    {
+      "d11_option": "Australia",
+      "code": "AU",
+      "name": "Australia"
+    }
+  ],
+  "evidence_sources": {
+    "note": "Source lines for figures quoted in narratives.json outcome copy, keyed by evidence-ledger ID (research/evidence-ledger.csv).",
+    "sources": {
+      "N8": {
+        "source": "Leger",
+        "year": 2025,
+        "population": "1,518 Canadian adults, online panel"
+      },
+      "N11": {
+        "source": "Kieslich, Lünich and Došenović",
+        "year": 2022,
+        "population": "14,988 German adults, surveyed 2020 to 2021"
+      }
+    }
+  }
+}

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>You and Sam</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap">
+<style>
+body{margin:0}
+a:focus-visible{outline:2px solid #2c6b64;outline-offset:2px}
+</style>
+</helmet>
+<div style="box-sizing: border-box; padding: 8px clamp(16px, 4vw, 24px) 40px; background: #f6f7f5; color: #1b211f; font-family: 'Atkinson Hyperlegible Next', 'Noto Sans', system-ui, sans-serif; font-size: 19px; line-height: 28px;">
+  <div style="width: 100%; max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px;">
+
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <header style="display: flex; align-items: center; min-height: 56px;">
+        <span style="font-size: 17px; line-height: 24px; font-weight: 700;">Find My AI Worldview</span>
+      </header>
+      <h1 style="margin: 0; font-size: clamp(32px, 1.35vw + 26.7px, 44px); line-height: 1.18; font-weight: 700;">You and Sam</h1>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px;">
+        <div style="display: flex; flex-direction: column; gap: 4px; padding: 16px; border-radius: 12px; background: #e2eeeb;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="width: 16px; height: 16px; flex: none; border-radius: 999px; background: #2c6b64;" aria-hidden="true"></span>
+            <span style="font-size: 16px; line-height: 24px; color: #545e5a;">You</span>
+          </div>
+          <span style="font-size: 22px; line-height: 28px; font-weight: 700;">Stewards</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px; padding: 16px; border-radius: 12px; background: #ffffff; border: 1px solid #d5dbd8;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="width: 12px; height: 12px; flex: none; border-radius: 999px; background: #ffffff; border: 2px solid #8a5d16;" aria-hidden="true"></span>
+            <span style="font-size: 16px; line-height: 24px; color: #545e5a;">Sam</span>
+          </div>
+          <span style="font-size: 22px; line-height: 28px; font-weight: 700;">Accelerators</span>
+        </div>
+      </div>
+      <p style="margin: 0;">You land in different places, and you're furthest apart on <strong>how fast AI should move</strong>.</p>
+    </div>
+
+    <section style="display: flex; flex-direction: column; gap: 32px;" aria-labelledby="both">
+      <h2 id="both" style="margin: 0; font-size: clamp(26px, 0.67vw + 23.4px, 32px); line-height: 1.24; font-weight: 700;">Side by side</h2>
+      <sc-for list="{{ tracks }}" as="t" hint-placeholder-count="6">
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <span style="font-weight: 600;">{{ t.question }}</span>
+          <div role="img" aria-label="{{ t.label }}" style="position: relative; height: 72px;">
+            <span style="{{ t.youLabel }}">You</span>
+            <div style="position: absolute; left: 0; right: 0; top: 35px; height: 2px; border-radius: 999px; background: #d5dbd8;"></div>
+            <div style="{{ t.samDot }}"></div>
+            <div style="{{ t.youDot }}"></div>
+            <span style="{{ t.samLabel }}">Sam</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; gap: 16px; font-size: 16px; line-height: 24px; color: #545e5a;"><span>{{ t.low }}</span><span style="text-align: right;">{{ t.high }}</span></div>
+        </div>
+      </sc-for>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 16px;" aria-labelledby="agree">
+      <h2 id="agree" style="margin: 0; font-size: clamp(26px, 0.67vw + 23.4px, 32px); line-height: 1.24; font-weight: 700;">Where you agree</h2>
+      <div style="display: flex; gap: 12px; align-items: flex-start;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#2c6b64" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 4px;"><path d="M4.5 10.5 8 14l7.5-8"/></svg>
+        <p style="margin: 0;">You both agree that AI will speed up important medical and scientific discoveries.</p>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: flex-start;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#2c6b64" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 4px;"><path d="M4.5 10.5 8 14l7.5-8"/></svg>
+        <p style="margin: 0;">You both agree that AI will give ordinary people affordable access to expert help.</p>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 16px;" aria-labelledby="split">
+      <h2 id="split" style="margin: 0; font-size: clamp(26px, 0.67vw + 23.4px, 32px); line-height: 1.24; font-weight: 700;">Where you split</h2>
+      <div style="display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 12px; background: #ffffff; border: 1px solid #d5dbd8;">
+        <p style="margin: 0;">You split on whether it's better to slow AI down and get the rules right, even if useful tools arrive later.</p>
+        <p style="margin: 0; font-size: 17px; line-height: 26px; color: #545e5a;">Ask each other: what would change your mind?</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 12px; background: #ffffff; border: 1px solid #d5dbd8;">
+        <p style="margin: 0;">You split on whether governments should set binding rules for AI.</p>
+        <p style="margin: 0; font-size: 17px; line-height: 26px; color: #545e5a;">Ask each other: what would change your mind?</p>
+      </div>
+    </section>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 8px;">
+      <a href="ShareCard.dc.html" style="display: flex; align-items: center; justify-content: center; min-height: 56px; box-sizing: border-box; padding: 0 16px; border-radius: 12px; background: #2c6b64; color: #ffffff; font-size: 19px; font-weight: 600; text-align: center; text-decoration: none;">Send this to Sam</a>
+      <a href="Result.dc.html" style="display: flex; align-items: center; justify-content: center; min-height: 56px; box-sizing: border-box; padding: 0 16px; border-radius: 12px; background: #ffffff; border: 1px solid #7f8985; color: #1b211f; font-size: 19px; font-weight: 600; text-align: center; text-decoration: none;">See your full result</a>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const pct = (s) => (s + 3) / 6 * 100;
+    const labelAt = (s) => Math.min(92, Math.max(8, pct(s))).toFixed(1) + '%';
+    const label = 'position: absolute; transform: translateX(-50%); font-size: 16px; line-height: 20px; font-weight: 700; white-space: nowrap;';
+    const where = (v, low, high) => v > 0.5 ? 'toward ' + high : v < -0.5 ? 'toward ' + low : 'in between';
+    const rows = [
+      ['How much good will AI do?', 'Expects little benefit', 'Expects large benefits', 1.2, 2.0],
+      ['How much harm will AI do?', 'Expects little harm', 'Expects serious harm', 0.8, -1.0],
+      ['How fast should AI move?', 'Move faster', 'Slow down until it is safe', 0.2, -2.0],
+      ['Who should set the rules?', 'Industry and markets', 'Public, independent oversight', 2.2, -1.6],
+      ['Who should make decisions about people?', 'AI can decide when it does better', 'Humans must decide', 1.0, -0.4],
+      ['Who should share in the gains?', 'Markets spread the gains', 'Gains should be shared deliberately', 0.4, 0.2]
+    ];
+    return {
+      tracks: rows.map(([question, low, high, you, sam]) => ({
+        question, low, high,
+        youLabel: label + ' top: 0; left: ' + labelAt(you) + '; color: #2c6b64;',
+        samLabel: label + ' bottom: 0; left: ' + labelAt(sam) + '; color: #8a5d16;',
+        youDot: 'position: absolute; top: 27px; left: ' + pct(you).toFixed(1) + '%; width: 18px; height: 18px; margin-left: -9px; border-radius: 999px; background: #2c6b64;',
+        samDot: 'position: absolute; top: 25px; left: ' + pct(sam).toFixed(1) + '%; width: 18px; height: 18px; margin-left: -11px; border-radius: 999px; background: #ffffff; border: 2px solid #8a5d16;',
+        label: question + ' You: ' + where(you, low, high) + '. Sam: ' + where(sam, low, high) + '.'
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>

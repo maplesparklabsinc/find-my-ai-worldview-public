@@ -1,0 +1,17 @@
+# Files left out of the public snapshot (npm run publish:public, issue #43).
+# One path per line, relative to the repo root; a trailing / means a whole folder.
+# The script also always leaves out CLAUDE.md, AGENTS.md, .github/, test-results/,
+# private/ and any .env* file, even if they're removed from this list.
+
+# Instructions for coding agents
+CLAUDE.md
+AGENTS.md
+
+# CI, which is set up for the private repo
+.github/
+
+# Test output, if it's ever tracked
+test-results/
+
+# Environment template: names the database host
+.env.example

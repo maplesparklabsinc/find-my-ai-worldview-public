@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Dark mode: result headline</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap">
+<style>
+body{margin:0}
+a:focus-visible{outline:2px solid #7fc4ba;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 100vh; box-sizing: border-box; padding: 8px clamp(16px, 4vw, 24px) 24px; background: #141816; color: #eef1ef; font-family: 'Atkinson Hyperlegible Next', 'Noto Sans', system-ui, sans-serif; font-size: 19px; line-height: 28px;">
+  <div style="width: 100%; max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px;">
+    <header style="display: flex; align-items: center; justify-content: space-between; min-height: 56px;">
+      <span style="font-size: 17px; line-height: 24px; font-weight: 700;">Find My AI Worldview</span>
+      <a href="ShareCard.dc.html" aria-label="Share" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; margin-right: -14px; color: #eef1ef;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 12.5V3"/><path d="M6.5 6.5 10 3l3.5 3.5"/><path d="M4 10.5v5a1.5 1.5 0 0 0 1.5 1.5h9a1.5 1.5 0 0 0 1.5-1.5v-5"/></svg>
+      </a>
+    </header>
+
+    <div style="display: flex; flex-direction: column; gap: 12px; padding: 24px 16px; border-radius: 12px; background: #1f3330;">
+      <span style="font-size: 16px; line-height: 24px; color: #a9b2ae;">Your result</span>
+      <h1 style="margin: 0; font-size: clamp(32px, 1.35vw + 26.7px, 44px); line-height: 1.18; font-weight: 700;">You sit between Stewards and Pragmatists</h1>
+      <p style="margin: 0;">Your answers fit two perspectives about equally well. Here's what you share with each, and the question that might tip you one way or the other.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 8px;">
+      <div style="display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 12px; background: #1c2120; border: 1px solid #353d3a;">
+        <div style="display: flex; flex-direction: column; gap: 0;">
+          <span style="font-size: 24px; line-height: 32px; font-weight: 700;">Stewards</span>
+          <span style="color: #a9b2ae;">Build it, with rules that have teeth.</span>
+        </div>
+        <p style="margin: 0;">You both think even well-run AI companies need an outside regulator.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 12px; background: #1c2120; border: 1px solid #353d3a;">
+        <div style="display: flex; flex-direction: column; gap: 0;">
+          <span style="font-size: 24px; line-height: 32px; font-weight: 700;">Pragmatists</span>
+          <span style="color: #a9b2ae;">It depends on the use.</span>
+        </div>
+        <p style="margin: 0;">You both think powerful, hard-to-test AI should be released in stages.</p>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 4px; padding: 16px; border-radius: 12px; background: #1c2120; border: 1px solid #353d3a;">
+      <span style="font-weight: 700;">The question that might tip you</span>
+      <p style="margin: 0;">Should rules for AI be written by government and enforced by law, or is a lighter touch enough for most uses?</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 8px;">
+      <a href="ShareCard.dc.html" style="display: flex; align-items: center; justify-content: center; min-height: 56px; border-radius: 12px; background: #7fc4ba; color: #0f1a18; font-size: 19px; font-weight: 600; text-decoration: none;">Share your result</a>
+      <a href="Compare.dc.html" style="display: flex; align-items: center; justify-content: center; min-height: 56px; box-sizing: border-box; border-radius: 12px; background: #1c2120; border: 1px solid #6f7975; color: #eef1ef; font-size: 19px; font-weight: 600; text-decoration: none;">Compare with a friend</a>
+    </div>
+    <a href="Result.dc.html" style="align-self: center; display: flex; align-items: center; min-height: 48px; color: #7fc4ba; font-size: 17px; line-height: 24px;">See your six answers</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1180}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Your result</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="box-sizing: border-box; padding: 8px clamp(16px, 4vw, 24px) 40px; background: #f6f7f5; color: #1b211f; font-family: 'Atkinson Hyperlegible Next', 'Noto Sans', system-ui, sans-serif; font-size: 19px; line-height: 28px;">
+  <div style="width: 100%; max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px;">
+
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <header style="display: flex; align-items: center; justify-content: space-between; min-height: 56px;">
+        <span style="font-size: 17px; line-height: 24px; font-weight: 700;">Find My AI Worldview</span>
+        <a href="ShareCard.dc.html" aria-label="Share" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; margin-right: -14px; color: #1b211f;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 12.5V3"/><path d="M6.5 6.5 10 3l3.5 3.5"/><path d="M4 10.5v5a1.5 1.5 0 0 0 1.5 1.5h9a1.5 1.5 0 0 0 1.5-1.5v-5"/></svg>
+        </a>
+      </header>
+
+      <div style="display: flex; flex-direction: column; gap: 16px; padding: 24px 16px; border-radius: 12px; background: #e2eeeb;">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-size: 16px; line-height: 24px; color: #545e5a;">Your closest perspective</span>
+          <h1 style="margin: 0; font-size: clamp(32px, 1.35vw + 26.7px, 44px); line-height: 1.18; font-weight: 700;">Stewards</h1>
+          <p style="margin: 0;">Build it, with rules that have teeth.</p>
+        </div>
+        <div style="height: 1px; background: #c3d6d2;"></div>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <span style="font-weight: 700;">What stands out</span>
+          <p style="margin: 0;">You expect AI to bring both large benefits and serious harms. Many people hold both views at once; the question that matters for you is which arrives first.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <p style="margin: 0; font-size: 16px; line-height: 24px; color: #545e5a;">Closest of the six perspectives we describe, not an exact match. You're also near:</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <a href="#" style="display: inline-flex; align-items: center; min-height: 48px; box-sizing: border-box; padding: 0 16px; border-radius: 999px; border: 1px solid #7f8985; background: #ffffff; color: #1b211f; font-size: 17px; text-decoration: none;">Pragmatists</a>
+          <a href="#" style="display: inline-flex; align-items: center; min-height: 48px; box-sizing: border-box; padding: 0 16px; border-radius: 999px; border: 1px solid #7f8985; background: #ffffff; color: #1b211f; font-size: 17px; text-decoration: none;">Human-Control Defenders</a>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 8px;">
+        <a href="ShareCard.dc.html" style="display: flex; align-items: center; justify-content: center; min-height: 56px; border-radius: 12px; background: #2c6b64; color: #ffffff; font-size: 19px; font-weight: 600; text-decoration: none;">Share your result</a>
+        <a href="Compare.dc.html" style="display: flex; align-items: center; justify-content: center; min-height: 56px; box-sizing: border-box; border-radius: 12px; background: #ffffff; border: 1px solid #7f8985; color: #1b211f; font-size: 19px; font-weight: 600; text-decoration: none;">Compare with a friend</a>
+      </div>
+    </div>
+
+    <section style="display: flex; flex-direction: column; gap: 32px;" aria-labelledby="six">
+      <h2 id="six" style="margin: 0; font-size: clamp(26px, 0.67vw + 23.4px, 32px); line-height: 1.24; font-weight: 700;">Your six answers</h2>
+      <sc-for list="{{ tracks }}" as="t" hint-placeholder-count="6">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-weight: 600;">{{ t.question }}</span>
+          <div role="img" aria-label="{{ t.band }}" style="position: relative; height: 24px;">
+            <div style="position: absolute; left: 0; right: 0; top: 11px; height: 2px; border-radius: 999px; background: #d5dbd8;"></div>
+            <div style="position: absolute; left: 50%; top: 5px; width: 2px; height: 14px; margin-left: -1px; border-radius: 999px; background: #d5dbd8;"></div>
+            <div style="{{ t.marker }}"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; gap: 16px; font-size: 16px; line-height: 24px; color: #545e5a;"><span>{{ t.low }}</span><span style="text-align: right;">{{ t.high }}</span></div>
+          <span>{{ t.band }}</span>
+        </div>
+      </sc-for>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 16px;" aria-labelledby="about">
+      <h2 id="about" style="margin: 0; font-size: clamp(26px, 0.67vw + 23.4px, 32px); line-height: 1.24; font-weight: 700;">About Stewards</h2>
+      <p style="margin: 0;">You expect AI to bring real benefits and real risks, and you think the answer is enforceable rules: independent testing, legal responsibility, regulators with the power to act. You see oversight less as a brake than as the condition for trusting the technology, and you would rather get the institutions right than slow the technology down.</p>
+      <div style="display: flex; flex-direction: column; gap: 4px; padding: 16px; border-radius: 12px; background: #ffffff; border: 1px solid #d5dbd8;">
+        <span style="font-weight: 700;">The strongest objection to this view</span>
+        <p style="margin: 0;">Regulators may lack the expertise and speed to oversee a fast-moving field, and detailed rules can entrench the largest companies.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 4px; padding: 16px; border-radius: 12px; background: #ffffff; border: 1px solid #d5dbd8;">
+        <span style="font-weight: 700;">Something to talk about</span>
+        <p style="margin: 0;">Which institution would you trust to test AI before it's used on people, and why that one?</p>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 16px;" aria-labelledby="others">
+      <h2 id="others" style="margin: 0; font-size: clamp(26px, 0.67vw + 23.4px, 32px); line-height: 1.24; font-weight: 700;">You and other Canadians</h2>
+      <div style="display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 12px; background: #ffffff; border: 1px solid #d5dbd8;">
+        <p style="margin: 0;">85% of Canadians said governments should regulate AI.</p>
+        <span style="font-size: 16px; line-height: 24px; color: #545e5a;">Leger, 2025 · 1,518 Canadian adults, online panel</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 12px; background: #ffffff; border: 1px solid #d5dbd8;">
+        <p style="margin: 0;">49% of Canadians wanted AI development slowed down, 24% wanted it as fast as possible, and 13% wanted it abandoned.</p>
+        <span style="font-size: 16px; line-height: 24px; color: #545e5a;">Research Co., 2025 · 1,001 Canadian adults, online panel</span>
+      </div>
+      <p style="margin: 0; font-size: 16px; line-height: 24px; color: #545e5a;">These come from published polls, not from this quiz.</p>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 16px;" aria-labelledby="ground">
+      <h2 id="ground" style="margin: 0; font-size: clamp(26px, 0.67vw + 23.4px, 32px); line-height: 1.24; font-weight: 700;">Common ground</h2>
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#2c6b64" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 4px;"><path d="M4.5 10.5 8 14l7.5-8"/></svg>
+          <p style="margin: 0;">Like most Stewards, you agree that governments should set binding rules for AI.</p>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#2c6b64" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 4px;"><path d="M4.5 10.5 8 14l7.5-8"/></svg>
+          <p style="margin: 0;">Like most Stewards, you don't think the people who build AI should set the rules for it.</p>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#2c6b64" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 4px;"><circle cx="7" cy="10" r="4"/><circle cx="13" cy="10" r="4"/></svg>
+          <p style="margin: 0;">You and Accelerators are far apart overall, but you agree that AI will speed up important medical and scientific discoveries.</p>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#545e5a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 4px;"><path d="M5 10h10"/></svg>
+          <p style="margin: 0;">Unlike most Stewards, you think strict AI rules mostly protect big companies.</p>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 12px;" aria-labelledby="fit">
+      <h2 id="fit" style="margin: 0; font-size: clamp(26px, 0.67vw + 23.4px, 32px); line-height: 1.24; font-weight: 700;">Does this fit you?</h2>
+      <div style="display: flex; flex-direction: column; gap: 8px;" role="group" aria-labelledby="fit">
+        <sc-for list="{{ fit }}" as="f" hint-placeholder-count="5">
+          <button type="button" aria-pressed="{{ f.pressed }}" onClick="{{ f.pick }}" style="{{ f.style }}">
+            <span>{{ f.label }}</span>
+            <sc-if value="{{ f.on }}" hint-placeholder-val="{{ false }}">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#2c6b64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none;"><path d="M4.5 10.5 8 14l7.5-8"/></svg>
+            </sc-if>
+          </button>
+        </sc-for>
+      </div>
+      <a href="#" style="display: flex; align-items: center; min-height: 48px; color: #2c6b64; font-size: 17px; line-height: 24px;">Something off? Tell us</a>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 16px; padding: 24px 16px; border-radius: 12px; background: #ffffff; border: 1px solid #d5dbd8;" aria-labelledby="help">
+      <h2 id="help" style="margin: 0; font-size: 24px; line-height: 32px; font-weight: 700;">Want to help shape this?</h2>
+      <p style="margin: 0;">We're still working out whether these perspectives hold up. If you leave your email, we may invite you to a short follow-up, like retaking the quiz in a few weeks. No newsletter, no marketing.</p>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <label for="email" style="font-weight: 600;">Email</label>
+        <input id="email" type="email" autocomplete="email" style="height: 56px; box-sizing: border-box; padding: 0 16px; border-radius: 6px; border: 1px solid #7f8985; background: #ffffff; font-family: inherit; font-size: 19px; color: #1b211f;">
+      </div>
+      <div style="display: flex; gap: 12px; align-items: flex-start;">
+        <input id="consent" type="checkbox" style="width: 24px; height: 24px; margin: 2px 0 0; flex: none; accent-color: #2c6b64;">
+        <label for="consent" style="font-size: 17px; line-height: 26px;">I'm 18 or older and I'm OK with Find My AI Worldview keeping my email, linked to my anonymous answers, so they can contact me about this project. I can ask to be removed at any time.</label>
+      </div>
+      <button type="button" aria-disabled="true" style="min-height: 56px; border-radius: 12px; border: 1px solid #d5dbd8; background: #f6f7f5; color: #545e5a; font-family: inherit; font-size: 19px; font-weight: 600;">Count me in</button>
+    </section>
+
+    <details style="border-top: 1px solid #d5dbd8; padding-top: 16px;">
+      <summary style="display: flex; align-items: center; min-height: 48px; cursor: pointer; font-weight: 700;">Why did I get this?</summary>
+      <p style="margin: 8px 0 0;">Your result comes from your answers to 30 statements on six questions. For each question we averaged your answers, placed you between its two sides, and found the perspective whose typical position is closest. You answered all 30. <a href="#" style="color: #2c6b64;">How this works</a></p>
+    </details>
+
+    <footer style="display: flex; flex-wrap: wrap; align-items: center; gap: 0 24px; font-size: 16px; line-height: 24px; color: #545e5a;">
+      <a href="#" style="display: flex; align-items: center; min-height: 48px; color: #545e5a;">How this works</a>
+      <a href="#" style="display: flex; align-items: center; min-height: 48px; color: #545e5a;">Privacy</a>
+      <a href="#" style="display: flex; align-items: center; min-height: 48px; color: #545e5a;">What's changed</a>
+      <span>Built with help from AI</span>
+    </footer>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":3700}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { fit: null }; }
+  renderVals() {
+    const pos = (s) => ((s + 3) / 6 * 100).toFixed(1) + '%';
+    const rows = [
+      ['How much good will AI do?', 'Expects little benefit', 'Expects large benefits', 1.2, 'Leaning toward "Expects large benefits"'],
+      ['How much harm will AI do?', 'Expects little harm', 'Expects serious harm', 0.8, 'Leaning toward "Expects serious harm"'],
+      ['How fast should AI move?', 'Move faster', 'Slow down until it is safe', 0.2, 'In between'],
+      ['Who should set the rules?', 'Industry and markets', 'Public, independent oversight', 2.2, 'Strongly toward "Public, independent oversight"'],
+      ['Who should make decisions about people?', 'AI can decide when it does better', 'Humans must decide', 1.0, 'Leaning toward "Humans must decide"'],
+      ['Who should share in the gains?', 'Markets spread the gains', 'Gains should be shared deliberately', 0.4, 'In between']
+    ];
+    const base = 'display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-height: 56px; box-sizing: border-box; border-radius: 12px; font-family: inherit; font-size: 19px; line-height: 26px; text-align: left; color: #1b211f; cursor: pointer;';
+    const on = base + ' padding: 12px 15px; background: #e2eeeb; border: 2px solid #2c6b64; font-weight: 700;';
+    const off = base + ' padding: 13px 16px; background: #ffffff; border: 1px solid #7f8985; font-weight: 500;';
+    return {
+      tracks: rows.map(([question, low, high, s, band]) => ({
+        question, low, high, band,
+        marker: 'position: absolute; left: ' + pos(s) + '; top: 3px; width: 18px; height: 18px; margin-left: -9px; border-radius: 999px; background: #2c6b64;'
+      })),
+      fit: ['Not at all', 'A little', 'Somewhat', 'Very well', 'Extremely well'].map((label, i) => ({
+        label,
+        on: this.state.fit === i,
+        pressed: this.state.fit === i ? 'true' : 'false',
+        style: this.state.fit === i ? on : off,
+        pick: () => this.setState({ fit: i })
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>

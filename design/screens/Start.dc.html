@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Before you start</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap">
+<style>
+body{margin:0}
+a:focus-visible{outline:2px solid #2c6b64;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 100vh; box-sizing: border-box; padding: 8px clamp(16px, 4vw, 24px) 24px; display: flex; flex-direction: column; background: #f6f7f5; color: #1b211f; font-family: 'Atkinson Hyperlegible Next', 'Noto Sans', system-ui, sans-serif; font-size: 19px; line-height: 28px;">
+  <div style="width: 100%; max-width: 640px; margin: 0 auto; flex: 1 0 auto; display: flex; flex-direction: column; gap: 24px;">
+    <header style="display: flex; align-items: center; gap: 4px; min-height: 56px;">
+      <a href="Main.dc.html" aria-label="Back" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; margin-left: -14px; color: #1b211f;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg>
+      </a>
+      <span style="font-size: 17px; line-height: 24px; font-weight: 700;">Find My AI Worldview</span>
+    </header>
+
+    <h1 style="margin: 0; font-size: clamp(26px, 0.67vw + 23.4px, 32px); line-height: 1.24; font-weight: 700;">Before you start</h1>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <p style="margin: 0;">By "AI" we mean the tools around today: chatbots and assistants, image and voice tools, recommendation feeds, and software that helps make decisions about people. A few questions ask about more powerful AI in the future, and they'll say so.</p>
+      <p style="margin: 0;">There are no right answers. If you're not sure, go with how you lean. You can skip anything.</p>
+    </div>
+    <div style="display: flex; gap: 12px; align-items: flex-start; padding: 16px; border-radius: 12px; background: #e2eeeb;">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#2c6b64" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px;"><rect x="4" y="9" width="12" height="8" rx="2"/><path d="M7 9V6.5a3 3 0 0 1 6 0V9"/></svg>
+      <p style="margin: 0; font-size: 16px; line-height: 24px;">We save an anonymous copy of your answers so we can count results. No name, no email, nothing that identifies you. <a href="#" style="color: #2c6b64;">Privacy</a></p>
+    </div>
+
+    <div style="margin-top: auto; padding-top: 16px; display: flex; flex-direction: column; gap: 12px;">
+      <a href="Question.dc.html" style="display: flex; align-items: center; justify-content: center; min-height: 56px; border-radius: 12px; background: #2c6b64; color: #ffffff; font-size: 19px; font-weight: 600; text-decoration: none;">Let's go</a>
+      <p style="margin: 0; text-align: center; font-size: 16px; line-height: 24px; color: #545e5a;">50 quick questions, about 10 minutes</p>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Trade-off question</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap">
+<style>
+body{margin:0}
+button:focus-visible,a:focus-visible{outline:2px solid #2c6b64;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 100vh; box-sizing: border-box; padding: 8px clamp(16px, 4vw, 24px) 16px; display: flex; flex-direction: column; background: #f6f7f5; color: #1b211f; font-family: 'Atkinson Hyperlegible Next', 'Noto Sans', system-ui, sans-serif; font-size: 19px; line-height: 28px;">
+  <div style="width: 100%; max-width: 640px; margin: 0 auto; flex: 1 0 auto; display: flex; flex-direction: column; gap: 24px;">
+
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <header style="display: flex; align-items: center; justify-content: space-between; min-height: 56px;">
+        <a href="Question.dc.html" aria-label="Back" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; margin-left: -14px; color: #1b211f;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg>
+        </a>
+        <span style="font-size: 16px; line-height: 24px; color: #545e5a;">Question 38 of 50</span>
+        <button type="button" aria-label="Text size" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; margin-right: -4px; padding: 0; border: 1px solid transparent; border-radius: 12px; background: transparent; font-family: inherit; font-size: 19px; font-weight: 700; color: #1b211f; cursor: pointer;">Aa</button>
+      </header>
+      <div role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="50" aria-valuenow="38" style="height: 6px; border-radius: 999px; background: #d5dbd8; overflow: hidden;">
+        <div style="width: 76%; height: 6px; border-radius: 999px; background: #2c6b64;"></div>
+      </div>
+    </div>
+
+    <p style="margin: 0; padding-top: 8px; font-size: clamp(24px, 1.2vw + 19.5px, 28px); line-height: 1.33; font-weight: 600;">Which is closer to your view?</p>
+
+    <div style="display: flex; flex-direction: column; gap: 8px;" role="group" aria-label="Choose one">
+      <sc-for list="{{ choices }}" as="c" hint-placeholder-count="2">
+        <button type="button" aria-pressed="{{ c.pressed }}" onClick="{{ c.pick }}" style="{{ c.style }}">
+          <span>{{ c.text }}</span>
+          <sc-if value="{{ c.on }}" hint-placeholder-val="{{ false }}">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#2c6b64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 4px;"><path d="M4.5 10.5 8 14l7.5-8"/></svg>
+          </sc-if>
+        </button>
+      </sc-for>
+    </div>
+
+    <sc-if value="{{ showStrength }}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <span style="font-weight: 600;">How strongly?</span>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px;" role="group" aria-label="How strongly">
+          <sc-for list="{{ strengths }}" as="s" hint-placeholder-count="2">
+            <button type="button" aria-pressed="{{ s.pressed }}" onClick="{{ s.pick }}" style="{{ s.style }}">
+              <sc-if value="{{ s.on }}" hint-placeholder-val="{{ false }}">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#2c6b64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none;"><path d="M4.5 10.5 8 14l7.5-8"/></svg>
+              </sc-if>
+              <span>{{ s.label }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <div style="margin-top: auto; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+      <a href="Result.dc.html" style="{{ nextStyle }}">Next</a>
+      <a href="Result.dc.html" style="display: flex; align-items: center; min-height: 48px; padding: 0 12px; color: #545e5a; font-size: 17px; line-height: 24px;">Skip this question</a>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { choice: 0, strength: null }; }
+  renderVals() {
+    const { choice, strength } = this.state;
+    const card = 'display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; width: 100%; min-height: 56px; box-sizing: border-box; border-radius: 12px; font-family: inherit; font-size: 19px; line-height: 28px; text-align: left; color: #1b211f; cursor: pointer;';
+    const pill = 'display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 56px; box-sizing: border-box; border-radius: 12px; font-family: inherit; font-size: 19px; line-height: 26px; color: #1b211f; cursor: pointer;';
+    const on = ' background: #e2eeeb; border: 2px solid #2c6b64; font-weight: 700;';
+    const off = ' background: #ffffff; border: 1px solid #7f8985; font-weight: 500;';
+    const texts = ['Keep safety rules for AI even if development is slower.', 'Develop AI as fast as possible even if some rules are loosened.'];
+    const ready = choice !== null && strength !== null;
+    return {
+      choices: texts.map((text, i) => ({
+        text,
+        on: choice === i,
+        pressed: choice === i ? 'true' : 'false',
+        style: card + (choice === i ? ' padding: 15px 15px;' + on : ' padding: 16px 16px;' + off),
+        pick: () => this.setState({ choice: i })
+      })),
+      showStrength: choice !== null,
+      strengths: ['Slightly', 'Strongly'].map((label, i) => ({
+        label,
+        on: strength === i,
+        pressed: strength === i ? 'true' : 'false',
+        style: pill + (strength === i ? ' padding: 0 11px;' + on : ' padding: 0 12px;' + off),
+        pick: () => this.setState({ strength: i })
+      })),
+      nextStyle: 'display: flex; align-items: center; justify-content: center; width: 100%; min-height: 56px; border-radius: 12px; font-size: 19px; font-weight: 600; text-decoration: none; ' + (ready ? 'background: #2c6b64; color: #ffffff;' : 'background: #f6f7f5; color: #545e5a; border: 1px solid #d5dbd8; box-sizing: border-box;')
+    };
+  }
+}
+</script>
+</body>
+</html>

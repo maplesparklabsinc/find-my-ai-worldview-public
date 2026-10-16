@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>A few about you</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap">
+<style>
+body{margin:0}
+button:focus-visible,a:focus-visible,textarea:focus-visible{outline:2px solid #2c6b64;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 100vh; box-sizing: border-box; padding: 4px clamp(16px, 4vw, 24px) 16px; display: flex; flex-direction: column; background: #f6f7f5; color: #1b211f; font-family: 'Atkinson Hyperlegible Next', 'Noto Sans', system-ui, sans-serif; font-size: 19px; line-height: 28px;">
+  <div style="width: 100%; max-width: 640px; margin: 0 auto; flex: 1 0 auto; display: flex; flex-direction: column; gap: 16px;">
+    <div style="display: flex; flex-direction: column; gap: 4px;">
+      <header style="display: flex; align-items: center; gap: 4px; min-height: 48px;">
+        <a href="Question.dc.html" aria-label="Back" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; margin-left: -14px; color: #1b211f;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></a>
+        <span style="flex: 1 1 auto; font-size: 16px; line-height: 24px; color: #545e5a;">Question 43 of 50</span>
+        <button type="button" aria-label="Larger text" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; flex: none; padding: 0; border: 1px solid transparent; border-radius: 12px; background: transparent; font-family: inherit; font-size: 19px; font-weight: 700; color: #1b211f; cursor: pointer;">Aa</button>
+        <a href="Tradeoff.dc.html" style="display: flex; align-items: center; min-height: 48px; padding: 0 0 0 12px; color: #545e5a; font-size: 17px; line-height: 24px;">Skip</a>
+      </header>
+      <div role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="50" aria-valuenow="43" style="height: 6px; border-radius: 999px; background: #d5dbd8; overflow: hidden;">
+        <div style="width: 86.0%; height: 6px; border-radius: 999px; background: #2c6b64;"></div>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 4px; padding: 12px 16px; border-radius: 12px; background: #e2eeeb;">
+      <span style="font-size: 17px; line-height: 26px; font-weight: 700;">A few about you</span>
+      <p style="margin: 0; font-size: 17px; line-height: 26px;">Last few. These don't change your result; they help us understand everyone's answers.</p>
+    </div>
+    <p style="margin: 0; font-size: clamp(22px, 1.2vw + 17.5px, 28px); line-height: 1.32; font-weight: 600;">Where do you live?</p>
+    <div style="display: flex; flex-direction: column; gap: 6px;" role="group" aria-label="Your answer">
+      <sc-for list="{{ options }}" as="opt" hint-placeholder-count="5">
+        <button type="button" aria-pressed="{{ opt.pressed }}" onClick="{{ opt.pick }}" style="{{ opt.style }}">
+          <span>{{ opt.label }}</span>
+          <sc-if value="{{ opt.on }}" hint-placeholder-val="{{ false }}">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#2c6b64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none;"><path d="M4.5 10.5 8 14l7.5-8"/></svg>
+          </sc-if>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":664}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { picked: null }; }
+  renderVals() {
+    const row = 'display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-height: 48px; box-sizing: border-box; border-radius: 12px; font-family: inherit; font-size: 19px; line-height: 24px; text-align: left; color: #1b211f; cursor: pointer;';
+    const on = row + ' padding: 9px 13px; background: #e2eeeb; border: 2px solid #2c6b64; font-weight: 700;';
+    const off = row + ' padding: 10px 14px; background: #ffffff; border: 1px solid #7f8985; font-weight: 500;';
+    const labels = ["Canada", "United States", "United Kingdom", "Australia", "Somewhere else"];
+    return {
+      options: labels.map((label, k) => ({
+        label, on: this.state.picked === k, pressed: this.state.picked === k ? 'true' : 'false',
+        style: this.state.picked === k ? on : off, pick: () => this.setState({ picked: k })
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>
