@@ -11,6 +11,7 @@ import { getContent } from "@/lib/content";
 import { getCopy } from "@/lib/content/copy";
 import { EDIT_TOKEN_HEADER } from "@/lib/edit-token/header";
 import { editToken } from "@/lib/quiz";
+import { saveWithRetry } from "@/lib/save";
 
 const noop = () => () => {};
 const field = "w-full rounded-sm border border-line-strong bg-surface-raised px-3 py-2 text-ink";
@@ -48,8 +49,9 @@ export function FeedbackForm() {
     const body = target.trim() ? `${target.trim()}\n\n${details.trim()}` : details.trim();
     // The edit token, if this browser saved the attached result, marks the attachment as theirs.
     const token = attach && resultId ? editToken(resultId) : null;
+    // Retried on network errors and 5xx (lib/save). A repeat after a lost reply can store the feedback twice; harmless.
     try {
-      const res = await fetch("/api/feedback", {
+      const { res } = await saveWithRetry(() => fetch("/api/feedback", {
         method: "POST",
         headers: { "content-type": "application/json", ...(token ? { [EDIT_TOKEN_HEADER]: token } : {}) },
         body: JSON.stringify({
@@ -61,8 +63,8 @@ export function FeedbackForm() {
           may_quote: quote,
           response_id: attach && resultId ? resultId : undefined,
         }),
-      });
-      if (!res.ok) throw new Error(String(res.status));
+      }), "feedback");
+      if (!res?.ok) throw new Error(String(res?.status));
       track("feedback_sent");
       setState("done");
     } catch {

@@ -51,6 +51,15 @@ describe("/admin gate", () => {
     expect((await proxy(req("/", "site"))).status).toBe(200);
   });
 
+  it("lets /api/health through without either password (issue #59), and nothing beside it", async () => {
+    setEnv("ADMIN_PASSWORD", "admin");
+    setEnv("SITE_PASSWORD", "site");
+    expect((await proxy(req("/api/health"))).status).toBe(200);
+    expect((await proxy(req("/api/health/x"))).status).toBe(401);
+    expect((await proxy(req("/api/healthz"))).status).toBe(401);
+    expect((await proxy(req("/api/responses"))).status).toBe(401);
+  });
+
   it("asks in its own realm, not the site's", async () => {
     setEnv("ADMIN_PASSWORD", "admin");
     setEnv("SITE_PASSWORD", "site");

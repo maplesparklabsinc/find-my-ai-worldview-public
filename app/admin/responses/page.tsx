@@ -1,6 +1,7 @@
 // /admin/responses (issue #37): single responses, newest first, 50 a page, for
 // one content release (the current one unless ?release= picks another) and
-// optionally one result (?result=). Same gate as /admin (proxy.ts). No emails,
+// optionally one result (?result=, including one In between pair), research
+// opt-in (?research=) and the quality flags (?check=, issue #55). Same gate as /admin (proxy.ts). No emails,
 // no free text, no feedback text. Copy here is founder-facing UI, not public
 // site copy.
 import type { Metadata } from "next";
@@ -10,7 +11,8 @@ import { Suspense } from "react";
 import { AdminHeader } from "@/components/admin-header";
 import { countOf, versionsLine } from "@/lib/admin";
 import { adminPassword } from "@/lib/admin/gate";
-import { PAGE_SIZE, buildResponseList, parsePage, parseResultFilter, releaseVersions, resultFilterOptions } from "@/lib/admin/responses";
+import { parseCheckFilter } from "@/lib/admin/quality";
+import { PAGE_SIZE, pageOfResponses, parsePage, parseResearchFilter, parseResultFilter, releaseVersions, resultFilterOptions } from "@/lib/admin/responses";
 import { contentVersions, getContent } from "@/lib/content";
 import { getCopy } from "@/lib/content/copy";
 import { loadReleaseByKey, releaseKey, releaseKeys } from "@/lib/content/release";
@@ -33,7 +35,7 @@ export default function Page({ searchParams }: PageProps<"/admin/responses">) {
   );
 }
 
-const field = "min-h-11 rounded-sm border border-line-strong bg-surface-raised px-3 text-base text-ink";
+const field = "min-h-11 max-w-full rounded-sm border border-line-strong bg-surface-raised px-3 text-base text-ink";
 
 async function Responses({ searchParams }: Pick<PageProps<"/admin/responses">, "searchParams">) {
   await connection();
@@ -48,13 +50,20 @@ async function Responses({ searchParams }: Pick<PageProps<"/admin/responses">, "
   // Names and labels as that release worded them; the current content if it was never frozen.
   const shownContent = (await loadReleaseByKey(key))?.content ?? content;
   const filter = parseResultFilter(params.result, shownContent);
+  const research = parseResearchFilter(params.research);
+  const check = parseCheckFilter(params.check);
   const page = parsePage(params.page);
-  const { rows, total } = await listResponses(versions, filter, page);
-  const list = buildResponseList(rows, shownContent, getCopy());
+  const { rows: list, total, pairs } = pageOfResponses(await listResponses(versions), shownContent, getCopy(), { result: filter, research, check }, page);
   const pages = Math.max(1, Math.ceil(total / PAGE_SIZE));
   const selectedResult = typeof params.result === "string" && filter ? params.result : "";
   const href = (p: number) => {
-    const q = new URLSearchParams({ release: key, ...(selectedResult ? { result: selectedResult } : {}), page: String(p) });
+    const q = new URLSearchParams({
+      release: key,
+      ...(selectedResult ? { result: selectedResult } : {}),
+      ...(research ? { research } : {}),
+      ...(check ? { check } : {}),
+      page: String(p),
+    });
     return `/admin/responses?${q.toString()}`;
   };
 
@@ -68,13 +77,13 @@ async function Responses({ searchParams }: Pick<PageProps<"/admin/responses">, "
         <div className="flex flex-col gap-2">
           <h1 className="text-[2rem] leading-10 font-bold">Responses</h1>
           <p className="max-w-[47.5rem] text-base text-ink-muted">
-            One row per completed quiz, newest first. Open one to see every answer. Emails, the free-text answer and
-            feedback text are never shown here.
+            One row per completed quiz, newest first. Open one to see every answer. Email addresses are never shown
+            here, including any typed into free text or feedback.
           </p>
         </div>
 
         <form method="get" action="/admin/responses" className="flex flex-wrap items-end gap-4">
-          <label className="flex flex-col gap-1 text-sm font-semibold">
+          <label className="flex max-w-full flex-col gap-1 text-sm font-semibold">
             Content release
             <select name="release" defaultValue={key} className={field}>
               {!keys.includes(currentKey) && <option value={currentKey}>{currentKey} (current, not frozen)</option>}
@@ -86,15 +95,31 @@ async function Responses({ searchParams }: Pick<PageProps<"/admin/responses">, "
               ))}
             </select>
           </label>
-          <label className="flex flex-col gap-1 text-sm font-semibold">
+          <label className="flex max-w-full flex-col gap-1 text-sm font-semibold">
             Result
             <select name="result" defaultValue={selectedResult} className={field}>
               <option value="">All results</option>
-              {resultFilterOptions(shownContent).map((o) => (
+              {resultFilterOptions(shownContent, pairs).map((o) => (
                 <option key={o.value} value={o.value}>
                   {o.label}
                 </option>
               ))}
+            </select>
+          </label>
+          <label className="flex max-w-full flex-col gap-1 text-sm font-semibold">
+            Research
+            <select name="research" defaultValue={research ?? ""} className={field}>
+              <option value="">All</option>
+              <option value="yes">Opted in</option>
+              <option value="no">Not opted in</option>
+            </select>
+          </label>
+          <label className="flex max-w-full flex-col gap-1 text-sm font-semibold">
+            Check
+            <select name="check" defaultValue={check ?? ""} className={field}>
+              <option value="">All</option>
+              <option value="flagged">Flagged</option>
+              <option value="clean">Not flagged</option>
             </select>
           </label>
           <button type="submit" className="min-h-11 rounded-md border border-line-strong bg-surface-raised px-4 font-semibold">
@@ -107,16 +132,19 @@ async function Responses({ searchParams }: Pick<PageProps<"/admin/responses">, "
         </p>
 
         {list.length > 0 && (
-          <div className="overflow-x-auto rounded-md border border-line bg-surface-raised">
-            <table className="w-full border-collapse text-left text-base">
+          <div role="region" aria-label="Responses" tabIndex={0} className="overflow-x-auto rounded-md border border-line bg-surface-raised">
+            <table className="w-full min-w-[62rem] border-collapse text-left text-base wrap-normal">
               <thead>
                 <tr className="border-b border-line text-sm text-ink-muted">
                   <th scope="col" className="p-3 font-semibold">Response</th>
                   <th scope="col" className="p-3 font-semibold">Completed</th>
                   <th scope="col" className="p-3 font-semibold">Result</th>
                   <th scope="col" className="p-3 font-semibold">Fit</th>
+                  <th scope="col" className="p-3 font-semibold">Research</th>
                   <th scope="col" className="p-3 font-semibold">Guess or quick check</th>
+                  <th scope="col" className="p-3 font-semibold">Guess matched?</th>
                   <th scope="col" className="p-3 text-right font-semibold">Answered</th>
+                  <th scope="col" className="p-3 font-semibold">Check</th>
                 </tr>
               </thead>
               <tbody>
@@ -128,8 +156,11 @@ async function Responses({ searchParams }: Pick<PageProps<"/admin/responses">, "
                     <td className="p-3 whitespace-nowrap">{r.date}</td>
                     <td className="p-3">{r.result}</td>
                     <td className="p-3 whitespace-nowrap">{r.fit}</td>
+                    <td className="p-3 whitespace-nowrap">{r.research}</td>
                     <td className="p-3">{r.guessOrCheck}</td>
+                    <td className="p-3 whitespace-nowrap">{r.guessMatched}</td>
                     <td className="p-3 text-right tabular-nums">{r.answered}</td>
+                    <td className="p-3 whitespace-nowrap">{r.check ? <span className="font-bold text-second">{r.check}</span> : "–"}</td>
                   </tr>
                 ))}
               </tbody>

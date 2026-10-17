@@ -18,9 +18,13 @@ export const PATTERNS = [
   { kind: "private artifact link", re: /claude\.ai\/artifact\//i },
   { kind: "Google Docs link", re: /docs\.google\.com/i },
   { kind: "Google Drive link", re: /drive\.google\.com/i },
-  { kind: "Postgres connection string", re: /postgres(ql)?:\/\//i },
   { kind: "Supabase address", re: /supabase\.co/i },
 ];
+
+// A connection string's host: after "user:password@" if there is one, up to the port, path or query.
+const POSTGRES_URL = /postgres(?:ql)?:\/\/(?:[^\s@/]*@)?(\[[^\]\s]*\]|[^\s:/?#'"`]*)/gi;
+// The local Docker database (docker-compose.yml) listens only on this computer, so its URL is fine to publish.
+const LOCAL_HOSTS = ["localhost", "127.0.0.1"];
 
 export function emailAllowed(address) {
   const a = address.toLowerCase();
@@ -33,6 +37,9 @@ export function scanText(text) {
   text.split("\n").forEach((line, i) => {
     for (const m of line.matchAll(EMAIL)) {
       if (!emailAllowed(m[0])) findings.push({ line: i + 1, kind: "email address" });
+    }
+    for (const m of line.matchAll(POSTGRES_URL)) {
+      if (!LOCAL_HOSTS.includes(m[1].toLowerCase())) findings.push({ line: i + 1, kind: "Postgres connection string" });
     }
     for (const p of PATTERNS) if (p.re.test(line)) findings.push({ line: i + 1, kind: p.kind });
   });
@@ -62,4 +69,34 @@ export function scanFolder(dir) {
     for (const f of scanText(buf.toString("utf8"))) findings.push({ file, ...f });
   }
   return findings;
+}
+
+/**
+ * Operations words that usually belong in the private docs/ops/ (CLAUDE.md, "What
+ * goes in this repo"). Warnings only: the publish goes ahead, but each one is
+ * worth a second look before pushing.
+ */
+export const OPS_WORDS = [
+  { kind: "lockout", re: /\block-?out\b/i },
+  { kind: "hosting plan", re: /\b(free|pro|paid|hobby|team) plan\b/i },
+  { kind: "backup", re: /\bbackups?\b/i },
+  { kind: "incident", re: /\bincidents?\b/i },
+  { kind: "runbook", re: /\brunbooks?\b/i },
+];
+
+/** Where an operations word shows up in the export: [{ file, line, kind }]. Licence texts and this scan's own files are skipped. */
+export function opsWarnings(dir) {
+  const out = [];
+  for (const file of listFiles(dir)) {
+    if (/(^|\/)(LICEN[CS]E|OFL\.txt)/i.test(file) || /(^|\/)publish-scan\.(mjs|test\.ts)$/.test(file)) continue;
+    const buf = readFileSync(join(dir, file));
+    if (buf.includes(0)) continue;
+    buf
+      .toString("utf8")
+      .split("\n")
+      .forEach((line, i) => {
+        for (const w of OPS_WORDS) if (w.re.test(line)) out.push({ file, line: i + 1, kind: w.kind });
+      });
+  }
+  return out;
 }

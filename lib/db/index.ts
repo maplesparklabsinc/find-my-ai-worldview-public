@@ -13,7 +13,10 @@ export function db(): postgres.Sql {
   const url = process.env.DATABASE_URL;
   if (!url) throw new Error("DATABASE_URL is not set");
   // prepare: false keeps this working through Supabase's transaction pooler.
-  client = postgres(url, { max: 5, prepare: false, idle_timeout: 20, connect_timeout: 10 });
+  // One connection per server instance, closed after 5 idle seconds, so many
+  // instances in a spike stay under the pooler's client limit (issue #59).
+  // Parallel queries in one request queue on it.
+  client = postgres(url, { max: 1, prepare: false, idle_timeout: 5, connect_timeout: 10 });
   return client;
 }
 

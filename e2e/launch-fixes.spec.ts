@@ -27,12 +27,14 @@ test("Try again sends the quiz once, with the same submission key (SE-05, SE-06)
   });
   await page.goto("/result");
   await page.getByRole("button", { name: "Try again" }).click();
+  // Each save is tried 3 times (lib/save), all with the first key.
+  await expect.poll(() => posts.length).toBe(6);
   await expect(page.getByRole("button", { name: "Try again" })).toBeVisible();
   // Give a second, unwanted request time to show up.
   await page.waitForTimeout(500);
-  expect(posts).toHaveLength(2);
+  expect(posts).toHaveLength(6);
   expect(posts[0].submission_key).toMatch(/^[0-9a-f-]{36}$/);
-  expect(posts[1].submission_key).toBe(posts[0].submission_key);
+  for (const p of posts) expect(p.submission_key).toBe(posts[0].submission_key);
 });
 
 for (const [reason, status, message, retry] of [

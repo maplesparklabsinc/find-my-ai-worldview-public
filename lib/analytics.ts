@@ -24,6 +24,10 @@ type Events = {
   compare_completed: undefined;
   research_email_left: undefined;
   feedback_sent: undefined;
+  /** A save that failed every retry (issue #59, lib/save). Which step and why, nothing else. */
+  save_failed: { step: "response" | "rating" | "research" | "feedback"; reason: "network" | "server" | "rate_limited" };
+  /** A save that worked only after a retry: the step, and why the earlier attempt failed. */
+  save_retried: { step: "response" | "rating" | "research" | "feedback"; reason: "network" | "server" | "rate_limited" };
 };
 
 export function track<K extends keyof Events>(name: K, ...props: Events[K] extends undefined ? [] : [Events[K]]): void {

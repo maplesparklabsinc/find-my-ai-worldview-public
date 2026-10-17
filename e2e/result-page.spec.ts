@@ -6,6 +6,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Browser, type Page } from "@playwright/test";
 import postgres from "postgres";
+import { LOCAL_TEST_URL } from "@/scripts/local-db.mjs";
 import vectors from "@/reference/test-vectors.json";
 import { getCopy } from "@/lib/content/copy";
 import { screenCount } from "@/lib/form";
@@ -392,8 +393,8 @@ test.describe("stored", () => {
   });
 
   test("the share images are served for a result from a frozen release (no summaries)", async ({ browser, request }) => {
-    process.loadEnvFile(".env.local");
-    const sql = postgres(process.env.DATABASE_URL!, { max: 1, prepare: false });
+    // The database the test server saves to (playwright.config.ts).
+    const sql = postgres(process.env.E2E_DATABASE_URL || LOCAL_TEST_URL, { max: 1, prepare: false });
     try {
       for (const [i, vector] of ["steward", "mixed_between"].entries()) {
         const page = await saved(browser, vector, `203.0.113.${90 + i}`);

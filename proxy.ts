@@ -6,7 +6,8 @@
 //   a 404 when ADMIN_PASSWORD is not set, or is the same as SITE_PASSWORD
 //   (issue #37; instrumentation.ts logs a warning at startup).
 // - M2 preview gate (docs/01-product-spec.md 9): when SITE_PASSWORD is set,
-//   every other request needs that password. Unset it to open the site.
+//   every other request needs that password, except /api/health (issue #59).
+//   Unset it to open the site.
 import { NextResponse, type NextRequest } from "next/server";
 import { adminPassword } from "@/lib/admin/gate";
 
@@ -21,6 +22,9 @@ export async function proxy(request: NextRequest) {
     res.headers.set("x-robots-tag", "noindex, nofollow");
     return res;
   }
+
+  // The health check is for an outside monitor, so neither password applies (issue #59).
+  if (pathname === "/api/health") return NextResponse.next();
 
   const password = process.env.SITE_PASSWORD;
   if (!password || (await authorised(request, password))) return NextResponse.next();

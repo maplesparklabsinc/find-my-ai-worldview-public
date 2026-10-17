@@ -1,12 +1,12 @@
 {
-  "copy_version": "0.12.2",
+  "copy_version": "0.12.3",
   "note": "Short site copy, moved from docs/04-methodology-and-disclosure.md and docs/01-product-spec.md section 5. Long pages are in content/pages/*.md. Inline links use markdown. {placeholders} are filled from `placeholders`; a null value must be set before launch.",
   "placeholders": {
     "contact_email": "findmyaiworldview@maplesparklabs.com",
     "public_repo_url": "https://github.com/maplesparklabsinc/find-my-ai-worldview-public",
     "scoring_rules_url": "{public_repo_url}/blob/main/docs/02-scoring-spec.md",
     "sources_url": "{public_repo_url}/blob/main/research/evidence-ledger.csv",
-    "privacy_last_updated": "October 14, 2026"
+    "privacy_last_updated": "October 16, 2026"
   },
   "site": {
     "name": "Find My AI Worldview",

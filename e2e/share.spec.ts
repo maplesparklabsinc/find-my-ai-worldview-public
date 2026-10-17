@@ -1,7 +1,7 @@
 // Sharing a result (issues #26 and #37): one Share button where the device has
 // a share menu, otherwise Copy link; the share card as a thumbnail with
 // Download image. They need a stored result, so they run only with E2E_DB=1
-// (DATABASE_URL from .env.local).
+// (the local fmaw_test database, or E2E_DATABASE_URL).
 import { expect, test, type Browser, type Page } from "@playwright/test";
 import vectors from "@/reference/test-vectors.json";
 import { cardAlt } from "@/components/share-card";

@@ -16,7 +16,7 @@ Only if you choose to. We keep your email in a separate, locked-down place, link
 We keep what you write. If you add an email, we use it only to reply. If you tick the box, we may quote you without your name on our What's changed page.
 
 **Visitor statistics**
-We use Vercel Web Analytics to count page visits. It doesn't use cookies or identify you.
+We use Vercel Web Analytics to count page visits, and Vercel Speed Insights to measure how fast pages load. Neither uses cookies or identifies you.
 
 **Where your data lives**
 Answers, emails and feedback are stored with Supabase in Canada. The site is hosted by Vercel. Like any web host, Vercel briefly processes your IP address to deliver the site; we don't store it.

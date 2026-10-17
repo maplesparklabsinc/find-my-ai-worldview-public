@@ -20,6 +20,13 @@ describe("overLimit", () => {
     expect(overLimit(req("1.1.1.1"), "t", 3, t0 + 600_000)).toBeNull();
   });
 
+  it("takes a shorter window, as the health check's 30 a minute does (issue #59)", () => {
+    const t0 = 5_000_000;
+    for (let i = 0; i < 30; i++) expect(overLimit(req("3.3.3.3"), "health", 30, t0 + i, 60_000)).toBeNull();
+    expect(overLimit(req("3.3.3.3"), "health", 30, t0 + 30_000, 60_000)).toBe(30);
+    expect(overLimit(req("3.3.3.3"), "health", 30, t0 + 60_000, 60_000)).toBeNull();
+  });
+
   it("answers 429 with Retry-After and the rate_limited reason", async () => {
     const res = tooMany(540);
     expect(res.status).toBe(429);

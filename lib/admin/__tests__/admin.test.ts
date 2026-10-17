@@ -14,14 +14,13 @@ const EMPTY: AdminRaw = {
   research_active: 0,
   daily: [],
   outcomes: [],
-  fit: [],
-  better_fit: [],
   rules_depend: [],
   tracks: [],
   skips: [],
   changes: [],
   feedback: [],
   feedback_last_7_days: 0,
+  feedback_total: 0,
 };
 
 const EMAIL = "someone@example.com";
@@ -47,19 +46,6 @@ const FIXTURE: AdminRaw = {
     { outcome_type: "mixed_between", perspective: null, n: 6 },
     { outcome_type: "undecided", perspective: null, n: 3 },
     { outcome_type: "mixed_unmatched", perspective: null, n: 1 },
-  ],
-  fit: [
-    { perspective: "stewards", rating: 5, n: 4 },
-    { perspective: "stewards", rating: 4, n: 2 },
-    { perspective: "stewards", rating: 3, n: 1 },
-    { perspective: "stewards", rating: 1, n: 3 },
-    { perspective: "accelerators", rating: 4, n: 5 },
-    { perspective: null, rating: 2, n: 1 },
-    { perspective: null, rating: 5, n: 1 },
-  ],
-  better_fit: [
-    { perspective: "stewards", pick: "pragmatists", n: 1 },
-    { perspective: "stewards", pick: "own_mix", n: 2 },
   ],
   rules_depend: [
     { outcome_type: "matched", perspective: "stewards", choice: 0, strength: "strongly", n: 3 },
@@ -99,7 +85,7 @@ const FIXTURE: AdminRaw = {
       type: "other",
       item_ids: [],
       perspective_ids: [],
-      body: "Nice.",
+      body: "Nice. Write back to me@example.net.",
       may_quote: false,
       response_id: null,
       attached_verified: false,
@@ -107,6 +93,7 @@ const FIXTURE: AdminRaw = {
     },
   ],
   feedback_last_7_days: 1,
+  feedback_total: 12,
 };
 
 describe("admin dashboard", () => {
@@ -146,15 +133,6 @@ describe("admin dashboard", () => {
     expect(d.outcomesTotal).toBe(30);
   });
 
-  it("fit: only rated perspectives, then other results together, shares of those who rated, flags", () => {
-    expect(d.fit.map((f) => f.name)).toEqual(["Accelerators", "Stewards", "Other results"]);
-    expect(d.fit[2]).toMatchObject({ n: 2, well: "50%", poor: "50%", poorFlag: true, picked: "–" });
-    const s = d.fit.find((f) => f.name === "Stewards")!;
-    expect(s).toMatchObject({ n: 10, well: "60%", poor: "30%", poorFlag: false, few: true, picked: copy.fit.better_own_mix });
-    const a = d.fit.find((f) => f.name === "Accelerators")!;
-    expect(a).toMatchObject({ n: 5, well: "100%", poor: "0%", picked: "–" });
-  });
-
   it("rules for low-risk AI: perspectives, then other outcomes, shares of those who answered", () => {
     const names = c.perspectives.perspectives.map((p) => p.name).filter((n) => n === "Stewards" || n === "Pragmatists");
     expect(d.rulesDepend.map((r) => r.name)).toEqual([...names, "In between", "Not a priority"]);
@@ -170,11 +148,14 @@ describe("admin dashboard", () => {
     expect(d.rulesDepend.find((r) => r.name === "In between")).toMatchObject({ n: 2, depends: "0%", strongly: "0%", named: false });
   });
 
-  it("track checks: one row per question in order, bands collapsed, sides over 30% flagged", () => {
+  it("track checks: one row per question in order, bands collapsed, sides over 30% flagged once 30 have checked", () => {
     expect(d.tracks.map((t) => t.question)).toEqual(c.config.scored_constructs.map((k) => c.narratives.constructs[k].question));
     expect(d.tracks[0]).toMatchObject({ n: 10, ok: "60%", further_low: "10%", further_high: "30%", lowFlag: false, highFlag: false });
     const c5 = d.tracks[c.config.scored_constructs.indexOf("C5")];
-    expect(c5).toMatchObject({ n: 1, ok: "0%", further_high: "100%", highFlag: true, few: true });
+    // One person said "further right": over 30%, but flags wait for 30.
+    expect(c5).toMatchObject({ n: 1, ok: "0%", further_high: "100%", highFlag: false, few: true });
+    const many = buildDashboard({ ...FIXTURE, tracks: [{ construct: "C5", answer: "further_high", n: 12 }, { construct: "C5", answer: "about_right", n: 18 }] }, c, copy, v);
+    expect(many.tracks[c.config.scored_constructs.indexOf("C5")]).toMatchObject({ n: 30, further_high: "40%", highFlag: true, few: false });
     expect(d.tracks.find((t) => t.n === 0)!.ok).toBe("–");
   });
 
@@ -193,19 +174,25 @@ describe("admin dashboard", () => {
       type: copy.feedback.problem_options.find((o) => o.id === "confusing_question")!.label,
       about: "C5-04, Accelerators",
       body: "Hard to read.",
-      result: "/r/abcdefghijklmn",
+      result: "/admin/responses/abcdefghijklmn",
       resultLabel: "Their result",
       quote: "Yes",
       reply: "Email given",
     });
     expect(d.feedback[1]).toMatchObject({ about: "", result: null, quote: "No", reply: "No" });
     expect(d.feedbackWeek).toBe(1);
+    expect(d.feedbackTotal).toBe(12);
+  });
+
+  // Issue #51: feedback text is shown, with any typed address masked.
+  it("masks email addresses typed into feedback", () => {
+    expect(d.feedback[1].body).toBe("Nice. Write back to [email removed].");
   });
 
   it("an attachment sent without the result's edit token reads as unverified", () => {
     const raw = { ...FIXTURE, feedback: [{ ...FIXTURE.feedback[0], attached_verified: false }] };
     expect(buildDashboard(raw, c, copy, v).feedback[0]).toMatchObject({
-      result: "/r/abcdefghijklmn",
+      result: "/admin/responses/abcdefghijklmn",
       resultLabel: "Attached result (unverified)",
     });
   });
@@ -225,7 +212,7 @@ describe("admin dashboard", () => {
     expect(e.peak).toBeNull();
     expect(e.daySummary).toContain("none yet");
     expect(e.outcomes.every((o) => o.n === 0 && o.pct === "–" && o.width === 0)).toBe(true);
-    expect([e.fit, e.rulesDepend, e.tracks, e.skipped, e.changed, e.feedback]).toEqual([[], [], [], [], [], []]);
+    expect([e.rulesDepend, e.tracks, e.skipped, e.changed, e.feedback]).toEqual([[], [], [], [], []]);
   });
 });
 
@@ -247,21 +234,41 @@ describe("admin queries (lib/db/admin.ts)", () => {
     .filter((l) => !l.trim().startsWith("//") && !l.trim().startsWith("*") && !l.trim().startsWith("/**"))
     .join("\n");
   const split = all.indexOf("export async function listResponses");
+  const cards = all.indexOf("export async function readAdminRows");
   const code = all.slice(0, split);
-  const single = all.slice(split);
+  const single = all.slice(split, cards);
+  // Issue #55: the cards built from single responses, and the export.
+  const rest = all.slice(cards);
+  const exportQuery = rest.slice(rest.indexOf("export async function readExport"));
 
-  it("single responses: no emails, no feedback, and free text never leaves the database", () => {
+  // Issue #51: single responses read the free-text answer, research rows and
+  // attached feedback (text masked in lib/admin), but never an email column.
+  it("single responses: emails only as 'is one set', never compare_name or edit tokens", () => {
     expect(split).toBeGreaterThan(0);
-    expect(single).not.toMatch(/\bemail\b|\bresearch_contacts\b|\bfeedback\b|compare_name|edit_token/i);
+    expect(single.match(/\bemail\b/gi)).toEqual(["email"]);
+    expect(single).toContain("f.email is not null");
+    expect(single).not.toMatch(/compare_name|edit_token/i);
     expect(single).not.toMatch(/select\s+\*/i);
-    // Answers are read only through the filter that drops string (free-text) answers, or counted.
-    const filtered = "(select coalesce(jsonb_object_agg(k, a), '{}'::jsonb) from jsonb_each(answers) e(k, a) where jsonb_typeof(a) <> 'string') as answers";
-    expect(single).toContain(filtered);
-    const rest = single
-      .replace(filtered, "")
-      .replace("exists (select 1 from jsonb_each(answers) e(k, a) where jsonb_typeof(a) = 'string') as free_text_answered", "")
-      .replace("(select count(*) from jsonb_object_keys(answers))::int as answered", "");
-    expect(rest).not.toMatch(/\banswers\b/);
+    // research_contacts: whether there is a row, when, and whether withdrawn.
+    expect(single).toMatch(/bool_or\(not rc\.withdrawn\)/);
+    expect(single).toMatch(/'created_on', rc\.created_on::text, 'withdrawn', rc\.withdrawn/);
+  });
+
+  it("cards and the export: emails only as 'was one given', never a key, token or select *", () => {
+    expect(cards).toBeGreaterThan(split);
+    expect(rest.match(/\bemail\b/gi)).toEqual(["email"]);
+    expect(rest).toContain("(email is not null) as has_email");
+    expect(rest).not.toMatch(/compare_name|edit_token|submission_key/i);
+    expect(rest).not.toMatch(/select\s+\*/i);
+    // research_contacts only as "is there an active row".
+    expect(rest.match(/research_contacts rc/g)).toHaveLength(1);
+    expect(rest).toMatch(/bool_or\(not rc\.withdrawn\)/);
+  });
+
+  it("cards read answers without free text; only the export reads free text (masked in lib/admin/export)", () => {
+    expect(rest.match(/jsonb_typeof\(a\) <> 'string'/g)).toHaveLength(2);
+    expect(rest.match(/jsonb_each_text\(answers\)/g)).toHaveLength(1);
+    expect(exportQuery).toContain("jsonb_each_text(answers)");
   });
 
   it("read emails only as 'was one given'", () => {

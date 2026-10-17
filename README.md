@@ -32,54 +32,30 @@ python3 -I reference/make_test_vectors.py
 
 Edit the generator, not the generated files.
 
-## Testing on a phone
+## Local database
 
-Nothing is deployed until launch. To try the quiz on a phone, run it on your computer.
+Development and database tests use Postgres in Docker on your computer, filled with made-up data. Docker must be running.
 
-**Same Wi-Fi (simplest).**
+1. `npm run db:up` starts it (on `127.0.0.1:54329`, reachable only from this computer) and runs the migrations on its two databases: `fmaw_dev` for `npm run dev`, and `fmaw_test` for `E2E_DB=1 npm run e2e`, which can wipe it freely.
+2. `npm run db:seed` fills `fmaw_dev` with about 60 made-up responses, research sign-ups and feedback (addresses at example.com only). It empties those tables first, so running it again gives the same data.
+3. Copy `.env.example` to `.env.local`; its `DATABASE_URL` already points at `fmaw_dev`. Set `ADMIN_PASSWORD` to anything to open `/admin`.
+4. `npm run dev`.
 
-1. `npm ci` once, then `npm run dev:lan`.
-2. Find your computer's local address: on a Mac, System Settings → Wi-Fi → Details → IP address (something like `192.168.1.23`).
-3. On the phone, open `http://192.168.1.23:3000`.
+`npm run db:reset` drops and recreates both databases, migrates them and seeds `fmaw_dev`. `npm run db:down` stops the database and keeps its data. `db:seed` and `db:reset` refuse to run unless `DATABASE_URL` points at the local database, so they can never change a real one. Never copy production data into it.
 
-The computer has to stay awake with the terminal open. If the page doesn't load, your Wi-Fi may keep devices apart (common on guest and office networks); use the tunnel below instead.
+## Load test
 
-**Testers somewhere else (free temporary tunnel).**
+`npm run load-test` simulates people finishing the quiz on your own copy of the site: each sends a completed quiz, then two or three follow-up saves a few seconds apart. It prints requests per second, errors by status and save times (p50, p95, p99). It refuses any host but `localhost` and `127.0.0.1`, and starts nothing itself:
 
-1. Run `SITE_PASSWORD="pick-something" npm run share`.
-2. It builds the site, starts it, and opens a [Cloudflare quick tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/do-more-with-tunnels/trycloudflare/) (no account needed).
-3. Send testers the `https://….trycloudflare.com` address it prints, plus the password. They can type any user name.
+1. `npm run db:reset` (a fresh local database).
+2. `npm run build && npx next start` in one terminal.
+3. `npm run load-test` in another: 300 people over 2 minutes against `http://127.0.0.1:3000`. Add `-- --people 1000` for more, or a different URL such as `-- http://localhost:3200`.
 
-The address changes every time you run it and stops working when you press Ctrl+C. The command won't start without a password.
+It tests the app and our code with the database it runs against, not the hosted database's own limits.
 
-Completed quizzes are saved to whatever database `DATABASE_URL` points at, so use the development database for testing.
+## Operations
 
-## Environment
-
-Set in Vercel project settings (and in `.env.local` for local work, which git ignores). Never commit them.
-
-| Variable | What it does |
-|---|---|
-| `DATABASE_URL` | Postgres connection string (Supabase). Server only. |
-| `SITE_PASSWORD` | Optional. Puts the whole site behind a password (HTTP Basic auth, any user name). |
-| `ADMIN_PASSWORD` | Password for the read-only admin pages (any user name), needed even when `SITE_PASSWORD` is off. If it isn't set, they return 404. In production use at least 32 random characters; there is no lockout, so a Vercel firewall rate rule on `/admin` limits guessing. `/admin` shows what's coming in; `/admin/perspectives` shows every perspective and other result exactly as the content files word them (add `?release=<key>`, or use its version picker, to see a frozen older release). |
-| `SITE_URL` | Optional. Absolute base URL for share previews on preview deploys. |
-| `ENABLE_DEV_PAGE` | Optional, at build time. `1` keeps the `/dev` test page in a production build. |
-
-## Admin notes
-
-- **Migrations.** `npm run db:migrate` applies `db/migrations/*.sql` in order to `DATABASE_URL` (`-- --dry` lists what's pending). Run it on the development database first.
-- **Withdrawing from research contact.** `npm run withdraw -- <email>` deletes that address's `research_contacts` row and clears it from any `feedback` it was left with (the feedback stays), in the database in `DATABASE_URL` (from `.env.local`). It prints only "Deleted 1 row." or "No matching row.", plus a count of feedback entries cleared, never the address; the private runbook covers the rest.
-- **Feedback with a result attached.** Anyone with a result link can attach it to feedback. On `/admin`, an attachment sent from the browser that saved the result reads "Their result"; any other reads "Attached result (unverified)".
-
-## Publishing
-
-This repository is private. The public repository is a clean snapshot, one commit per release, with no history, issues or pull requests.
-
-1. Merge to `main` and pull, with no uncommitted changes.
-2. `npm run publish:public -- --dry` exports the tracked files at `HEAD`, leaves out what `scripts/public-exclude.txt` lists (agent instructions, CI, the environment template) and scans the rest: `gitleaks`, any email address other than the contact address, private session, artifact and Google Drive links, and database connection strings. It prints the file and line of each finding, never the value, and keeps the export in a temp folder so it can be read.
-3. `npm run publish:public -- --to <local clone of the public repo>` does the same, adds `NOTICE.md`, replaces everything in the clone except `.git`, and makes one commit as Maple Spark Labs ("Release <versions> (<date>)", with the private commit in the body). `--rev <git rev>` publishes an earlier commit on `main`.
-4. Review it with `git -C <clone> show --stat`, then push it yourself. The script never pushes.
+How the site is run (environments, passwords, deployment, the admin pages, publishing) is documented privately.
 
 ## AI use
 

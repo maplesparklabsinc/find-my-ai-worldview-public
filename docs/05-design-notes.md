@@ -144,3 +144,5 @@ Some research tools are built into the results page:
 - Will calibration against real answers be needed, and how many results would it change?
 
 If you build something similar and want to compare notes, use "Tell us" on the site.
+
+The hypotheses we're testing, and how each is going, are in `hypotheses.md`.

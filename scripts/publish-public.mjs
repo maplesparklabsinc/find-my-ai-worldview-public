@@ -12,7 +12,7 @@ import { execFileSync } from "node:child_process";
 import { cpSync, existsSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { listFiles, scanFolder } from "./publish-scan.mjs";
+import { listFiles, opsWarnings, scanFolder } from "./publish-scan.mjs";
 
 const root = new URL("..", import.meta.url).pathname;
 const AUTHOR = { name: "Maple Spark Labs", email: "findmyaiworldview@maplesparklabs.com" };
@@ -147,6 +147,13 @@ if (diff) {
 }
 console.log(`\nScan: ${findings.length === 0 ? "passed, nothing found" : `${findings.length} finding(s)`}`);
 for (const f of findings) console.log(`  ${f}`);
+
+// Operations words: a warning, not a stop. They usually belong in docs/ops/ (private).
+const warnings = opsWarnings(out);
+if (warnings.length > 0) {
+  console.log(`\nWorth a second look (operations words; these usually belong in docs/ops/): ${warnings.length}`);
+  for (const w of warnings) console.log(`  ${w.file}:${w.line}  ${w.kind}`);
+}
 
 if (findings.length > 0) {
   fail(`\nStopped: fix the findings above (or list a file in scripts/public-exclude.txt), commit, and run again. Nothing was committed. The export is at ${out}.`);

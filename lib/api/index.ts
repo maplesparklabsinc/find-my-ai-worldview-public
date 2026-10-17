@@ -45,12 +45,13 @@ function clientKey(req: Request): string {
 
 /**
  * Null while this client is within `limit` requests to `route` in the current
- * 10-minute window; once over it, the seconds until the window resets.
+ * window (10 minutes unless `windowMs` says otherwise); once over it, the
+ * seconds until the window resets.
  */
-export function overLimit(req: Request, route: string, limit: number, now = Date.now()): number | null {
+export function overLimit(req: Request, route: string, limit: number, now = Date.now(), windowMs = WINDOW_MS): number | null {
   const key = `${route}|${clientKey(req)}`;
   const w = windows.get(key);
-  if (!w || now - w.start >= WINDOW_MS) {
+  if (!w || now - w.start >= windowMs) {
     windows.set(key, { start: now, count: 1 });
     if (windows.size > 10_000) {
       for (const [k, v] of windows) if (now - v.start >= WINDOW_MS) windows.delete(k);
@@ -58,7 +59,7 @@ export function overLimit(req: Request, route: string, limit: number, now = Date
     return null;
   }
   w.count += 1;
-  return w.count > limit ? Math.max(1, Math.ceil((w.start + WINDOW_MS - now) / 1000)) : null;
+  return w.count > limit ? Math.max(1, Math.ceil((w.start + windowMs - now) / 1000)) : null;
 }
 
 /**

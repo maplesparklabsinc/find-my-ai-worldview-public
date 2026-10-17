@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Atkinson_Hyperlegible_Next } from "next/font/google";
-import { Analytics } from "@/components/analytics";
+import { Analytics, SpeedInsights } from "@/components/analytics";
 import tokens from "@/design/tokens.json";
 import { getCopy } from "@/lib/content/copy";
 import "./globals.css";
@@ -39,6 +39,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         {children}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

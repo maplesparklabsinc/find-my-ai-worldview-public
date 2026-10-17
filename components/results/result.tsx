@@ -29,6 +29,7 @@ import {
   type QuizState,
 } from "@/lib/quiz";
 import { resultView } from "@/lib/results";
+import { saveWithRetry } from "@/lib/save";
 import { score } from "@/lib/scoring";
 import type { SaveRefusal } from "@/lib/submit";
 import { Reflection, TakeAgain } from "./actions";
@@ -77,7 +78,8 @@ export default function Finish() {
     }
     setPhase("saving");
     try {
-      const res = await fetch("/api/responses", {
+      // Retried on network errors and 5xx (lib/save), with the same submission key each time.
+      const { res } = await saveWithRetry(() => fetch("/api/responses", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
@@ -92,7 +94,8 @@ export default function Finish() {
           compared_with: compareWith,
           submission_key: q.submissionKey,
         }),
-      });
+      }), "response");
+      if (!res) throw new Refused("failed");
       const body = (await res.json().catch(() => null)) as { id?: unknown; token?: unknown; reason?: unknown } | null;
       if (!res.ok) {
         const reason = typeof body?.reason === "string" && REFUSALS.includes(body.reason) ? (body.reason as SaveRefusal) : "failed";

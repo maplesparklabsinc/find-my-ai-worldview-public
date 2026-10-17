@@ -191,7 +191,7 @@ test("/admin is a 404 when ADMIN_PASSWORD is the same as SITE_PASSWORD, with one
 test.describe("with a database", () => {
   test.skip(process.env.E2E_DB !== "1", "set E2E_DB=1 to run against a database");
 
-  test("/admin/responses lists single responses and shows one in full, never with an email or free text", async ({ page, browser, request }) => {
+  test("/admin/responses lists single responses and shows one in full, never with an email address", async ({ page, browser, request }) => {
     const tag = Date.now().toString(36);
     const email = `responses-e2e-${tag}@example.com`;
     const d9 = `free text that must stay private ${tag}`;
@@ -219,7 +219,7 @@ test.describe("with a database", () => {
 
     const admin = await (await browser.newContext({ httpCredentials: { username: "walter", password } })).newPage();
     await admin.goto("/admin");
-    await admin.getByRole("link", { name: "Look at single responses" }).click();
+    await admin.getByRole("link", { name: "Single responses" }).click();
     await expect(admin.getByRole("heading", { level: 1, name: "Responses" })).toBeVisible();
     await expect(admin.getByRole("navigation", { name: "Admin pages" }).getByRole("link", { name: "Responses" })).toHaveAttribute("aria-current", "page");
     // Filtered to Stewards.
@@ -238,7 +238,8 @@ test.describe("with a database", () => {
     await expect(row).toContainText("Stewards");
     await expect(row).toContainText(`2 · ${copy.fit.options[1]}`);
     await expect(row).toContainText(`Quick check (own, Stewards): ${copy.quick_check.options[3]}`);
-    for (const h of ["Response", "Completed", "Result", "Fit", "Guess or quick check", "Answered"]) {
+    await expect(row).toContainText("Yes");
+    for (const h of ["Response", "Completed", "Result", "Fit", "Research", "Guess or quick check", "Answered"]) {
       await expect(admin.getByRole("columnheader", { name: h })).toBeVisible();
     }
     await audit(admin);
@@ -246,13 +247,17 @@ test.describe("with a database", () => {
 
     await row.getByRole("link", { name: id }).click();
     await expect(admin.getByRole("heading", { level: 1, name: id })).toBeVisible();
-    await expect(admin.getByText("Free text: answered")).toBeVisible();
+    // Issue #51: what they wrote is readable on the detail page (no address in it here).
+    const told = admin.getByRole("region", { name: "What they told us" });
+    await expect(told).toContainText(d9);
+    await expect(told).toContainText(feedbackBody);
+    await expect(told).toContainText("Opted in on");
     await expect(admin.getByRole("row").filter({ hasText: "C5-05" })).toContainText(content.itemsById.get("C5-05")!.short!);
     await expect(admin.getByText(standardSequence(content, 34).direction === "agree_first" ? "Agree first" : "Disagree first")).toBeVisible();
     await expect(admin.getByText("34", { exact: true })).toBeVisible();
     await expect(admin.getByRole("row").filter({ hasText: "Stewards" }).first()).toContainText(/\d\.\d{3}/);
     await audit(admin);
-    for (const text of [email, d9, feedbackBody, "@example.com"]) expect(await admin.content()).not.toContain(text);
+    for (const text of [email, "@example.com"]) expect(await admin.content()).not.toContain(text);
 
     // An unknown ID says so.
     await admin.goto("/admin/responses/zzzzzzzzzzzzzz");

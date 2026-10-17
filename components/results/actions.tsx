@@ -28,6 +28,7 @@ import {
   type FeedbackGiven,
 } from "@/lib/quiz";
 import { sharedResultPath } from "@/lib/results";
+import { saveWithRetry, type SaveStep } from "@/lib/save";
 import type { Outcome } from "@/lib/scoring";
 import { text as size } from "./type";
 
@@ -92,17 +93,13 @@ function Block({ title, children }: { title: string; children: React.ReactNode }
 const inputClass =
   "min-h-tap-min w-full rounded-sm border border-line-strong bg-surface-raised px-3 py-2 text-ink placeholder:text-ink-muted";
 
-/** Send a change to a saved result, with this browser's edit token for it. */
-async function send(url: string, method: "POST" | "PATCH", body: unknown, resultId: string): Promise<boolean> {
-  try {
-    const headers: Record<string, string> = { "content-type": "application/json" };
-    const token = editToken(resultId);
-    if (token) headers[EDIT_TOKEN_HEADER] = token;
-    const res = await fetch(url, { method, headers, body: JSON.stringify(body) });
-    return res.ok;
-  } catch {
-    return false;
-  }
+/** Send a change to a saved result, with this browser's edit token for it, retrying as lib/save says. */
+async function send(url: string, method: "POST" | "PATCH", body: unknown, resultId: string, step: SaveStep): Promise<boolean> {
+  const headers: Record<string, string> = { "content-type": "application/json" };
+  const token = editToken(resultId);
+  if (token) headers[EDIT_TOKEN_HEADER] = token;
+  const { res } = await saveWithRetry(() => fetch(url, { method, headers, body: JSON.stringify(body) }), step);
+  return res?.ok ?? false;
 }
 
 // ---------- Quick-check note ----------
@@ -335,7 +332,7 @@ export function FitCard({ id }: { id: string }) {
   async function rate(rating: number) {
     const before = fit;
     setFit(rating);
-    if (await send(`/api/responses/${id}`, "PATCH", { fit_rating: rating }, id)) {
+    if (await send(`/api/responses/${id}`, "PATCH", { fit_rating: rating }, id, "rating")) {
       saveFeedbackGiven(id, { fit_rating: rating });
       fitListeners.forEach((l) => l());
       setStatus("saved");
@@ -398,7 +395,7 @@ export function HelpUs({ id, others, tracks }: { id: string; others: FeedbackPer
 
   /** Save one answer; if the server doesn't take it, `undo` clears the choice so it doesn't look saved. */
   async function save(patch: FeedbackGiven, undo: () => void) {
-    if (await send(`/api/responses/${id}`, "PATCH", patch, id)) {
+    if (await send(`/api/responses/${id}`, "PATCH", patch, id, "rating")) {
       saveFeedbackGiven(id, patch);
       setStatus("saved");
     } else {
@@ -506,6 +503,7 @@ export function ResearchSignup({ id }: { id: string }) {
       "POST",
       { email, response_id: id, consent_version: r.consent_version, consent: true },
       id,
+      "research",
     );
     if (ok) track("research_email_left");
     setState(ok ? "done" : "error");

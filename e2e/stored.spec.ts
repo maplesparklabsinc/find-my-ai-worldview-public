@@ -1,7 +1,7 @@
 // Pages that read a stored response: the result page (with the feedback
 // section open), the shared link's invitation to compare, an older compare
 // link, and a comparison. They need a database, so they run only with E2E_DB=1
-// (DATABASE_URL from .env.local).
+// (the local fmaw_test database, or E2E_DATABASE_URL).
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Browser, type Page } from "@playwright/test";
 import vectors from "@/reference/test-vectors.json";
@@ -212,9 +212,11 @@ test("only the browser that saved a result can change it (edit token)", async ({
   expect(token).toMatch(/^[A-Za-z0-9_-]{43}$/);
   const consent = { email: "visitor@example.com", response_id: id, consent_version: "0.1.0", consent: true };
   const wrong = "A".repeat(43);
+  // An address of its own, so other tests' sign-ups don't use up the research-contact rate limit (5 per 10 minutes).
+  const from = { "x-forwarded-for": `198.51.100.${Math.floor(Math.random() * 250)}` };
 
   // A visitor who only knows the shared link gets "not found", never "forbidden".
-  for (const headers of [{}, { "x-edit-token": wrong }] as Record<string, string>[]) {
+  for (const headers of [from, { ...from, "x-edit-token": wrong }] as Record<string, string>[]) {
     for (const data of [{ fit_rating: 1 }, { better_fit: "none" }, { track_checks: { C1: "further_low" } }]) {
       expect((await request.patch(`/api/responses/${id}`, { data, headers })).status()).toBe(404);
     }
@@ -225,7 +227,7 @@ test("only the browser that saved a result can change it (edit token)", async ({
   await expect(page.getByText("Someone shared this with you", { exact: false })).toBeVisible();
 
   // The owner's token works, for an existing result only.
-  const own = { "x-edit-token": token };
+  const own = { ...from, "x-edit-token": token };
   expect((await request.patch(`/api/responses/${id}`, { data: { fit_rating: 4 }, headers: own })).status()).toBe(204);
   expect((await request.patch(`/api/responses/zzzzzzzzzzzzzz`, { data: { fit_rating: 4 }, headers: own })).status()).toBe(404);
   expect((await request.post("/api/research-contact", { data: { ...consent, email: "owner@example.com" }, headers: own })).status()).toBe(204);

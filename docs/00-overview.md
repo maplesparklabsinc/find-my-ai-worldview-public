@@ -28,6 +28,7 @@ See `decisions.md`. Headlines: working name Find My AI Worldview on a Maple Spar
 | `03-design-brief.md` | draft v0.1 |
 | `04-methodology-and-disclosure.md` | draft v0.2 |
 | `decisions.md` | running log |
+| `hypotheses.md` | What we expect to find, written down before the data; status and dated observations |
 | `../research/evidence-ledger.csv` | 43 sources, verified 2026-10-12 |
 | `../research/item-bank.csv` | item bank v0.3 |
 

@@ -1,7 +1,8 @@
 // /admin/responses/{id} (issue #37): one response as stored, read under the
-// content release it was scored with. Same gate as /admin (proxy.ts). No
-// email, no free text (only whether there was one), no feedback text. Copy
-// here is founder-facing UI, not public site copy.
+// content release it was scored with. Same gate as /admin (proxy.ts). Never an
+// email address: the free-text answer and feedback text arrive masked (issue
+// #51) and are rendered as plain text. Copy here is founder-facing UI, not
+// public site copy.
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -14,7 +15,8 @@ import { buildResponseDetail } from "@/lib/admin/responses";
 import { contentVersions, getContent } from "@/lib/content";
 import { getCopy } from "@/lib/content/copy";
 import { loadRelease } from "@/lib/content/release";
-import { readResponse } from "@/lib/db/admin";
+import { releaseMedianMs } from "@/lib/admin/quality";
+import { readReleaseTotals, readResponse } from "@/lib/db/admin";
 import { responseIdSchema } from "@/lib/submit";
 
 export const metadata: Metadata = {
@@ -56,13 +58,14 @@ async function Response({ params }: Pick<PageProps<"/admin/responses/[id]">, "pa
       </>
     );
   }
-  const release = await loadRelease({
+  const versions = {
     scoring: raw.scoring_version,
     taxonomy: raw.taxonomy_version,
     item_bank: raw.item_bank_version,
     narratives: raw.narratives_version,
-  });
-  const d = buildResponseDetail(raw, release?.content ?? content, getCopy());
+  };
+  const release = await loadRelease(versions);
+  const d = buildResponseDetail(raw, release?.content ?? content, getCopy(), releaseMedianMs(await readReleaseTotals(versions)));
 
   return (
     <>
@@ -101,13 +104,23 @@ async function Response({ params }: Pick<PageProps<"/admin/responses/[id]">, "pa
           </table>
         </Card>
 
-        <Card title="Before the result, and after">
-          <Pairs
-            rows={[
-              { label: "Guess or quick check", value: d.guessOrCheck },
-              ...d.fit,
-            ]}
-          />
+        <Card title="What they told us">
+          <Pairs rows={d.told} />
+          <h3 className="mt-2 text-[1.0625rem] leading-6 font-bold">Feedback sent</h3>
+          {d.feedback.length === 0 ? (
+            <p className="text-base">–</p>
+          ) : (
+            <ul className="flex flex-col gap-3">
+              {d.feedback.map((f, i) => (
+                <li key={i} className="flex flex-col gap-1 border-b border-line pb-3 last:border-0">
+                  <p className="text-sm text-ink-muted">
+                    {f.date} · {f.type} · may quote: {f.quote} · left an email to reply to: {f.email}
+                  </p>
+                  <p className="text-base break-words whitespace-pre-line">{f.body}</p>
+                </li>
+              ))}
+            </ul>
+          )}
         </Card>
 
         <Card title="How the quiz was shown">
@@ -116,6 +129,7 @@ async function Response({ params }: Pick<PageProps<"/admin/responses/[id]">, "pa
               ...d.versions,
               { label: "Answer direction", value: d.direction },
               { label: "Seed", value: d.seed },
+              { label: "Time", value: d.timing },
             ]}
           />
         </Card>
@@ -144,7 +158,6 @@ async function Response({ params }: Pick<PageProps<"/admin/responses/[id]">, "pa
               </tbody>
             </table>
           </div>
-          <p className="text-base">{d.freeText}</p>
         </Card>
 
         <Card title={`Skipped (${d.skipped.length})`}>
@@ -166,21 +179,22 @@ async function Response({ params }: Pick<PageProps<"/admin/responses/[id]">, "pa
 }
 
 function Card({ title, children }: { title: string; children: ReactNode }) {
+  const id = `card-${title.toLowerCase().replace(/[^a-z]+/g, "-")}`;
   return (
-    <section className="flex min-w-0 flex-col gap-3 rounded-md border border-line bg-surface-raised p-4 sm:p-6">
-      <h2 className="text-[1.375rem] leading-7 font-bold">{title}</h2>
+    <section aria-labelledby={id} className="flex min-w-0 flex-col gap-3 rounded-md border border-line bg-surface-raised p-4 sm:p-6">
+      <h2 id={id} className="text-[1.375rem] leading-7 font-bold">{title}</h2>
       {children}
     </section>
   );
 }
 
-function Pairs({ rows }: { rows: { label: string; value: string }[] }) {
+function Pairs({ rows }: { rows: { label: string; value: string; href?: string }[] }) {
   return (
     <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-base">
       {rows.map((r) => (
         <div key={r.label} className="contents">
           <dt className="text-ink-muted">{r.label}</dt>
-          <dd>{r.value}</dd>
+          <dd className="min-w-0 break-words whitespace-pre-line">{r.href ? <a href={r.href} className="font-mono text-sm">{r.value}</a> : r.value}</dd>
         </div>
       ))}
     </dl>

@@ -140,7 +140,7 @@ test("the finished quiz is posted for saving, with the quick check when drawn", 
   expect(posted).not.toHaveProperty("result");
 });
 
-// Needs a database: E2E_DB=1 npm run e2e (uses DATABASE_URL from .env.local).
+// Needs a database: E2E_DB=1 npm run e2e (the local fmaw_test database, or E2E_DATABASE_URL).
 test("saves to the database and opens the result page", async ({ page }) => {
   test.skip(process.env.E2E_DB !== "1", "set E2E_DB=1 to run against a database");
   const answers = { "C1-01": 6, "C1-02": 6, "C1-04": 6, "C2-01": 2, "C2-03": 2, "C2-04": 2, D11: 0 };

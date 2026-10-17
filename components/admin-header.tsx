@@ -3,9 +3,11 @@
 import type { ReactNode } from "react";
 
 const PAGES = [
-  { href: "/admin", label: "Dashboard" },
+  { href: "/admin", label: "Overview" },
+  { href: "/admin/research", label: "Research checks" },
   { href: "/admin/responses", label: "Responses" },
   { href: "/admin/perspectives", label: "Perspectives" },
+  { href: "/admin/download", label: "Download data" },
 ] as const;
 
 export function AdminHeader({ current, children }: { current: (typeof PAGES)[number]["href"]; children?: ReactNode }) {

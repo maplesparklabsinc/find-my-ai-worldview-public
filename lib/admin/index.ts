@@ -5,6 +5,7 @@
 // spread, so a stray column (an email, an answer) can't leak through.
 import type { Content, Versions } from "@/lib/content";
 import type { CopyFile } from "@/lib/content/copy";
+import { maskEmails } from "./mask";
 
 /** Groups smaller than this are marked "read lightly". */
 export const FEW = 30;
@@ -23,9 +24,6 @@ export interface AdminRaw {
   daily: { day: string; n: number }[];
   /** The rest are for the current content release only. */
   outcomes: { outcome_type: string; perspective: string | null; n: number }[];
-  /** Results with a fit rating: perspective (null for every outcome but matched), rating 1..5, count. */
-  fit: { perspective: string | null; rating: number; n: number }[];
-  better_fit: { perspective: string | null; pick: string; n: number }[];
   /** Answers to RULES_DEPEND_ITEM by result (perspective only for matched): choice 0 = leave low-risk AI mostly alone, 1 = basic rules for all AI. */
   rules_depend: { outcome_type: string; perspective: string | null; choice: number; strength: string; n: number }[];
   /** Construct ID, 'about_right' | 'further_low' | 'further_high', count. */
@@ -47,6 +45,7 @@ export interface AdminRaw {
     has_email: boolean;
   }[];
   feedback_last_7_days: number;
+  feedback_total: number;
 }
 
 export interface Dashboard {
@@ -58,7 +57,6 @@ export interface Dashboard {
   peak: string | null;
   outcomes: { name: string; n: number; pct: string; width: number; named: boolean }[];
   outcomesTotal: number;
-  fit: { name: string; n: number; well: string; poor: string; poorFlag: boolean; few: boolean; picked: string }[];
   rulesDepend: { name: string; n: number; depends: string; strongly: string; few: boolean; named: boolean }[];
   tracks: {
     question: string;
@@ -78,13 +76,16 @@ export interface Dashboard {
     date: string;
     type: string;
     about: string;
+    /** Email addresses masked (issue #51). */
     body: string;
+    /** The attached response's admin page. */
     result: string | null;
     resultLabel: string;
     quote: string;
     reply: string;
   }[];
   feedbackWeek: number;
+  feedbackTotal: number;
 }
 
 /** Outcomes other than a named perspective, in the order the page lists them. */
@@ -174,30 +175,6 @@ export function buildDashboard(raw: AdminRaw, content: Content, copy: CopyFile, 
     width: maxOutcome > 0 ? o.n / maxOutcome : 0,
   }));
 
-  // Does the result fit? --------------------------------------------------------
-  const pickName = (pick: string) =>
-    pick === "none" ? copy.fit.better_none : pick === "own_mix" ? copy.fit.better_own_mix : pname(pick);
-  // One row per named perspective, then one for every other outcome together.
-  const fitRow = (name: string, perspective: string | null) => {
-    const rows = raw.fit.filter((f) => f.perspective === perspective);
-    const n = rows.reduce((s, f) => s + f.n, 0);
-    const well = rows.filter((f) => f.rating >= 4).reduce((s, f) => s + f.n, 0);
-    const poor = rows.filter((f) => f.rating <= 2).reduce((s, f) => s + f.n, 0);
-    const picks = raw.better_fit
-      .filter((b) => b.perspective === perspective)
-      .sort((a, b) => b.n - a.n || a.pick.localeCompare(b.pick));
-    return {
-      name,
-      n,
-      well: pct(well, n),
-      poor: pct(poor, n),
-      poorFlag: n > 0 && poor / n > FLAG,
-      few: n < FEW,
-      picked: picks[0] ? pickName(picks[0].pick) : "–",
-    };
-  };
-  const fit = [...perspectives.map((p) => fitRow(p.name, p.id)), fitRow("Other results", null)].filter((f) => f.n > 0);
-
   // Rules for low-risk AI (CX-T1) ---------------------------------------------------
   // Each perspective (closest, for matched), then the other outcomes, as listed in issue #33.
   const dependRow = (name: string, type: string, perspective: string | null, named: boolean) => {
@@ -236,8 +213,9 @@ export function buildDashboard(raw: AdminRaw, content: Content, copy: CopyFile, 
           ok: pct(of("about_right"), n),
           further_low: pct(lo, n),
           further_high: pct(hi, n),
-          lowFlag: n > 0 && lo / n > FLAG,
-          highFlag: n > 0 && hi / n > FLAG,
+          // Bold flags wait for FEW answers, like the other cards.
+          lowFlag: n >= FEW && lo / n > FLAG,
+          highFlag: n >= FEW && hi / n > FLAG,
           few: n < FEW,
         };
       })
@@ -261,8 +239,8 @@ export function buildDashboard(raw: AdminRaw, content: Content, copy: CopyFile, 
     date: dayLabel(f.created_on),
     type: typeLabel(f.type),
     about: [...f.item_ids, ...f.perspective_ids.map(pname)].join(", "),
-    body: f.body,
-    result: f.response_id ? `/r/${f.response_id}` : null,
+    body: maskEmails(f.body),
+    result: f.response_id ? `/admin/responses/${f.response_id}` : null,
     resultLabel: f.attached_verified ? "Their result" : "Attached result (unverified)",
     quote: f.may_quote ? "Yes" : "No",
     reply: f.has_email ? "Email given" : "No",
@@ -277,13 +255,13 @@ export function buildDashboard(raw: AdminRaw, content: Content, copy: CopyFile, 
     peak,
     outcomes,
     outcomesTotal,
-    fit,
     rulesDepend,
     tracks,
     skipped,
     changed,
     feedback,
     feedbackWeek: raw.feedback_last_7_days,
+    feedbackTotal: raw.feedback_total,
   };
 }
 

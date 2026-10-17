@@ -15,3 +15,6 @@ test-results/
 
 # Environment template: names the database host
 .env.example
+
+# Operations notes and decisions: hosting, plans, passwords, security settings, workflow
+docs/ops/

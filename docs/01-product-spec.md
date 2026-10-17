@@ -23,10 +23,10 @@ A simple, friendly website where anyone can answer about 50 quick questions abou
 | App | Next.js (App Router), TypeScript, Tailwind | Founder's stack |
 | Hosting | Vercel; subdomain pointed with a CNAME | Simple deploys, preview links for each pull request |
 | Database | Supabase (Postgres), Canada region (ca-central-1), accessed as plain Postgres | Founder has used it; Canadian data residency; easy SQL views for totals; no lock-in |
-| Analytics | Vercel Web Analytics (cookieless) | Page views and funnel events without cookies or personal data |
+| Analytics | Vercel Web Analytics and Speed Insights (cookieless) | Page views, funnel events and page load timings without cookies or personal data |
 | Email | None sent in v1 | Research emails are only collected; contact happens manually later |
 
-The database is only read and written from server routes, through a Postgres connection string (`DATABASE_URL`, kept in Vercel settings) and a small SQL query library, not the Supabase JavaScript client. Moving to another Postgres host (Neon, AWS) should be a settings change. Row-level security is on for every table with no public policies, so even a leaked public key could not read or write anything. The schema lives in SQL migration files in the repo, applied to both projects. Two Supabase projects, both in Canada: `find-my-ai-worldview-dev` for local development and testing (Free plan; may be reset at any time) and a production project created in M3 that only ever holds real responses (Pro plan, with daily backups and no pausing, before launch). Until launch the site is developed and tested on localhost only, against the dev project (`.env.local`); nothing is deployed. At launch it is pushed to Vercel, and Vercel production points at the prod project.
+The database is only read and written from server routes, through a Postgres connection string (`DATABASE_URL`, kept in Vercel settings) and a small SQL query library, not the Supabase JavaScript client. Moving to another Postgres host (Neon, AWS) should be a settings change. Row-level security is on for every table with no public policies, so even a leaked public key could not read or write anything. The schema lives in SQL migration files in the repo, applied to both projects. Development and production use separate databases; production only ever holds real responses, and its data is stored in Canada. How each is hosted and run is in the private operations notes.
 
 ## 4. User flow
 
@@ -87,7 +87,7 @@ One screen, readable in 20 seconds:
 D11 country, D1 how often you use AI, D2 how well you understand it, D4 trust grid, D6 lived benefit, D7 lived harm, D8 importance, D9 "In a few words, how would you describe your view of AI?" (optional, free text). Introduced with: "Last few. These don't change your result; they help us understand everyone's answers." Asked at the end so the quiz starts with the interesting part. The intro sits in a tinted box above the first of these questions.
 
 - D4 trust grid: never a table on phones. One screen, one row at a time: the row name as the heading, styled like a question, with the shared question smaller and muted above it, and "2 of 4" beside the row name; the four options as rows, auto-advance to the next unanswered row after about 400 ms. Answered rows are listed underneath with their answer and "Change". It counts as one question in the progress count.
-- D9 free text: optional, 280 characters at most, with the hint "Optional. Please leave out names and contact details." The button reads "See my result". Free text is never shown on any result page, view or export summary; it is read only in the database.
+- D9 free text: optional, 280 characters at most, with the hint "Optional. Please leave out names and contact details." The button reads "See my result". Free text is never shown on any result page, view or export summary; it is read in the database and on the private `/admin` response page, with any email address masked (issue #51).
 
 ### 5.4a Your guess (optional, issue #24)
 
@@ -183,7 +183,7 @@ Results are always computed in the browser with the shared scoring module and re
 
 ### 6.3 Seeing totals
 
-SQL views in Supabase (the founder can read them in the Supabase dashboard from day one). The read-only `/admin` page shows the same aggregates, behind its own password (`ADMIN_PASSWORD`, in its own Basic-auth realm, and closed with a 404 if it is the same as `SITE_PASSWORD`); `/admin/responses` lists single responses (versions, result with ranked distances, every answer with the label seen, skips, the guess or quick check, the fit answers, answer direction and seed), never with an email, the free-text answer or feedback text. The rest of the site needs no password:
+SQL views in Supabase (the founder can read them in the Supabase dashboard from day one). The read-only `/admin` page shows the same aggregates, behind its own password (`ADMIN_PASSWORD`, in its own Basic-auth realm, and closed with a 404 if it is the same as `SITE_PASSWORD`); `/admin/responses` lists single responses (versions, result with ranked distances, every answer with the label seen, skips, research opt-in, everything the person told us around their result including the free-text answer and attached feedback, answer direction and seed). Email addresses never appear there: email columns are never read, and any address typed into free text or feedback is masked. The rest of the site needs no password:
 
 - `v_totals`: completions all time, last 7 days, today
 - `v_daily`: completions per day
@@ -237,23 +237,7 @@ Rules: no jargon (no "construct", "dimension", "psychometric", "validated", "lat
 
 ## 10. Launch checklist
 
-- All copy reviewed by the founder for voice.
-- Privacy page and consent text in place (`04`), reviewed by the founder; a lawyer's read is recommended once there is traction.
-- No IP addresses or user agents written to the database (check the payload and the table).
-- Row-level security on, no public policies; database credentials only on the server.
-- Vercel Firewall rate-limit rules on the write routes, keyed by IP, returning 429 (the in-memory limiter in `lib/api` stays as a per-instance backstop): `/api/responses` and `/api/responses/*` 30 requests per 10 minutes; `/api/research-contact` 5 per 10 minutes; `/api/feedback` 10 per 10 minutes. Checked with a burst of requests against the deployed site.
-- `ADMIN_PASSWORD` set in Vercel (production), a long random value; `/admin` checked: 401 without it, the page with it.
-- ADMIN_PASSWORD is at least 32 random characters, and differs from SITE_PASSWORD (if that is still set)
-- Vercel Firewall rate rule on /admin
-- Research withdrawal runbook exists (private, Drive) and npm run withdraw works against production
-- Production Supabase project on a paid plan (no inactivity pausing, daily backups) and a test restore done; no test data in it.
-- Results reproduce from stored answers and versions.
-- Accessibility check (axe) clean on every page; tested with a screen reader on one phone.
-- Share preview checked on at least two platforms.
-- Five-person test from M2 done and fixes made.
-- Changelog entry v0.1.0 published.
-- `npm run launch-check` passes: no unset placeholders in `copy.json`.
-- Create the public repo, run `npm run publish:public`, review, push, set `public_repo_url`.
+Kept with the private operations notes, since it names security settings and plans.
 
 ## 11. Not in v1
 

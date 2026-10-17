@@ -1,9 +1,15 @@
 import { defineConfig, devices } from "@playwright/test";
+import { LOCAL_TEST_URL } from "./scripts/local-db.mjs";
 
 const PORT = 3200;
 
 // The admin page (e2e/admin.spec.ts) needs a password on the test server.
 process.env.ADMIN_PASSWORD ??= "e2e-admin-password";
+
+// With E2E_DB=1 the test server saves to E2E_DATABASE_URL, or else the local
+// Docker test database (npm run db:up), never fmaw_dev or .env.local's database.
+const testDatabase: Record<string, string> =
+  process.env.E2E_DB === "1" ? { DATABASE_URL: process.env.E2E_DATABASE_URL || LOCAL_TEST_URL } : {};
 
 export default defineConfig({
   testDir: "e2e",
@@ -21,5 +27,6 @@ export default defineConfig({
     url: `http://localhost:${PORT}`,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
+    env: testDatabase,
   },
 });
