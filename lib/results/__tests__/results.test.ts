@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import vectors from "@/reference/test-vectors.json";
 import { getContent } from "@/lib/content";
 import { getCopy } from "@/lib/content/copy";
+import { loadReleaseByKey } from "@/lib/content/release";
 import { compare, score, type Answers } from "@/lib/scoring";
 import { compareView, countryOf, overlapLine, pickBaseRates, render, resultView, type ResultView, type TrackView } from "@/lib/results";
 
@@ -100,11 +101,31 @@ describe("resultView", () => {
 describe("base rates", () => {
   const x = cases.find((k) => k.id === "precautionist")!;
 
-  it("map D11 to a country code", () => {
-    expect(countryOf(c, copy, { D11: 0 })).toBe("CA");
-    expect(countryOf(c, copy, { D11: 2 })).toBe("GB");
-    expect(countryOf(c, copy, { D11: 4 })).toBeNull();
+  it("map D11 to a country code: the four named countries, and null for the regions and Somewhere else", () => {
+    const options = c.itemsById.get("D11")!.options;
+    const named: Record<string, string> = { Canada: "CA", "United States": "US", "United Kingdom": "GB", "Australia or New Zealand": "AU" };
+    expect(options).toHaveLength(11);
+    for (const [i, label] of options.entries()) expect(countryOf(c, copy, { D11: i }), label).toBe(named[label] ?? null);
     expect(countryOf(c, copy, {})).toBeNull();
+  });
+
+  it("Australia or New Zealand gets the Australian figures; a region gets figures from another country, labelled", () => {
+    const options = c.itemsById.get("D11")!.options;
+    const cards = (label: string) => pickBaseRates(c, copy, x.result, countryOf(c, copy, { ...x.answers, D11: options.indexOf(label) }), 6);
+    const au = cards("Australia or New Zealand").find((k) => k.construct === "C1")!;
+    expect(au).toMatchObject({ country: "AU", countryName: "Australia", fromOtherCountry: false });
+    for (const region of ["Latin America", "Elsewhere in Europe", "Middle East", "Africa", "South Asia", "East and Southeast Asia"]) {
+      const rs = cards(region);
+      expect(rs.length, region).toBeGreaterThan(0);
+      for (const k of rs) expect(k, region).toMatchObject({ fromOtherCountry: true });
+    }
+  });
+
+  it("an earlier release's answers keep their own labels (item bank 0.8.0: Australia was the fourth option)", async () => {
+    const old = (await loadReleaseByKey("0.4.0-0.3.1-0.8.0-0.7.0"))!;
+    expect(countryOf(old.content, old.copy, { D11: 2 })).toBe("GB");
+    expect(countryOf(old.content, old.copy, { D11: 3 })).toBe("AU");
+    expect(countryOf(old.content, old.copy, { D11: 4 })).toBeNull();
   });
 
   it("prefer the person's country and always carry their source", () => {

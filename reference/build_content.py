@@ -61,7 +61,7 @@ def main():
     missing = [x for x in referenced if x not in by_id]
     assert not missing, missing
     bundle = {
-        "item_bank_version": "0.8.0",
+        "item_bank_version": "0.9.0",
         "likert_labels": ["Strongly disagree", "Disagree", "Somewhat disagree", "Neither agree nor disagree",
                           "Somewhat agree", "Agree", "Strongly agree"],
         "tradeoff_strength_labels": ["Slightly", "Strongly"],

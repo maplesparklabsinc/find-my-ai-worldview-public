@@ -1,10 +1,12 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import copyJson from "@/content/copy.json";
+import itemsJson from "@/content/items.json";
 import { fill, getCopy, missingPlaceholders, parseCopy, placeholdersIn, resolvePlaceholders } from "@/lib/content/copy";
 import { getPage, PAGES } from "@/lib/content/pages";
 
 const copy = getCopy();
+const D11 = itemsJson.items.find((i) => i.id === "D11")!.options;
 const ROUTES = ["/", "/start", "/quiz", "/how-it-works", "/privacy", "/changes", "/feedback"];
 
 function allStrings(x: unknown): string[] {
@@ -56,7 +58,7 @@ describe("site copy", () => {
 
   // Issue #43: the How this works links point into the public snapshot repo.
   it("builds the scoring rules and sources links from public_repo_url", () => {
-    const withRepo = parseCopy({ ...copyJson, placeholders: { ...copyJson.placeholders, public_repo_url: "https://github.com/org/repo" } }, ["Canada", "United States", "United Kingdom", "Australia"]);
+    const withRepo = parseCopy({ ...copyJson, placeholders: { ...copyJson.placeholders, public_repo_url: "https://github.com/org/repo" } }, D11);
     expect(withRepo.placeholders.scoring_rules_url).toBe("https://github.com/org/repo/blob/main/docs/02-scoring-spec.md");
     expect(withRepo.placeholders.sources_url).toBe("https://github.com/org/repo/blob/main/research/evidence-ledger.csv");
     expect(missingPlaceholders(withRepo)).not.toContain("public_repo_url");
@@ -64,7 +66,7 @@ describe("site copy", () => {
   });
 
   it("leaves the links visibly unset, and launch-check failing, until public_repo_url is set", () => {
-    const unset = parseCopy({ ...copyJson, placeholders: { ...copyJson.placeholders, public_repo_url: null } }, ["Canada", "United States", "United Kingdom", "Australia"]);
+    const unset = parseCopy({ ...copyJson, placeholders: { ...copyJson.placeholders, public_repo_url: null } }, D11);
     expect(missingPlaceholders(unset)).toContain("public_repo_url");
     expect(missingPlaceholders(unset)).not.toContain("scoring_rules_url");
     expect(unset.placeholders.scoring_rules_url).toBe("{public_repo_url}/blob/main/docs/02-scoring-spec.md");

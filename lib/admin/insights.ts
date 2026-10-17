@@ -403,20 +403,30 @@ export interface LocationRow {
   weekPct: string;
 }
 
-/** Each answer to "Where do you live?" (D11), then "Not answered". Only what people told us. */
-export function location(content: Content, raw: { option: number | null; all_time: number; last_7_days: number }[]): LocationRow[] {
+/**
+ * Each answer to "Where do you live?" (D11), then "Not answered". Only what people told us.
+ * An answer counts under the label it had in its own item bank version (`optionsByItemBank`;
+ * the current options if its version isn't there). Today's options come first, then any older
+ * label that's no longer an option (e.g. "Australia" before item bank 0.9.0), if anyone chose it.
+ */
+export function location(
+  content: Content,
+  raw: { item_bank_version: string; option: number | null; all_time: number; last_7_days: number }[],
+  optionsByItemBank: ReadonlyMap<string, readonly string[]> = new Map(),
+): LocationRow[] {
   const options = content.itemsById.get("D11")?.options ?? [];
+  const labelOf = (r: (typeof raw)[number]) => (r.option === null ? undefined : (optionsByItemBank.get(r.item_bank_version) ?? options)[r.option]);
   const all = raw.reduce((s, r) => s + r.all_time, 0);
   const week = raw.reduce((s, r) => s + r.last_7_days, 0);
-  const of = (match: (o: number | null) => boolean) => raw.filter((r) => match(r.option));
   const row = (label: string, rows: typeof raw): LocationRow => {
     const a = rows.reduce((s, r) => s + r.all_time, 0);
     const w = rows.reduce((s, r) => s + r.last_7_days, 0);
     return { label, allTime: a, allPct: pct(a, all), week: w, weekPct: pct(w, week) };
   };
+  const older = [...new Set(raw.map(labelOf).filter((l): l is string => l !== undefined && !options.includes(l)))];
   return [
-    ...options.map((label, i) => row(label, of((o) => o === i))),
-    row("Not answered", of((o) => o === null || o < 0 || o >= options.length)),
+    ...[...options, ...older].map((label) => row(label, raw.filter((r) => labelOf(r) === label))),
+    row("Not answered", raw.filter((r) => labelOf(r) === undefined)),
   ];
 }
 

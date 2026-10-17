@@ -15,6 +15,7 @@ import { guessMatch, guessSummary } from "@/lib/admin/guess";
 import { alsoBetweenWith, betweenPairs, flaggedTile, location, qualityByRow, sharing, themeSpread } from "@/lib/admin/insights";
 import { contentVersions, getContent } from "@/lib/content";
 import { getCopy } from "@/lib/content/copy";
+import { optionsByItemBank } from "@/lib/content/release";
 import { readAdmin, readAdminRows, readLocation, readSharing } from "@/lib/db/admin";
 
 export const metadata: Metadata = {
@@ -42,7 +43,13 @@ async function Overview() {
   const content = getContent();
   const copy = getCopy();
   const versions = contentVersions(content);
-  const [raw, rows, loc, share] = await Promise.all([readAdmin(versions), readAdminRows(versions), readLocation(), readSharing()]);
+  const [raw, rows, loc, share, d11] = await Promise.all([
+    readAdmin(versions),
+    readAdminRows(versions),
+    readLocation(),
+    readSharing(),
+    optionsByItemBank("D11"),
+  ]);
   const d = buildDashboard(raw, content, copy, versions);
   const early = rows.length < FEW;
   const flagged = flaggedTile(qualityByRow(content, rows));
@@ -107,12 +114,12 @@ async function Overview() {
           </p>
         </section>
 
-        <Feedback d={d} />
+        <PerDay d={d} />
         <Outcomes d={d} pairs={betweenPairs(content, rows)} also={(name) => also.get(names.get(name) ?? "") ?? ""} early={early} />
         <Themes themes={themeSpread(content, rows)} early={early} />
-        <PerDay d={d} />
+        <Feedback d={d} />
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,28.75rem),1fr))] items-start gap-6">
-          <Location rows={location(content, loc)} />
+          <Location rows={location(content, loc, d11)} />
           <SharingCard s={sharing(share)} />
         </div>
       </main>

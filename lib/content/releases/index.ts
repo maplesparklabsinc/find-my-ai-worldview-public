@@ -79,6 +79,12 @@ import perspectives12 from "./0.4.0-0.3.1-0.8.0-0.7.0/perspectives.json";
 import narratives12 from "./0.4.0-0.3.1-0.8.0-0.7.0/narratives.json";
 import baseRates12 from "./0.4.0-0.3.1-0.8.0-0.7.0/base-rates.json";
 import copy12 from "./0.4.0-0.3.1-0.8.0-0.7.0/copy.json";
+import items13 from "./0.4.0-0.3.1-0.9.0-0.7.0/items.json";
+import config13 from "./0.4.0-0.3.1-0.9.0-0.7.0/scoring-config.json";
+import perspectives13 from "./0.4.0-0.3.1-0.9.0-0.7.0/perspectives.json";
+import narratives13 from "./0.4.0-0.3.1-0.9.0-0.7.0/narratives.json";
+import baseRates13 from "./0.4.0-0.3.1-0.9.0-0.7.0/base-rates.json";
+import copy13 from "./0.4.0-0.3.1-0.9.0-0.7.0/copy.json";
 
 export const releases: Record<string, RawRelease> = {
   "0.1.0-0.1.0-0.3.0-0.2.1": { items: items0, config: config0, perspectives: perspectives0, narratives: narratives0, baseRates: baseRates0, copy: copy0 },
@@ -94,4 +100,5 @@ export const releases: Record<string, RawRelease> = {
   "0.4.0-0.2.2-0.8.0-0.6.0": { items: items10, config: config10, perspectives: perspectives10, narratives: narratives10, baseRates: baseRates10, copy: copy10 },
   "0.4.0-0.3.0-0.8.0-0.7.0": { items: items11, config: config11, perspectives: perspectives11, narratives: narratives11, baseRates: baseRates11, copy: copy11 },
   "0.4.0-0.3.1-0.8.0-0.7.0": { items: items12, config: config12, perspectives: perspectives12, narratives: narratives12, baseRates: baseRates12, copy: copy12 },
+  "0.4.0-0.3.1-0.9.0-0.7.0": { items: items13, config: config13, perspectives: perspectives13, narratives: narratives13, baseRates: baseRates13, copy: copy13 },
 };

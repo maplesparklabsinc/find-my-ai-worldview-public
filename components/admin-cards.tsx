@@ -483,7 +483,7 @@ export function Fit({ rows, early }: { rows: FitRow[]; early: boolean }) {
 export function Location({ rows }: { rows: LocationRow[] }) {
   return (
     <Card id="location" title="Where people live">
-      <Note>From &quot;Where do you live?&quot;, as people answered it. All content versions. Never looked up from an address.</Note>
+      <Note>From &quot;Where do you currently live?&quot;, as people answered it. All content versions, each answer under the option it had then. Never looked up from an address.</Note>
       <TableBox label="Where people live">
         <thead>
           <tr>

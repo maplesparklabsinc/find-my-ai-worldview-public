@@ -4,7 +4,7 @@
  "versions": {
   "scoring": "0.4.0",
   "taxonomy": "0.3.1",
-  "item_bank": "0.8.0",
+  "item_bank": "0.9.0",
   "narratives": "0.7.0"
  },
  "score_cases": [
@@ -61,7 +61,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -224,7 +224,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -386,7 +386,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -548,7 +548,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -707,7 +707,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -869,7 +869,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -1031,7 +1031,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -1201,7 +1201,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -1363,7 +1363,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -1520,7 +1520,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -1657,7 +1657,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -1799,7 +1799,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -1962,7 +1962,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -2125,7 +2125,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -2287,7 +2287,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -2449,7 +2449,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -2611,7 +2611,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -2769,7 +2769,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -2926,7 +2926,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -3074,7 +3074,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -3222,7 +3222,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -3369,7 +3369,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -3521,7 +3521,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -3683,7 +3683,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -3849,7 +3849,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -4015,7 +4015,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -4177,7 +4177,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -4339,7 +4339,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -4502,7 +4502,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {
@@ -4665,7 +4665,7 @@
     "versions": {
      "scoring": "0.4.0",
      "taxonomy": "0.3.1",
-     "item_bank": "0.8.0",
+     "item_bank": "0.9.0",
      "narratives": "0.7.0"
     },
     "constructs": {

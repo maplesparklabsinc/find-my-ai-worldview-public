@@ -2,6 +2,7 @@
 import { describe, expect, it } from "vitest";
 import { getContent } from "@/lib/content";
 import { getCopy } from "@/lib/content/copy";
+import { optionsByItemBank } from "@/lib/content/release";
 import { standardSequence } from "@/lib/form";
 import {
   alsoBetweenWith,
@@ -254,14 +255,43 @@ describe("research setup check (section 8)", () => {
 
 describe("location, sharing and the flagged tile", () => {
   it("location: every D11 answer, then Not answered, with shares", () => {
+    const v = c.items.item_bank_version;
     const rows = location(c, [
-      { option: 0, all_time: 6, last_7_days: 2 },
-      { option: 4, all_time: 2, last_7_days: 0 },
-      { option: null, all_time: 2, last_7_days: 2 },
+      { item_bank_version: v, option: 0, all_time: 6, last_7_days: 2 },
+      { item_bank_version: v, option: 4, all_time: 2, last_7_days: 0 },
+      { item_bank_version: v, option: null, all_time: 2, last_7_days: 2 },
     ]);
     expect(rows.map((r) => r.label)).toEqual([...c.itemsById.get("D11")!.options, "Not answered"]);
+    expect(rows).toHaveLength(12);
     expect(rows[0]).toMatchObject({ allTime: 6, allPct: "60%", week: 2, weekPct: "50%" });
     expect(rows.at(-1)).toMatchObject({ allTime: 2, weekPct: "50%" });
+  });
+
+  it("location across releases: 0.8.0 answers count under their own labels, and an old-only label gets its own row", async () => {
+    const byVersion = await optionsByItemBank("D11");
+    expect(byVersion.get("0.8.0")).toEqual(["Canada", "United States", "United Kingdom", "Australia", "Somewhere else"]);
+    expect(byVersion.get(c.items.item_bank_version)).toEqual(c.itemsById.get("D11")!.options);
+    const now = c.items.item_bank_version;
+    const rows = location(
+      c,
+      [
+        { item_bank_version: "0.8.0", option: 2, all_time: 3, last_7_days: 0 }, // United Kingdom then, Latin America now
+        { item_bank_version: "0.8.0", option: 3, all_time: 1, last_7_days: 0 }, // Australia
+        { item_bank_version: "0.8.0", option: 4, all_time: 1, last_7_days: 0 }, // Somewhere else
+        { item_bank_version: now, option: 3, all_time: 2, last_7_days: 2 }, // United Kingdom
+        { item_bank_version: now, option: 2, all_time: 1, last_7_days: 1 }, // Latin America
+        { item_bank_version: now, option: 99, all_time: 1, last_7_days: 1 },
+      ],
+      byVersion,
+    );
+    const count = (label: string) => rows.find((r) => r.label === label)?.allTime;
+    expect(count("United Kingdom")).toBe(5);
+    expect(count("Latin America")).toBe(1);
+    expect(count("Somewhere else")).toBe(1);
+    expect(count("Australia or New Zealand")).toBe(0);
+    expect(rows.map((r) => r.label).slice(-2)).toEqual(["Australia", "Not answered"]);
+    expect(count("Australia")).toBe(1);
+    expect(count("Not answered")).toBe(1);
   });
 
   it("sharing and the flagged tile", () => {

@@ -5,6 +5,9 @@ import { STORAGE_KEY, newQuiz, type QuizState } from "@/lib/quiz";
 
 export const content = getContent();
 
+/** The quiz set: what a visitor hits. CI runs it on every PR as the fast first signal (`--grep @quiz`). */
+export const QUIZ = { tag: "@quiz" };
+
 export const PREDICTION_HEADING = "Before you see your result, where do you think your answers landed?";
 
 /** The first seed that gives this answer direction. */

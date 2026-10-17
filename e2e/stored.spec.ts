@@ -8,7 +8,7 @@ import vectors from "@/reference/test-vectors.json";
 import { getCopy } from "@/lib/content/copy";
 import { screenCount } from "@/lib/form";
 import { STORAGE_KEY, newQuiz } from "@/lib/quiz";
-import { content, settled } from "./helpers";
+import { QUIZ, content, settled } from "./helpers";
 
 const copy = getCopy();
 
@@ -113,7 +113,7 @@ async function friendBrowser(browser: Browser): Promise<Page> {
 // Issue #37: the founder's compare link didn't work. Every way in from a shared
 // result goes through the quiz to the comparison and back.
 for (const place of ["top", "bar", "end"] as const) {
-  test(`shared link → quiz → comparison → sent back, from the ${place} button`, async ({ page, browser }) => {
+  test(`shared link → quiz → comparison → sent back, from the ${place} button`, QUIZ, async ({ page, browser }) => {
     const path = await save(page, "steward", 4242);
     const friend = await friendBrowser(browser);
     await friend.goto(`${path}?view=shared`);

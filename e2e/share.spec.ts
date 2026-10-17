@@ -9,7 +9,7 @@ import { getCopy } from "@/lib/content/copy";
 import { STORAGE_KEY, newQuiz } from "@/lib/quiz";
 import { resultView, shareText } from "@/lib/results";
 import { score, type Answers } from "@/lib/scoring";
-import { content } from "./helpers";
+import { QUIZ, content } from "./helpers";
 
 const copy = getCopy();
 const s = copy.share;
@@ -40,7 +40,7 @@ async function saved(browser: Browser, vector: string, ip: string, share: "menu"
 
 const box = (page: Page) => page.getByRole("region", { name: s.heading });
 
-test("the share images for an In between result are served", async ({ browser, request }) => {
+test("the share images for an In between result are served", QUIZ, async ({ browser, request }) => {
   const page = await saved(browser, "mixed_between", "203.0.113.31");
   const path = new URL(page.url()).pathname;
   for (const url of [`${path}/image`, `${path}/opengraph-image`]) {
@@ -50,7 +50,7 @@ test("the share images for an In between result are served", async ({ browser, r
   }
 });
 
-test("with a share menu: one Share button that sends the title, text and link, and no file", async ({ browser }) => {
+test("with a share menu: one Share button that sends the title, text and link, and no file", QUIZ, async ({ browser }) => {
   const page = await saved(browser, "steward", "203.0.113.34", "menu");
   const share = box(page).getByRole("button");
   await expect(share).toHaveCount(1);
@@ -63,7 +63,7 @@ test("with a share menu: one Share button that sends the title, text and link, a
     .toEqual([{ title: copy.site.name, text, url: `${page.url()}?view=shared` }]);
 });
 
-test("without a share menu: Copy link copies the link only and says so for 3 seconds", async ({ browser }) => {
+test("without a share menu: Copy link copies the link only and says so for 3 seconds", QUIZ, async ({ browser }) => {
   const page = await saved(browser, "steward", "203.0.113.35");
   await page.evaluate(() => {
     const w = window as unknown as { copied: string[] };
@@ -80,7 +80,7 @@ test("without a share menu: Copy link copies the link only and says so for 3 sec
   await expect(box(page).locator("[aria-live=polite]")).toHaveText("");
 });
 
-test("the box shows who can see the link first, then the button, the card as a thumbnail and Download image; no channel links", async ({
+test("the box shows who can see the link first, then the button, the card as a thumbnail and Download image; no channel links", QUIZ, async ({
   browser,
 }) => {
   const page = await saved(browser, "steward", "203.0.113.36");
@@ -110,7 +110,7 @@ test("the box shows who can see the link first, then the button, the card as a t
   for (const channel of ["X", "LinkedIn", "Facebook", "WhatsApp", "Email"]) await expect(page.getByRole("link", { name: channel, exact: true })).toHaveCount(0);
 });
 
-test("a shared link previews with the share card", async ({ browser, request }) => {
+test("a shared link previews with the share card", QUIZ, async ({ browser, request }) => {
   const page = await saved(browser, "steward", "203.0.113.37");
   // The link people share is the read-only view; it previews the same way.
   const html = await (await request.get(`${new URL(page.url()).pathname}?view=shared`)).text();
@@ -123,7 +123,7 @@ test("a shared link previews with the share card", async ({ browser, request }) 
   expect(meta("twitter:card")).toBe("summary_large_image");
 });
 
-test("Copy link works without the Clipboard API, and never opens a dialog", async ({ browser }) => {
+test("Copy link works without the Clipboard API, and never opens a dialog", QUIZ, async ({ browser }) => {
   const page = await saved(browser, "steward", "203.0.113.32");
   page.on("dialog", (d) => {
     throw new Error(`unexpected ${d.type()} dialog`);
@@ -134,7 +134,7 @@ test("Copy link works without the Clipboard API, and never opens a dialog", asyn
   await expect(box(page).getByRole("button", { name: s.copied }).or(box(page).getByRole("textbox", { name: s.copy_link }))).toBeVisible();
 });
 
-test("when the browser won't copy at all, the link is shown selected to copy by hand", async ({ browser }) => {
+test("when the browser won't copy at all, the link is shown selected to copy by hand", QUIZ, async ({ browser }) => {
   const page = await saved(browser, "steward", "203.0.113.33");
   page.on("dialog", (d) => {
     throw new Error(`unexpected ${d.type()} dialog`);

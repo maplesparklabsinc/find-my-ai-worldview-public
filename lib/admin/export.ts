@@ -127,7 +127,7 @@ export function responseColumns(content: Content, rows: ExportResponseRaw[]): Co
     { name: "between_1", about: "In between results only: the first of the two perspective IDs (alphabetical)", value: (r) => between(r)?.[0] ?? null },
     { name: "between_2", about: "In between results only: the second of the two perspective IDs", value: (r) => between(r)?.[1] ?? null },
     ...bands,
-    { name: "country", about: "Country code from D11, empty if not answered or somewhere else", value: (r) => r.country },
+    { name: "country", about: "Country code from D11, empty if not answered, a region or somewhere else", value: (r) => r.country },
     { name: "fit_rating", about: '"Does this fit you?", 1 to 5', value: (r) => r.fit_rating },
     { name: "better_fit", about: '"Which fits you better?": a perspective ID, none or own_mix', value: (r) => r.better_fit },
     { name: "track_checks", about: '"Check your six answers": JSON, construct -> about_right, further_low or further_high', value: (r) => (Object.keys(r.track_checks ?? {}).length ? r.track_checks : null) },

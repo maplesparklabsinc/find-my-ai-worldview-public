@@ -64,6 +64,16 @@ export async function releaseKeys(): Promise<string[]> {
   return Object.keys(releases);
 }
 
+/** One item's options in each frozen item bank version, e.g. D11's, so old answers keep their own labels. */
+export async function optionsByItemBank(itemId: string): Promise<Map<string, string[]>> {
+  const out = new Map<string, string[]>();
+  for (const key of await releaseKeys()) {
+    const options = (await loadReleaseByKey(key))?.content.itemsById.get(itemId)?.options;
+    if (options) out.set(key.split("-")[2], options);
+  }
+  return out;
+}
+
 /** A frozen release by its key, or null if there is none. */
 export async function loadReleaseByKey(key: string): Promise<Release | null> {
   if (!built.has(key)) {

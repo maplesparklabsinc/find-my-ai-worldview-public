@@ -1,10 +1,10 @@
 import { expect, test } from "@playwright/test";
 import vectors from "@/reference/test-vectors.json";
 import { STORAGE_KEY } from "@/lib/quiz";
-import { PREDICTION_HEADING, content, failSaving, openQuizAt, openUnsavedResult, seedFor } from "./helpers";
+import { PREDICTION_HEADING, QUIZ, content, failSaving, openQuizAt, openUnsavedResult, seedFor } from "./helpers";
 import { newQuiz } from "@/lib/quiz";
 
-test("landing to result, answering everything, on a phone", async ({ page }) => {
+test("landing to result, answering everything, on a phone", QUIZ, async ({ page }) => {
   test.setTimeout(120_000);
   await page.setViewportSize({ width: 390, height: 844 });
   const seed = seedFor("agree_first");
@@ -63,7 +63,7 @@ test("landing to result, answering everything, on a phone", async ({ page }) => 
   await expect(page.getByRole("button", { name: "Try again" })).toBeVisible();
 });
 
-test("back keeps earlier answers and skip leaves a question unanswered", async ({ page }) => {
+test("back keeps earlier answers and skip leaves a question unanswered", QUIZ, async ({ page }) => {
   await page.goto("/quiz");
   const options = page.getByRole("group").first().getByRole("button");
   await options.nth(2).click();
@@ -76,7 +76,33 @@ test("back keeps earlier answers and skip leaves a question unanswered", async (
   await expect(options.nth(2)).toHaveAttribute("aria-pressed", "true");
 });
 
-test("larger text makes the statement bigger and is remembered", async ({ page }) => {
+// Issue #80: the four countries with published polls, inside a sweep of regions.
+test("where you live: the eleven options in order, as the usual list, and the answer is kept", QUIZ, async ({ page }) => {
+  await openQuizAt(page, seedFor("disagree_first"), "D11");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Where do you currently live?");
+  const options = page.getByRole("group").getByRole("button");
+  await expect(options).toHaveText([
+    "Canada",
+    "United States",
+    "Latin America",
+    "United Kingdom",
+    "Elsewhere in Europe",
+    "Middle East",
+    "Africa",
+    "South Asia",
+    "East and Southeast Asia",
+    "Australia or New Zealand",
+    "Somewhere else",
+  ]);
+  const boxes = await Promise.all((await options.all()).map((o) => o.boundingBox()));
+  for (const [i, b] of boxes.entries()) if (i > 0) expect(b!.y).toBeGreaterThan(boxes[i - 1]!.y);
+  await options.getByText("South Asia", { exact: true }).click();
+  await expect(page.getByRole("heading", { level: 1 })).not.toHaveText("Where do you currently live?");
+  const stored = await page.evaluate((k) => JSON.parse(sessionStorage.getItem(k)!), STORAGE_KEY);
+  expect(stored.answers.D11).toBe(7);
+});
+
+test("larger text makes the statement bigger and is remembered", QUIZ, async ({ page }) => {
   await page.goto("/quiz");
   const h1 = page.getByRole("heading", { level: 1 });
   const before = await h1.evaluate((e) => parseFloat(getComputedStyle(e).fontSize));
@@ -87,7 +113,7 @@ test("larger text makes the statement bigger and is remembered", async ({ page }
   await expect(page.getByRole("button", { name: "Larger text" })).toHaveAttribute("aria-pressed", "true");
 });
 
-test("trust grid: one row at a time, answered rows listed with Change", async ({ page }) => {
+test("trust grid: one row at a time, answered rows listed with Change", QUIZ, async ({ page }) => {
   await openQuizAt(page, seedFor("disagree_first"), "D4");
   const rows = content.itemsById.get("D4")!.rows;
   await expect(page.getByText(rows[0], { exact: true })).toBeVisible();
@@ -109,7 +135,7 @@ test("trust grid: one row at a time, answered rows listed with Change", async ({
   await expect(page.getByText(`Question ${n + 1} of 51`)).toBeVisible();
 });
 
-test("free text is optional, limited to 280 characters, and never shown on the result", async ({ page }) => {
+test("free text is optional, limited to 280 characters, and never shown on the result", QUIZ, async ({ page }) => {
   await openQuizAt(page, seedFor("disagree_first"), "D9");
   await expect(page.getByText("Optional. Please leave out names and contact details.")).toBeVisible();
   const box = page.getByRole("textbox");
@@ -122,7 +148,7 @@ test("free text is optional, limited to 280 characters, and never shown on the r
   await expect(page.getByText("My secret words")).toHaveCount(0);
 });
 
-test("the finished quiz is posted for saving, with the quick check when drawn", async ({ page }) => {
+test("the finished quiz is posted for saving, with the quick check when drawn", QUIZ, async ({ page }) => {
   // Seed 34 draws the quick check (lib/quickcheck); nothing is compared.
   const answers = vectors.score_cases.find((x) => x.id === "steward")!.answers;
   const state = { ...newQuiz(34), index: 999, answers, timings: { "C1-01": 90_000 }, finished: true, prediction: { kind: "skipped" } };
@@ -141,7 +167,7 @@ test("the finished quiz is posted for saving, with the quick check when drawn", 
 });
 
 // Needs a database: E2E_DB=1 npm run e2e (the local fmaw_test database, or E2E_DATABASE_URL).
-test("saves to the database and opens the result page", async ({ page }) => {
+test("saves to the database and opens the result page", QUIZ, async ({ page }) => {
   test.skip(process.env.E2E_DB !== "1", "set E2E_DB=1 to run against a database");
   const answers = { "C1-01": 6, "C1-02": 6, "C1-04": 6, "C2-01": 2, "C2-03": 2, "C2-04": 2, D11: 0 };
   const state = { ...newQuiz(5), index: 999, answers, timings: { "C1-01": 90_000 }, finished: true, prediction: { kind: "skipped" } };

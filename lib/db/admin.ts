@@ -24,6 +24,7 @@ import type { AdminRow } from "@/lib/admin/insights";
 import { db } from "./index";
 
 export interface LocationRaw {
+  item_bank_version: string;
   option: number | null;
   all_time: number;
   last_7_days: number;
@@ -202,15 +203,19 @@ export async function readAdminRows(v: Versions): Promise<AdminRow[]> {
   return [...rows];
 }
 
-/** Where people say they live (D11, the option index; null for not answered), all time and the last 7 days. All releases. */
+/**
+ * Where people say they live (D11, the option index; null for not answered), all time and the last 7 days.
+ * All releases, by item bank version, since the options differ between versions.
+ */
 export async function readLocation(): Promise<LocationRaw[]> {
   const sql = db();
   const rows = await sql<LocationRaw[]>`
-    select case when jsonb_typeof(answers -> 'D11') = 'number' then (answers ->> 'D11')::int end as option,
+    select item_bank_version,
+           case when jsonb_typeof(answers -> 'D11') = 'number' then (answers ->> 'D11')::int end as option,
            count(*)::int as all_time,
            count(*) filter (where completed_on >= current_date - 6)::int as last_7_days
     from responses
-    group by 1`;
+    group by 1, 2`;
   return [...rows];
 }
 

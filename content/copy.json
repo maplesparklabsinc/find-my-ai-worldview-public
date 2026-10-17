@@ -1,5 +1,5 @@
 {
-  "copy_version": "0.12.3",
+  "copy_version": "0.13.0",
   "note": "Short site copy, moved from docs/04-methodology-and-disclosure.md and docs/01-product-spec.md section 5. Long pages are in content/pages/*.md. Inline links use markdown. {placeholders} are filled from `placeholders`; a null value must be set before launch.",
   "placeholders": {
     "contact_email": "findmyaiworldview@maplesparklabs.com",
@@ -38,7 +38,7 @@
       "name": "the United Kingdom"
     },
     {
-      "d11_option": "Australia",
+      "d11_option": "Australia or New Zealand",
       "code": "AU",
       "name": "Australia"
     }
@@ -222,6 +222,14 @@
       "version_unreleased": "Version {version}"
     },
     "entries": [
+      {
+        "version": "0.2.0",
+        "date": null,
+        "what": "The 'Where do you live?' question now has regions, so fewer people have to pick 'Somewhere else'.",
+        "why": "Most people outside those countries were landing in 'Somewhere else'.",
+        "based_on": "our own review.",
+        "past_results": "Wording only."
+      },
       {
         "version": "0.1.0",
         "date": null,

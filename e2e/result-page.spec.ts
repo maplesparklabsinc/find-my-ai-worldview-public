@@ -11,7 +11,7 @@ import vectors from "@/reference/test-vectors.json";
 import { getCopy } from "@/lib/content/copy";
 import { screenCount } from "@/lib/form";
 import { STORAGE_KEY, newQuiz } from "@/lib/quiz";
-import { content, failSaving, openUnsavedResult, settled } from "./helpers";
+import { QUIZ, content, failSaving, openUnsavedResult, settled } from "./helpers";
 
 const copy = getCopy();
 const r = copy.results;
@@ -90,7 +90,7 @@ const ROWS: Record<string, string[]> = {
 };
 
 for (const [vector, rows] of Object.entries(ROWS)) {
-  test(`unsaved ${vector} result: hero, six answers, Go deeper rows in order and all closed`, async ({ page }) => {
+  test(`unsaved ${vector} result: hero, six answers, Go deeper rows in order and all closed`, QUIZ, async ({ page }) => {
     await unsaved(page, vector);
     const hs = await headings(page);
     expect(hs[0]).toMatch(/^H1:/);
@@ -201,7 +201,7 @@ test("opening a Go deeper row is counted once per page view", async ({ page }) =
 
 for (const scheme of ["light", "dark"] as const) {
   for (const width of [390, 320]) {
-    test(`axe on the unsaved result with rows closed and open (${scheme}, ${width}px)`, async ({ browser }) => {
+    test(`axe on the unsaved result with rows closed and open (${scheme}, ${width}px)`, scheme === "light" && width === 390 ? QUIZ : {}, async ({ browser }) => {
       const page = await (await browser.newContext({ colorScheme: scheme, viewport: { width, height: 844 } })).newPage();
       if (width === 320) {
         await page.addInitScript(() => document.addEventListener("DOMContentLoaded", () => (document.documentElement.style.fontSize = "200%")));

@@ -104,8 +104,8 @@ function answersFor(c: Content, seed: number, pattern: string, jitter: boolean, 
     let v: AnswerValue | undefined = base[step.key];
     if (v === undefined && step.kind === "item" && !step.sectionConstruct && chance(0.85)) v = extraAnswer(c, step.key);
     if (item.format === "TXT") v = freeText ?? undefined;
-    // The reference vectors all say Canada; spread the made-up people around.
-    if (step.key === "D11" && v !== undefined) v = pick([0, 0, 0, 1, 1, 2, 3, 4]);
+    // The reference vectors all say Canada; spread the made-up people over every option, more in Canada and the US.
+    if (step.key === "D11" && v !== undefined) v = pick([0, 0, 0, 1, 1, ...item.options.keys()]);
     if (jitter && typeof v === "number" && item.format === "L7" && step.kind !== "confidence_probe" && chance(0.2)) {
       v = Math.min(7, Math.max(1, v + pick([-1, 1])));
     }

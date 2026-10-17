@@ -4,7 +4,7 @@ import vectors from "@/reference/test-vectors.json";
 import type { Answers } from "@/lib/scoring";
 import { STORAGE_KEY, goTo, newQuiz } from "@/lib/quiz";
 import { standardSequence } from "@/lib/form";
-import { content, failSaving, openQuizAt, openUnsavedResult, seedFor, settled } from "./helpers";
+import { QUIZ, content, failSaving, openQuizAt, openUnsavedResult, seedFor, settled } from "./helpers";
 
 async function audit(page: Page) {
   await settled(page);
@@ -13,20 +13,22 @@ async function audit(page: Page) {
 }
 
 for (const scheme of ["light", "dark"] as const) {
+  // The quiz set has the light theme; the dark theme and What's changed run with the rest.
+  const quiz = scheme === "light" ? QUIZ : {};
   test.describe(`axe (${scheme})`, () => {
     test.beforeEach(async ({ page }) => {
       await page.emulateMedia({ colorScheme: scheme });
     });
 
     for (const path of ["/", "/start", "/how-it-works", "/privacy", "/changes", "/feedback"]) {
-      test(path, async ({ page }) => {
+      test(path, path === "/changes" ? {} : quiz, async ({ page }) => {
         await page.goto(path);
         await audit(page);
       });
     }
 
     for (const key of ["C5-05", "S1", "D3:C1", "C3-T1", "D11", "D4", "D9"]) {
-      test(`quiz at ${key}`, async ({ page }) => {
+      test(`quiz at ${key}`, quiz, async ({ page }) => {
         await openQuizAt(page, seedFor("disagree_first"), key);
         await audit(page);
       });
@@ -34,7 +36,7 @@ for (const scheme of ["light", "dark"] as const) {
 
     // One result page per outcome type, from the reference vectors.
     for (const id of ["steward", "mixed_between", "mixed_unmatched", "undecided_confidence", "undecided_coverage", "indifferent"]) {
-      test(`result: ${id}`, async ({ page }) => {
+      test(`result: ${id}`, quiz, async ({ page }) => {
         const v = vectors.score_cases.find((x) => x.id === id)!;
         const steps = standardSequence(content, 5).steps;
         const s = { ...goTo({ ...newQuiz(5), answers: v.answers as Answers }, steps.length, steps.length), prediction: { kind: "skipped" } };
@@ -50,7 +52,7 @@ for (const scheme of ["light", "dark"] as const) {
       });
     }
 
-    test("quick check and save failed", async ({ page }) => {
+    test("quick check and save failed", quiz, async ({ page }) => {
       const steps = standardSequence(content, 34).steps;
       const v = vectors.score_cases.find((x) => x.id === "steward")!;
       const s = { ...goTo({ ...newQuiz(34), answers: v.answers as Answers }, steps.length, steps.length), prediction: { kind: "skipped" } };

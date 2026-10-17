@@ -84,7 +84,7 @@ One screen, readable in 20 seconds:
 
 ### 5.4 A few about you
 
-D11 country, D1 how often you use AI, D2 how well you understand it, D4 trust grid, D6 lived benefit, D7 lived harm, D8 importance, D9 "In a few words, how would you describe your view of AI?" (optional, free text). Introduced with: "Last few. These don't change your result; they help us understand everyone's answers." Asked at the end so the quiz starts with the interesting part. The intro sits in a tinted box above the first of these questions.
+D11 where you currently live (the four countries with published polls, plus regions and "Somewhere else"), D1 how often you use AI, D2 how well you understand it, D4 trust grid, D6 lived benefit, D7 lived harm, D8 importance, D9 "In a few words, how would you describe your view of AI?" (optional, free text). Introduced with: "Last few. These don't change your result; they help us understand everyone's answers." Asked at the end so the quiz starts with the interesting part. The intro sits in a tinted box above the first of these questions.
 
 - D4 trust grid: never a table on phones. One screen, one row at a time: the row name as the heading, styled like a question, with the shared question smaller and muted above it, and "2 of 4" beside the row name; the four options as rows, auto-advance to the next unanswered row after about 400 ms. Answered rows are listed underneath with their answer and "Change". It counts as one question in the progress count.
 - D9 free text: optional, 280 characters at most, with the hint "Optional. Please leave out names and contact details." The button reads "See my result". Free text is never shown on any result page, view or export summary; it is read in the database and on the private `/admin` response page, with any email address masked (issue #51).
@@ -114,7 +114,7 @@ One scrolling page, laid out as the "Result page v2" boards on the screens canva
    - **What stands out**: the defining tension sentence (or the `no_tension` sentence).
    - **Something to talk about**: the perspective's discussion prompt.
    - **Common ground**: "Like most {perspective}, you agree that…", "You and {far perspective} are far apart overall, but you agree that…", "Unlike most {perspective}, you don't agree that…".
-   - **You and others**: two or three base-rate figures for the person's country from `content/base-rates.json`, each with source, year and population in small type.
+   - **You and others**: two or three base-rate figures for the person's country from `content/base-rates.json` (for a region or "Somewhere else", figures from one of those countries, marked as such), each with source, year and population in small type.
    - **Help us get this right** (owner): **Which fits you better?** after Not at all, A little or Somewhat (the other six perspectives, name and tagline, plus "None of these" and "My own mix"); **Check your six answers** (collapsed): under each track, "Is this about right?" with "About right", "I'm further toward {low}", "I'm further toward {high}"; "Something off? Tell us" links to the feedback form with the result ID attached (only if they choose).
    - **Why did I get this?**: the plain-language explanation from `narratives.json`, a link to How this works, and the early-version note.
 9. **Take the quiz again** (owner): a link. A saved result keeps its link, so it just clears any progress and goes to Before you start; an unsaved one asks first, on the page. Visitors get the "Where would you land?" box again instead.
