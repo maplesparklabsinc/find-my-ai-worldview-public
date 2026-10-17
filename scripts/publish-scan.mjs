@@ -2,7 +2,7 @@
 // committed to the public repo (issue #43). Pure apart from reading the folder,
 // so it can be tested on a fixture. A finding names the file, line and kind,
 // never the matched text.
-import { readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join, relative, sep } from "node:path";
 
 /** The only addresses the public snapshot may contain. */
@@ -25,6 +25,8 @@ export const PATTERNS = [
 const POSTGRES_URL = /postgres(?:ql)?:\/\/(?:[^\s@/]*@)?(\[[^\]\s]*\]|[^\s:/?#'"`]*)/gi;
 // The local Docker database (docker-compose.yml) listens only on this computer, so its URL is fine to publish.
 const LOCAL_HOSTS = ["localhost", "127.0.0.1"];
+// A template's placeholder host, such as "ep-<name>-pooler.<region>.aws.neon.tech" in .env.example.
+const isPlaceholder = (host) => host.includes("<");
 
 export function emailAllowed(address) {
   const a = address.toLowerCase();
@@ -39,7 +41,7 @@ export function scanText(text) {
       if (!emailAllowed(m[0])) findings.push({ line: i + 1, kind: "email address" });
     }
     for (const m of line.matchAll(POSTGRES_URL)) {
-      if (!LOCAL_HOSTS.includes(m[1].toLowerCase())) findings.push({ line: i + 1, kind: "Postgres connection string" });
+      if (!LOCAL_HOSTS.includes(m[1].toLowerCase()) && !isPlaceholder(m[1])) findings.push({ line: i + 1, kind: "Postgres connection string" });
     }
     for (const p of PATTERNS) if (p.re.test(line)) findings.push({ line: i + 1, kind: p.kind });
   });
@@ -69,6 +71,24 @@ export function scanFolder(dir) {
     for (const f of scanText(buf.toString("utf8"))) findings.push({ file, ...f });
   }
   return findings;
+}
+
+// A file name in backticks: a path with a folder, or a file with one of these extensions
+// (so `.env.local`, which the reader makes, and `127.0.0.1` aren't taken for files).
+const NAMED_FILE = /^(\.?[\w.-]+\/)+[\w.-]*$|^\.?[\w.-]+\.(md|json|csv|py|mjs|js|ts|tsx|txt|yml|yaml|sql|example)$|^LICENSE$/;
+
+/** Files and folders README.md names in backticks that aren't in the folder: [{ line, name }]. */
+export function missingReadmeFiles(dir) {
+  if (!existsSync(join(dir, "README.md"))) return [{ line: 0, name: "README.md" }];
+  const out = [];
+  readFileSync(join(dir, "README.md"), "utf8")
+    .split("\n")
+    .forEach((line, i) => {
+      for (const [, name] of line.matchAll(/`([^`\s]+)`/g)) {
+        if (NAMED_FILE.test(name) && !existsSync(join(dir, name))) out.push({ line: i + 1, name });
+      }
+    });
+  return out;
 }
 
 /**

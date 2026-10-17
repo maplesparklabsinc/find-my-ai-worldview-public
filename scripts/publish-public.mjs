@@ -12,7 +12,7 @@ import { execFileSync } from "node:child_process";
 import { cpSync, existsSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { listFiles, opsWarnings, scanFolder } from "./publish-scan.mjs";
+import { listFiles, missingReadmeFiles, opsWarnings, scanFolder } from "./publish-scan.mjs";
 
 const root = new URL("..", import.meta.url).pathname;
 const AUTHOR = { name: "Maple Spark Labs", email: "findmyaiworldview@maplesparklabs.com" };
@@ -71,7 +71,9 @@ const rules = [...new Set([...ALWAYS_EXCLUDED, ...listed])];
 const matches = (file, rule) => (rule.endsWith("/") ? file.startsWith(rule) : file === rule);
 const excluded = [];
 for (const file of listFiles(out)) {
-  const isEnv = file.split("/").pop().startsWith(".env");
+  // .env.example is the template the README points to; every other .env* file stays out.
+  const name = file.split("/").pop();
+  const isEnv = name.startsWith(".env") && name !== ".env.example";
   if (isEnv || rules.some((r) => matches(file, r))) {
     excluded.push(file);
     rmSync(join(out, file));
@@ -100,6 +102,7 @@ rmSync(join(report, ".."), { recursive: true, force: true });
 // --- 5. Files the public repo needs and this one doesn't
 if (!existsSync(join(out, "content/LICENSE"))) findings.push("content/LICENSE  missing (the content licence)");
 writeFileSync(join(out, "NOTICE.md"), NOTICE);
+for (const m of missingReadmeFiles(out)) findings.push(`README.md:${m.line}  names ${m.name}, which isn't in the snapshot`);
 
 // --- What changes against the last public commit
 function changes() {
@@ -126,7 +129,22 @@ const v = {
 };
 const d = new Date();
 const today = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-const subject = `Release ${v.scoring}-${v.taxonomy}-${v.items}-${v.narratives} (${today})`;
+const label = `${v.scoring}-${v.taxonomy}-${v.items}-${v.narratives}`;
+// A repeat publish of the same release says so: "(<date>, update N)", where N counts
+// the commits of this release already at the tip of the clone.
+let updates = 0;
+if (to) {
+  try {
+    const subjects = execFileSync("git", ["-C", to, "log", "--format=%s", "HEAD"], { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
+    for (const s of subjects.trim().split("\n")) {
+      if (!s.startsWith(`Release ${label} (`)) break;
+      updates++;
+    }
+  } catch {
+    // An empty clone: no commits yet.
+  }
+}
+const subject = `Release ${label} (${today}${updates > 0 ? `, update ${updates}` : ""})`;
 const body = `Copy version ${v.copy}.\nPrivate commit ${short}.`;
 
 // --- 7. Summary

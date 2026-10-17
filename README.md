@@ -32,16 +32,23 @@ python3 -I reference/make_test_vectors.py
 
 Edit the generator, not the generated files.
 
-## Local database
+## Development database
 
-Development and database tests use Postgres in Docker on your computer, filled with made-up data. Docker must be running.
+Development uses a database with made-up data only, never a copy of real answers. There are two ways to run one.
+
+**A hosted development database (no install).** Any hosted Postgres works, such as a free Neon project.
+
+1. Create the project, and put its connection string in `.env.local` as `DATABASE_URL`. Copy `.env.example` to start.
+2. Add the database's host name, without the user name or password, as `SEED_ALLOWED_HOST`. This is the one hosted database the seed may write to.
+3. Run `npm run db:migrate`, then `npm run db:seed`, then `npm run dev`. Set `ADMIN_PASSWORD` to anything to open `/admin`.
+
+**Postgres in Docker (fully offline).** Docker must be running.
 
 1. `npm run db:up` starts it (on `127.0.0.1:54329`, reachable only from this computer) and runs the migrations on its two databases: `fmaw_dev` for `npm run dev`, and `fmaw_test` for `E2E_DB=1 npm run e2e`, which can wipe it freely.
-2. `npm run db:seed` fills `fmaw_dev` with about 60 made-up responses, research sign-ups and feedback (addresses at example.com only). It empties those tables first, so running it again gives the same data.
-3. Copy `.env.example` to `.env.local`; its `DATABASE_URL` already points at `fmaw_dev`. Set `ADMIN_PASSWORD` to anything to open `/admin`.
-4. `npm run dev`.
+2. Copy `.env.example` to `.env.local`; its `DATABASE_URL` already points at `fmaw_dev`. Set `ADMIN_PASSWORD` to anything to open `/admin`.
+3. `npm run db:seed`, then `npm run dev`.
 
-`npm run db:reset` drops and recreates both databases, migrates them and seeds `fmaw_dev`. `npm run db:down` stops the database and keeps its data. `db:seed` and `db:reset` refuse to run unless `DATABASE_URL` points at the local database, so they can never change a real one. Never copy production data into it.
+`npm run db:seed` fills the database with about 60 made-up responses, research sign-ups and feedback (addresses at example.com only). It empties those tables first, so running it again gives the same data. It refuses anything but the local database or the host in `SEED_ALLOWED_HOST`. `npm run db:reset` drops and recreates both local databases, migrates them and seeds `fmaw_dev`; it's local only. `npm run db:down` stops the local database and keeps its data. The production connection string never goes in `.env.local`.
 
 ## Load test
 

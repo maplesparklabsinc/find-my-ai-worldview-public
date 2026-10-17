@@ -33,3 +33,5 @@ See `decisions.md`. Headlines: working name Find My AI Worldview on a Maple Spar
 | `../research/item-bank.csv` | item bank v0.3 |
 
 Working research documents (the Stage 0 review, the interview guide and notes) are kept privately; the published sources are in `research/evidence-ledger.csv`.
+
+In source notes, 'handoff' means the early AI-drafted plan the project started from.
