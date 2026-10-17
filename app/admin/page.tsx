@@ -13,6 +13,7 @@ import { FEW, buildDashboard, countOf, plural } from "@/lib/admin";
 import { adminPassword } from "@/lib/admin/gate";
 import { guessMatch, guessSummary } from "@/lib/admin/guess";
 import { alsoBetweenWith, betweenPairs, flaggedTile, location, qualityByRow, sharing, themeSpread, worldMap } from "@/lib/admin/insights";
+import { rulesLine } from "@/lib/admin/scope";
 import { contentVersions, getContent } from "@/lib/content";
 import { getCopy } from "@/lib/content/copy";
 import { optionsByItemBank } from "@/lib/content/release";
@@ -44,8 +45,10 @@ async function Overview() {
   const copy = getCopy();
   const versions = contentVersions(content);
   const [raw, rows, loc, share, d11] = await Promise.all([
-    readAdmin(versions),
-    readAdminRows(versions),
+    // Results, themes, the flagged tile, the guess line and the early note count
+    // every response under the live result rules, whatever the wording (issue #89).
+    readAdmin(versions, "rules"),
+    readAdminRows(versions, "rules"),
     readLocation(),
     readSharing(),
     optionsByItemBank("D11"),
@@ -78,7 +81,7 @@ async function Overview() {
             Everyone here chose to take the quiz, so these numbers describe them, not any population. Days are UTC.
             {early ? "" : " Groups with fewer than 30 people are marked; read them lightly."}
           </p>
-          {early && <EarlyNote />}
+          {early && <EarlyNote scope="rules" />}
           <p className="text-base">
             <Link href="/admin/research">Research checks</Link> has the method and question checks.{" "}
             <Link href="/admin/responses">Single responses</Link> are listed without email addresses.
@@ -99,13 +102,13 @@ async function Overview() {
             <Tile
               label="Flagged for a look"
               value={flagged.n}
-              note={`${flagged.pct} of current content. Rushed or the same answer throughout. See the list.`}
+              note={`${flagged.pct} under the current result rules. Rushed or the same answer throughout. See the list.`}
               href="/admin/responses?check=flagged"
             />
           </div>
           <p className="text-base">
             {guess.guessed === 0 ? (
-              "Guessed their result: no guesses yet on current content."
+              "Guessed their result: no guesses yet under the current result rules."
             ) : (
               <>
                 Guessed their result: <span className="font-bold">{pct(guess.yes, guess.guessed)}</span> of those who guessed (
@@ -119,8 +122,8 @@ async function Overview() {
           <PerDay d={d} />
           <Location rows={where} map={worldMap(where)} />
         </div>
-        <Outcomes d={d} pairs={betweenPairs(content, rows)} also={(name) => also.get(names.get(name) ?? "") ?? ""} early={early} />
-        <Themes themes={themeSpread(content, rows)} early={early} />
+        <Outcomes d={d} rules={rulesLine(versions)} pairs={betweenPairs(content, rows)} also={(name) => also.get(names.get(name) ?? "") ?? ""} early={early} />
+        <Themes themes={themeSpread(content, rows)} rules={rulesLine(versions)} early={early} />
         <Feedback d={d} />
         <SharingCard s={sharing(share)} />
       </main>
@@ -128,7 +131,7 @@ async function Overview() {
       <p className="max-w-[47.5rem] text-sm text-ink-muted">
         Read only. No single person&apos;s answers are shown on this page (Responses has them), and no email addresses,
         including any typed into feedback. Replying to feedback isn&apos;t set up yet.
-        Older content versions are counted in the totals, per day, location and sharing, but left out of the rest.
+        Older content versions are counted in the totals, per day, location and sharing, and in results and themes while the result rules are unchanged.
       </p>
     </>
   );

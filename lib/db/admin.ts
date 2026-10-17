@@ -19,6 +19,8 @@ import "server-only";
 import { DAYS, RULES_DEPEND_ITEM, type AdminRaw } from "@/lib/admin";
 import type { ResponseDetailRaw, ResponseListRaw } from "@/lib/admin/responses";
 import type { Versions } from "@/lib/content";
+import type postgres from "postgres";
+import { scopeVersions, type Scope } from "@/lib/admin/scope";
 import type { ExportFeedbackRaw, ExportResponseRaw } from "@/lib/admin/export";
 import type { AdminRow } from "@/lib/admin/insights";
 import { db } from "./index";
@@ -37,11 +39,28 @@ export interface SharingRaw {
   top: { id: string; n: number }[];
 }
 
-export async function readAdmin(v: Versions): Promise<AdminRaw> {
+const VERSION_COLUMN: Record<keyof Versions, string> = {
+  scoring: "scoring_version",
+  taxonomy: "taxonomy_version",
+  item_bank: "item_bank_version",
+  narratives: "narratives_version",
+};
+
+/** The where-clause for the responses that count as current under a scope (lib/admin/scope). */
+function inScopeSql(sql: postgres.Sql | postgres.TransactionSql, live: Versions, scope: Scope) {
+  return Object.entries(scopeVersions(live, scope))
+    .map(([k, want]) => sql`${sql(VERSION_COLUMN[k as keyof Versions])} = ${want!}`)
+    .reduce((a, b) => sql`${a} and ${b}`);
+}
+
+/**
+ * The aggregates for the dashboard tabs. `scope` picks which responses the
+ * per-release counts use: the Overview counts by the live result rules, Research
+ * checks by the exact live release (issue #89).
+ */
+export async function readAdmin(v: Versions, scope: Scope = "release"): Promise<AdminRaw> {
   return db().begin("isolation level repeatable read read only", async (sql) => {
-    const current = sql`
-      scoring_version = ${v.scoring} and taxonomy_version = ${v.taxonomy}
-      and item_bank_version = ${v.item_bank} and narratives_version = ${v.narratives}`;
+    const current = inScopeSql(sql, v, scope);
 
     const [
       [today],
@@ -185,8 +204,8 @@ export async function readReleaseTotals(v: Versions): Promise<number[]> {
 // and, from research_contacts and feedback, only whether there is a row and
 // whether an email was left, never the address.
 
-/** The current release's responses, for the cards in lib/admin/insights. */
-export async function readAdminRows(v: Versions): Promise<AdminRow[]> {
+/** The current responses under a scope (see readAdmin), for the cards in lib/admin/insights. */
+export async function readAdminRows(v: Versions, scope: Scope = "release"): Promise<AdminRow[]> {
   const sql = db();
   const rows = await sql<AdminRow[]>`
     select id, completed_on::text, form, seed::float8 as seed, answer_direction,
@@ -197,8 +216,7 @@ export async function readAdminRows(v: Versions): Promise<AdminRow[]> {
            (select coalesce(jsonb_object_agg(k, c -> 'band'), '{}'::jsonb) from jsonb_each(result -> 'constructs') e(k, c)) as bands,
            fit_rating::int, better_fit, quick_check_shown, prediction_kind, prediction_perspectives, outcome_reason
     from responses
-    where scoring_version = ${v.scoring} and taxonomy_version = ${v.taxonomy}
-      and item_bank_version = ${v.item_bank} and narratives_version = ${v.narratives}
+    where ${inScopeSql(sql, v, scope)}
     order by completed_on, id`;
   return [...rows];
 }

@@ -6,6 +6,7 @@
 import type { ReactNode } from "react";
 import { countOf, niceMax, type Dashboard } from "@/lib/admin";
 import { WorldMap } from "@/components/admin-map";
+import type { Scope } from "@/lib/admin/scope";
 import { NumbersToggle } from "@/components/admin-map-client";
 import {
   HEALTH_FIRST_ROWS,
@@ -120,13 +121,23 @@ export function PerDay({ d }: { d: Dashboard }) {
   );
 }
 
-export function Outcomes({ d, pairs, also, early }: { d: Dashboard; pairs: BetweenPair[]; also: (name: string) => string; early: boolean }) {
+/** `rules` is the live result rules, e.g. "scoring 0.4.0, taxonomy 0.3.1" (lib/admin/scope). */
+export function Outcomes({
+  d,
+  rules,
+  pairs,
+  also,
+  early,
+}: {
+  d: Dashboard;
+  rules: string;
+  pairs: BetweenPair[];
+  also: (name: string) => string;
+  early: boolean;
+}) {
   return (
     <Card id="results" title="Results people got">
-      <Note>
-        All time, current content only{d.outcomesTotal > 0 ? ` (${countOf(d.outcomesTotal, "person", "people")})` : ""}. A healthy
-        mix matters more than any one number.
-      </Note>
+      <Note>All time, under the current result rules ({rules}), all wording versions. A healthy mix matters more than any one number.</Note>
       <TableBox label="Results people got">
         <thead>
           <tr>
@@ -488,7 +499,7 @@ export function Location({ rows, map }: { rows: LocationRow[]; map: WorldMapView
   const answered = rows.filter((r) => r.label !== "Not answered").reduce((s, r) => s + r.allTime, 0);
   return (
     <Card id="location" title="Where people live" aside={`All time · ${fmt.format(answered)} answered`}>
-      <Note>From &quot;Where do you currently live?&quot;, as people answered it. Never looked up from an address.</Note>
+      <Note>From &quot;Where do you currently live?&quot;, as people answered it. Never looked up from an address. Russia is drawn with Europe and Central Asia with South Asia; someone living there may have picked Somewhere else.</Note>
       <WorldMap view={map} />
       <NumbersToggle label="Show the numbers">
         <Note>All content versions, each answer under the option it had then (&quot;Australia&quot; under Australia or New Zealand).</Note>
@@ -578,12 +589,12 @@ export function Setup({ lines }: { lines: SetupLine[] }) {
   );
 }
 
-export function Themes({ themes, early }: { themes: ThemeSpread[]; early: boolean }) {
+export function Themes({ themes, rules, early }: { themes: ThemeSpread[]; rules: string; early: boolean }) {
   return (
     <Card id="themes" title="How people spread across each theme">
       <Note>
-        How many people are in each band, from one end to the other, on current content. Counts across people only: no
-        averages and no one&apos;s score.
+        How many people are in each band, from one end to the other, under the current result rules ({rules}), all wording
+        versions. Counts across people only: no averages and no one&apos;s score.
       </Note>
       <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,22rem),1fr))] gap-x-8 gap-y-6">
         {themes.map((t) => (
@@ -710,11 +721,13 @@ export function Health({ rows, pairs, sort, all, early }: { rows: StatementHealt
   );
 }
 
-/** One line under the page heading while current content has fewer than FEW responses. */
-export function EarlyNote() {
+/** One line under the page heading while fewer than FEW responses count as current (`scope`, lib/admin/scope). */
+export function EarlyNote({ scope = "release" }: { scope?: Scope }) {
   return (
     <p role="note" className="max-w-[47.5rem] rounded-md border-2 border-second bg-surface-raised p-3 text-base font-semibold">
-      Fewer than 30 responses on current content. Treat everything below as early.
+      {scope === "rules"
+        ? "Fewer than 30 responses under the current result rules. Treat everything below as early."
+        : "Fewer than 30 responses on current content. Treat everything below as early."}
     </p>
   );
 }

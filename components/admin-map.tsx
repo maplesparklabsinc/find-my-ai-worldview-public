@@ -6,7 +6,7 @@ import worldMapPaths from "@/lib/admin/world-map.json";
 import type { MapAreaName, WorldMapView } from "@/lib/admin/insights";
 import { MapTooltips } from "./admin-map-client";
 
-const paths = worldMapPaths as { width: number; height: number; clipX: number; land: string; areas: Record<MapAreaName, string> };
+const paths = worldMapPaths as { width: number; height: number; clipX: number; areas: Record<MapAreaName, string> };
 
 /** Where each area's number sits: set by hand, since Alaska and Scandinavia pull centroids off. */
 const LABEL_AT: Record<MapAreaName, [number, number]> = {
@@ -46,7 +46,6 @@ export function WorldMap({ view }: { view: WorldMapView }) {
             </clipPath>
           </defs>
           <g clipPath="url(#world-map-clip)">
-            <path d={paths.land} className="fill-map-none stroke-surface-raised" strokeWidth={0.7} aria-hidden="true" />
             {view.areas.map((a) => {
               const [x, y] = LABEL_AT[a.name];
               return (
@@ -94,8 +93,6 @@ export function WorldMap({ view }: { view: WorldMapView }) {
             <span key={s} aria-hidden="true" className={`inline-block size-3.5 rounded-[3px] ${s}`} />
           ))}
           <span>more</span>
-          <span aria-hidden="true" className="ml-2.5 inline-block size-3.5 rounded-[3px] bg-map-none" />
-          <span>not an option</span>
         </p>
       </div>
     </div>

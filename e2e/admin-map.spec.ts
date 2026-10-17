@@ -28,6 +28,10 @@ for (const scheme of ["light", "dark"] as const) {
       await expect(area.locator("text")).toHaveText(String(n));
     }
     await expect(page.getByText("Somewhere else: 2 · Not answered: 4")).toBeVisible();
+    // Every piece of land is part of an area (issue #87): no grey land, no "not an option" key.
+    expect(await map.locator("path").count()).toBe(AREAS.length);
+    await expect(page.getByText("not an option")).toHaveCount(0);
+    await expect(page.getByText("Russia is drawn with Europe and Central Asia with South Asia", { exact: false })).toBeVisible();
 
     // Side by side on a wide screen.
     const perDay = await page.getByRole("region", { name: "Completions per day" }).boundingBox();
