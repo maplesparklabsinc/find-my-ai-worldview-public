@@ -14,6 +14,10 @@ import {
   fitRows,
   flaggedTile,
   location,
+  MAP_AREAS,
+  mapAreaOf,
+  shadeStep,
+  worldMap,
   pairKey,
   parseHealthSort,
   qualityByRow,
@@ -267,7 +271,7 @@ describe("location, sharing and the flagged tile", () => {
     expect(rows.at(-1)).toMatchObject({ allTime: 2, weekPct: "50%" });
   });
 
-  it("location across releases: 0.8.0 answers count under their own labels, and an old-only label gets its own row", async () => {
+  it("location across releases: 0.8.0 answers count under their own labels, and Australia under Australia or New Zealand", async () => {
     const byVersion = await optionsByItemBank("D11");
     expect(byVersion.get("0.8.0")).toEqual(["Canada", "United States", "United Kingdom", "Australia", "Somewhere else"]);
     expect(byVersion.get(c.items.item_bank_version)).toEqual(c.itemsById.get("D11")!.options);
@@ -288,10 +292,51 @@ describe("location, sharing and the flagged tile", () => {
     expect(count("United Kingdom")).toBe(5);
     expect(count("Latin America")).toBe(1);
     expect(count("Somewhere else")).toBe(1);
-    expect(count("Australia or New Zealand")).toBe(0);
-    expect(rows.map((r) => r.label).slice(-2)).toEqual(["Australia", "Not answered"]);
-    expect(count("Australia")).toBe(1);
+    expect(count("Australia or New Zealand")).toBe(1);
+    expect(rows.map((r) => r.label)).toEqual([...c.itemsById.get("D11")!.options, "Not answered"]);
     expect(count("Not answered")).toBe(1);
+  });
+
+  it("map areas: every current answer but Somewhere else, and 0.8.0's labels, by label", async () => {
+    const current = c.itemsById.get("D11")!.options;
+    expect(current.map(mapAreaOf)).toEqual([...MAP_AREAS.slice(0, 2), "Latin America", "United Kingdom", ...MAP_AREAS.slice(4), null]);
+    expect(current.filter((o) => mapAreaOf(o) === null)).toEqual(["Somewhere else"]);
+    const old = (await optionsByItemBank("D11")).get("0.8.0")!;
+    expect(Object.fromEntries(old.map((o) => [o, mapAreaOf(o)]))).toEqual({
+      Canada: "Canada",
+      "United States": "United States",
+      "United Kingdom": "United Kingdom",
+      Australia: "Australia or New Zealand",
+      "Somewhere else": null,
+    });
+    expect(mapAreaOf("Not answered")).toBeNull();
+  });
+
+  it("map shades in five steps: 0-1, 2-4, 5-9, 10-19, 20 or more", () => {
+    expect([0, 1, 2, 4, 5, 9, 10, 19, 20, 500].map(shadeStep)).toEqual([1, 1, 2, 2, 3, 3, 4, 4, 5, 5]);
+  });
+
+  it("world map: every area with its count, the top three in the summary, and the two answers that aren't on it", () => {
+    const v = c.items.item_bank_version;
+    const options = c.itemsById.get("D11")!.options;
+    const at = (label: string) => options.indexOf(label);
+    const view = worldMap(
+      location(c, [
+        { item_bank_version: v, option: at("Canada"), all_time: 31, last_7_days: 9 },
+        { item_bank_version: v, option: at("United States"), all_time: 24, last_7_days: 6 },
+        { item_bank_version: v, option: at("South Asia"), all_time: 7, last_7_days: 2 },
+        { item_bank_version: v, option: at("Somewhere else"), all_time: 2, last_7_days: 0 },
+        { item_bank_version: v, option: null, all_time: 4, last_7_days: 1 },
+      ]),
+    );
+    expect(view.areas.map((a) => a.name)).toEqual([...MAP_AREAS]);
+    expect(view.areas[0]).toMatchObject({ allTime: 31, step: 5, description: "Canada: 31, 46% of all time; 9 in the last 7 days (50%)" });
+    expect(view.areas.find((a) => a.name === "Africa")).toMatchObject({ allTime: 0, step: 1 });
+    expect(view.summary).toBe(
+      "World map of where people live, with the number of answers on each area. Most answers: Canada (31), United States (24), South Asia (7).",
+    );
+    expect(view).toMatchObject({ somewhereElse: 2, notAnswered: 4 });
+    expect(worldMap(location(c, [])).summary).toBe("World map of where people live: no answers on the map yet.");
   });
 
   it("sharing and the flagged tile", () => {

@@ -12,7 +12,7 @@ import { EarlyNote, Feedback, Location, Outcomes, PerDay, SharingCard, Themes, T
 import { FEW, buildDashboard, countOf, plural } from "@/lib/admin";
 import { adminPassword } from "@/lib/admin/gate";
 import { guessMatch, guessSummary } from "@/lib/admin/guess";
-import { alsoBetweenWith, betweenPairs, flaggedTile, location, qualityByRow, sharing, themeSpread } from "@/lib/admin/insights";
+import { alsoBetweenWith, betweenPairs, flaggedTile, location, qualityByRow, sharing, themeSpread, worldMap } from "@/lib/admin/insights";
 import { contentVersions, getContent } from "@/lib/content";
 import { getCopy } from "@/lib/content/copy";
 import { optionsByItemBank } from "@/lib/content/release";
@@ -53,6 +53,7 @@ async function Overview() {
   const d = buildDashboard(raw, content, copy, versions);
   const early = rows.length < FEW;
   const flagged = flaggedTile(qualityByRow(content, rows));
+  const where = location(content, loc, d11);
   const also = alsoBetweenWith(content, rows);
   const names = new Map(content.perspectives.perspectives.map((p) => [p.name, p.id]));
   const guess = guessSummary(
@@ -114,14 +115,14 @@ async function Overview() {
           </p>
         </section>
 
-        <PerDay d={d} />
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,28.75rem),1fr))] items-start gap-6">
+          <PerDay d={d} />
+          <Location rows={where} map={worldMap(where)} />
+        </div>
         <Outcomes d={d} pairs={betweenPairs(content, rows)} also={(name) => also.get(names.get(name) ?? "") ?? ""} early={early} />
         <Themes themes={themeSpread(content, rows)} early={early} />
         <Feedback d={d} />
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,28.75rem),1fr))] items-start gap-6">
-          <Location rows={location(content, loc, d11)} />
-          <SharingCard s={sharing(share)} />
-        </div>
+        <SharingCard s={sharing(share)} />
       </main>
 
       <p className="max-w-[47.5rem] text-sm text-ink-muted">

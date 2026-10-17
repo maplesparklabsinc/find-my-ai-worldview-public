@@ -403,11 +403,15 @@ export interface LocationRow {
   weekPct: string;
 }
 
+/** Older option labels that mean a current one: item bank 0.8.0's "Australia" (issue #84). */
+const LOCATION_ALIASES: Record<string, string> = { Australia: "Australia or New Zealand" };
+
 /**
  * Each answer to "Where do you live?" (D11), then "Not answered". Only what people told us.
  * An answer counts under the label it had in its own item bank version (`optionsByItemBank`;
- * the current options if its version isn't there). Today's options come first, then any older
- * label that's no longer an option (e.g. "Australia" before item bank 0.9.0), if anyone chose it.
+ * the current options if its version isn't there), or the current label it maps to
+ * (`LOCATION_ALIASES`). Today's options come first, then any older label that maps to none,
+ * if anyone chose it.
  */
 export function location(
   content: Content,
@@ -415,7 +419,10 @@ export function location(
   optionsByItemBank: ReadonlyMap<string, readonly string[]> = new Map(),
 ): LocationRow[] {
   const options = content.itemsById.get("D11")?.options ?? [];
-  const labelOf = (r: (typeof raw)[number]) => (r.option === null ? undefined : (optionsByItemBank.get(r.item_bank_version) ?? options)[r.option]);
+  const labelOf = (r: (typeof raw)[number]) => {
+    const label = r.option === null ? undefined : (optionsByItemBank.get(r.item_bank_version) ?? options)[r.option];
+    return label === undefined ? undefined : (LOCATION_ALIASES[label] ?? label);
+  };
   const all = raw.reduce((s, r) => s + r.all_time, 0);
   const week = raw.reduce((s, r) => s + r.last_7_days, 0);
   const row = (label: string, rows: typeof raw): LocationRow => {
@@ -428,6 +435,71 @@ export function location(
     ...[...options, ...older].map((label) => row(label, raw.filter((r) => labelOf(r) === label))),
     row("Not answered", raw.filter((r) => labelOf(r) === undefined)),
   ];
+}
+
+/** The answers drawn on the admin world map (issue #84). "Somewhere else" and "Not answered" are listed under it. */
+export const MAP_AREAS = [
+  "Canada",
+  "United States",
+  "Latin America",
+  "United Kingdom",
+  "Elsewhere in Europe",
+  "Middle East",
+  "Africa",
+  "South Asia",
+  "East and Southeast Asia",
+  "Australia or New Zealand",
+] as const;
+export type MapAreaName = (typeof MAP_AREAS)[number];
+
+/** The map area for an answer label from any release, or null for "Somewhere else", "Not answered" and anything unknown. */
+export function mapAreaOf(label: string): MapAreaName | null {
+  const l = LOCATION_ALIASES[label] ?? label;
+  return (MAP_AREAS as readonly string[]).includes(l) ? (l as MapAreaName) : null;
+}
+
+/** The map shade for a count, in five steps: 0–1, 2–4, 5–9, 10–19, 20 or more. */
+export function shadeStep(n: number): 1 | 2 | 3 | 4 | 5 {
+  return n >= 20 ? 5 : n >= 10 ? 4 : n >= 5 ? 3 : n >= 2 ? 2 : 1;
+}
+
+export interface MapArea extends LocationRow {
+  name: MapAreaName;
+  step: 1 | 2 | 3 | 4 | 5;
+  /** For the area's aria-label and its tooltip. */
+  description: string;
+}
+
+export interface WorldMapView {
+  areas: MapArea[];
+  somewhereElse: number;
+  notAnswered: number;
+  /** The map's aria-label: the three areas with the most answers. */
+  summary: string;
+}
+
+/** The world map from the location rows: every map area (zero if nobody chose it), and the two answers that aren't on it. */
+export function worldMap(rows: LocationRow[]): WorldMapView {
+  const empty = { allTime: 0, allPct: "–", week: 0, weekPct: "–" };
+  const byArea = new Map<MapAreaName, Omit<LocationRow, "label">>();
+  for (const r of rows) {
+    const area = mapAreaOf(r.label);
+    if (area && !byArea.has(area)) byArea.set(area, r);
+  }
+  const areas = MAP_AREAS.map((name): MapArea => {
+    const r = byArea.get(name) ?? empty;
+    const description = `${name}: ${r.allTime}, ${r.allPct} of all time; ${r.week} in the last 7 days (${r.weekPct})`;
+    return { label: name, allTime: r.allTime, allPct: r.allPct, week: r.week, weekPct: r.weekPct, name, step: shadeStep(r.allTime), description };
+  });
+  const count = (label: string) => rows.find((r) => r.label === label)?.allTime ?? 0;
+  const top = areas
+    .filter((a) => a.allTime > 0)
+    .sort((a, b) => b.allTime - a.allTime || MAP_AREAS.indexOf(a.name) - MAP_AREAS.indexOf(b.name))
+    .slice(0, 3);
+  const summary = top.length
+    ? `World map of where people live, with the number of answers on each area. Most answers: ${top.map((a) => `${a.name} (${a.allTime})`).join(", ")}.`
+    : "World map of where people live: no answers on the map yet.";
+  return { areas, somewhereElse: count("Somewhere else"), notAnswered: count("Not answered"), summary };
 }
 
 // ---------- Section 7: sharing ----------

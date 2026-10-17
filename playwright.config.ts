@@ -29,6 +29,7 @@ export default defineConfig({
     url: `http://localhost:${PORT}`,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
-    env: testDatabase,
+    // /dev/admin-map, the world map with made-up numbers (e2e/admin-map.spec.ts).
+    env: { ...testDatabase, ENABLE_DEV_PAGE: "1" },
   },
 });

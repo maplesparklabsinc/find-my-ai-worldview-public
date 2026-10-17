@@ -5,6 +5,8 @@
 // Copy here is founder-facing UI, not public site copy.
 import type { ReactNode } from "react";
 import { countOf, niceMax, type Dashboard } from "@/lib/admin";
+import { WorldMap } from "@/components/admin-map";
+import { NumbersToggle } from "@/components/admin-map-client";
 import {
   HEALTH_FIRST_ROWS,
   worstBothAgree,
@@ -17,6 +19,7 @@ import {
   type Sharing,
   type StatementHealth,
   type ThemeSpread,
+  type WorldMapView,
 } from "@/lib/admin/insights";
 
 const fmt = new Intl.NumberFormat("en-CA");
@@ -480,40 +483,46 @@ export function Fit({ rows, early }: { rows: FitRow[]; early: boolean }) {
   );
 }
 
-export function Location({ rows }: { rows: LocationRow[] }) {
+/** The world map, then the exact numbers under "Show the numbers" (open by default on phones). */
+export function Location({ rows, map }: { rows: LocationRow[]; map: WorldMapView }) {
+  const answered = rows.filter((r) => r.label !== "Not answered").reduce((s, r) => s + r.allTime, 0);
   return (
-    <Card id="location" title="Where people live">
-      <Note>From &quot;Where do you currently live?&quot;, as people answered it. All content versions, each answer under the option it had then. Never looked up from an address.</Note>
-      <TableBox label="Where people live">
-        <thead>
-          <tr>
-            <th scope="col">Answer</th>
-            <th scope="col" className="text-right!">
-              All time
-            </th>
-            <th scope="col" className="text-right!">
-              Share
-            </th>
-            <th scope="col" className="text-right!">
-              Last 7 days
-            </th>
-            <th scope="col" className="text-right!">
-              Share
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((r) => (
-            <tr key={r.label}>
-              <td className={r.label === "Not answered" ? "text-ink-muted italic" : ""}>{r.label}</td>
-              <td className={num}>{fmt.format(r.allTime)}</td>
-              <td className={num}>{r.allPct}</td>
-              <td className={num}>{fmt.format(r.week)}</td>
-              <td className={num}>{r.weekPct}</td>
+    <Card id="location" title="Where people live" aside={`All time · ${fmt.format(answered)} answered`}>
+      <Note>From &quot;Where do you currently live?&quot;, as people answered it. Never looked up from an address.</Note>
+      <WorldMap view={map} />
+      <NumbersToggle label="Show the numbers">
+        <Note>All content versions, each answer under the option it had then (&quot;Australia&quot; under Australia or New Zealand).</Note>
+        <TableBox label="Where people live: the numbers">
+          <thead>
+            <tr>
+              <th scope="col">Answer</th>
+              <th scope="col" className="text-right!">
+                All time
+              </th>
+              <th scope="col" className="text-right!">
+                Share
+              </th>
+              <th scope="col" className="text-right!">
+                Last 7 days
+              </th>
+              <th scope="col" className="text-right!">
+                Share
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </TableBox>
+          </thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr key={r.label}>
+                <td className={r.label === "Not answered" ? "text-ink-muted italic" : ""}>{r.label}</td>
+                <td className={num}>{fmt.format(r.allTime)}</td>
+                <td className={num}>{r.allPct}</td>
+                <td className={num}>{fmt.format(r.week)}</td>
+                <td className={num}>{r.weekPct}</td>
+              </tr>
+            ))}
+          </tbody>
+        </TableBox>
+      </NumbersToggle>
     </Card>
   );
 }
