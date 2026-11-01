@@ -3,13 +3,13 @@
 // take the quiz and compare (issue #37): the quiz they start is linked to this
 // result, as a compare link (/c/{id}) is. A result taken that way opens with
 // the comparison; /r/{friendId}?vs={originalId} is that comparison seen by the
-// person who shared the result.
+// person who shared the result. Visitors see a shorter view: the result's name
+// and tagline and its six tracks, between two invitations (issue #91).
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { Inline } from "@/components/markdown";
 import {
-  CompareBar,
   DeeperRow,
   FitCard,
   HelpUs,
@@ -21,11 +21,11 @@ import {
   ShareBox,
   TakeAgain,
   TakeIt,
-  VisitorCompare,
 } from "@/components/results/actions";
 import { Comparison } from "@/components/results/comparison";
 import { ResultBody } from "@/components/results/result-view";
 import { ResultShell } from "@/components/results/shell";
+import { VisitorResult } from "@/components/results/visitor";
 import { cardAlt } from "@/components/share-card";
 import { LinkButton } from "@/components/ui";
 import { fill, getCopy } from "@/lib/content/copy";
@@ -83,7 +83,7 @@ async function StoredResult({ params, searchParams }: Pick<PageProps<"/r/[id]">,
 
   const other = row.compared_with ? await loadResponse(row.compared_with) : null;
   const them = other ? await shown(other) : null;
-  // At the very end of the page, for owner and visitor alike (issue #37).
+  // At the very end of the owner's page (issue #37); not on the visitor's view (issue #91).
   const banner = (me.outdated || them?.outdated) && (
     <p className="rounded-md border border-line bg-surface-raised p-4 type-small [&_a]:text-ink">
       <Inline text={copy.result_page.old_version} />
@@ -140,78 +140,66 @@ async function StoredResult({ params, searchParams }: Pick<PageProps<"/r/[id]">,
 
   const themName = copy.compare.friend_fallback;
   const cmp = them ? comparison(me, them) : null;
-  const before = (
-    <>
-      {shared}
-      <OwnerOnly id={id} otherwise={<VisitorCompare id={id} place="top" />}>
-        {null}
-      </OwnerOnly>
-      {them?.view && cmp && <Comparison you={view} them={them.view} themName={themName} view={cmp} />}
-    </>
+
+  // The owner's page, unchanged; anyone else gets the shorter visitor view
+  // (issue #91). Neither shows until the page knows which, so the owner never
+  // sees the visitor's view flash on load.
+  const ownerView = (
+    <ResultBody
+      view={view}
+      before={them?.view && cmp && <Comparison you={view} them={them.view} themName={themName} view={cmp} />}
+      afterTop={
+        <>
+          <PredictionReflection id={id} outcome={me.result.outcome} />
+          {them && <SendBack id={id} vs={them.row.id} name={themName} />}
+        </>
+      }
+      owner={
+        // Share after the fit questions, so people share once they've judged their result (issue #37).
+        <>
+          <FitCard id={id} />
+          <ShareBox id={id} text={shareText(me.release!.copy, view)} imageAlt={cardAlt({ view, headline: view.headline })} />
+          <ResearchSignup id={id} />
+        </>
+      }
+      help={
+        <DeeperRow section="help" title={copy.fit.section_heading}>
+          <HelpUs
+            id={id}
+            others={me
+              .release!.content.perspectives.perspectives.filter((p) => p.id !== view.perspective?.id)
+              .map(({ id, name, tagline }) => ({ id, name, tagline }))}
+            tracks={view.tracks.flatMap((t) =>
+              t.position === null
+                ? []
+                : [
+                    {
+                      construct: t.construct,
+                      question: t.question,
+                      low: t.lowLabel,
+                      high: t.highLabel,
+                      position: t.position,
+                      bandText: t.bandText,
+                    },
+                  ],
+            )}
+          />
+        </DeeperRow>
+      }
+      end={
+        <>
+          <TakeAgain saved />
+          {banner}
+        </>
+      }
+    />
   );
 
   return (
     <ReadOnlyView on={readOnly}>
-      <ResultBody
-        view={view}
-        before={before}
-        afterTop={
-          <OwnerOnly id={id}>
-            <PredictionReflection id={id} outcome={me.result.outcome} />
-            {them && <SendBack id={id} vs={them.row.id} name={themName} />}
-          </OwnerOnly>
-        }
-        owner={
-          // Share after the fit questions, so people share once they've judged their result (issue #37).
-          <OwnerOnly id={id}>
-            <FitCard id={id} />
-            <ShareBox id={id} text={shareText(me.release!.copy, view)} imageAlt={cardAlt({ view, headline: view.headline })} />
-            <ResearchSignup id={id} />
-          </OwnerOnly>
-        }
-        help={
-          <OwnerOnly id={id}>
-            <DeeperRow section="help" title={copy.fit.section_heading}>
-              <HelpUs
-                id={id}
-                others={me
-                  .release!.content.perspectives.perspectives.filter((p) => p.id !== view.perspective?.id)
-                  .map(({ id, name, tagline }) => ({ id, name, tagline }))}
-                tracks={view.tracks.flatMap((t) =>
-                  t.position === null
-                    ? []
-                    : [
-                        {
-                          construct: t.construct,
-                          question: t.question,
-                          low: t.lowLabel,
-                          high: t.highLabel,
-                          position: t.position,
-                          bandText: t.bandText,
-                        },
-                      ],
-                )}
-              />
-            </DeeperRow>
-          </OwnerOnly>
-        }
-        end={
-          <>
-            <OwnerOnly
-              id={id}
-              otherwise={
-                <>
-                  <VisitorCompare id={id} place="end" />
-                  <CompareBar id={id} />
-                </>
-              }
-            >
-              <TakeAgain saved />
-            </OwnerOnly>
-            {banner}
-          </>
-        }
-      />
+      <OwnerOnly id={id} otherwise={<VisitorResult id={id} view={view} />} pending={<Loading />}>
+        {ownerView}
+      </OwnerOnly>
     </ReadOnlyView>
   );
 }

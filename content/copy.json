@@ -1,5 +1,5 @@
 {
-  "copy_version": "0.13.0",
+  "copy_version": "0.14.0",
   "note": "Short site copy, moved from docs/04-methodology-and-disclosure.md and docs/01-product-spec.md section 5. Long pages are in content/pages/*.md. Inline links use markdown. {placeholders} are filled from `placeholders`; a null value must be set before launch.",
   "placeholders": {
     "contact_email": "findmyaiworldview@maplesparklabs.com",
@@ -289,6 +289,9 @@
     "take_it_button": "Take the quiz yourself",
     "compare_body": "Take the quiz ({n} questions, about 10 minutes) and see where you and the person who shared this agree and differ.",
     "compare_button": "Take the quiz and compare",
+    "visitor_label": "Their result",
+    "visitor_tracks_heading": "Where they landed on six questions",
+    "visitor_tracks_intro": "Where would you put yourself? Take the quiz to see where you and they agree and differ.",
     "again_link": "Take the quiz again",
     "again_unsaved": "Your current result isn't saved, so it will be gone. Start again?",
     "again_confirm": "Start again",

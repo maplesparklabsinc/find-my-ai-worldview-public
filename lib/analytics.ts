@@ -20,6 +20,10 @@ type Events = {
   /** A "Go deeper" row on a result page opened for the first time in this page view (issue #28). */
   result_section_opened: { section: "stands_out" | "talk" | "elsewhere" | "about_p1" | "about_p2" | "common_ground" | "others" | "help" | "why" };
   compare_link_created: undefined;
+  /** A visitor's view of someone's shared result (issue #91), once per page load. Never the owner's own page. */
+  shared_result_viewed: undefined;
+  /** A "Take the quiz and compare" button on a shared result: the top box, the end box, or the phone bar. Visitors only, never the owner. */
+  compare_cta_clicked: { position: "top" | "bottom" | "bar" };
   compare_started: undefined;
   compare_completed: undefined;
   research_email_left: undefined;

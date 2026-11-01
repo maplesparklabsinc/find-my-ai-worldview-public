@@ -117,12 +117,13 @@ for (const place of ["top", "bar", "end"] as const) {
     const path = await save(page, "steward", 4242);
     const friend = await friendBrowser(browser);
     await friend.goto(`${path}?view=shared`);
-    await friend.getByRole("heading", { level: 2, name: copy.results.six_answers }).waitFor();
+    await friend.getByRole("heading", { level: 2, name: copy.result_page.visitor_tracks_heading }).waitFor();
     const buttons = friend.getByRole("button", { name: copy.result_page.compare_button });
     let button = buttons.first();
     if (place === "bar") {
-      await friend.getByRole("heading", { level: 2, name: copy.results.six_answers }).scrollIntoViewIfNeeded();
-      await friend.evaluate(() => window.scrollBy(0, 200));
+      // The visitor's view is short: on a smaller screen, the middle of the six tracks has neither box in view.
+      await friend.setViewportSize({ width: 390, height: 480 });
+      await friend.getByText(content.narratives.constructs.C3.question).evaluate((el) => el.scrollIntoView({ block: "center" }));
       button = friend.getByTestId("compare-bar").getByRole("button");
       await expect(button).toBeVisible();
     } else if (place === "end") {
@@ -139,7 +140,7 @@ test("the shared link is read-only, even in the browser that saved the result", 
   await expect(page.getByRole("heading", { name: copy.share.heading })).toBeVisible();
   // ...and the link they share shows exactly what a friend sees.
   await page.goto(`${path}?view=shared`);
-  await page.getByRole("heading", { level: 2, name: copy.results.six_answers }).waitFor();
+  await page.getByRole("heading", { level: 2, name: copy.result_page.visitor_tracks_heading }).waitFor();
   await expect(page.getByText(copy.result_page.shared_anonymous)).toBeVisible();
   // The top and end boxes; the phone bar stays hidden while the top box is on screen.
   await expect(page.getByRole("region", { name: copy.result_page.take_it_heading })).toHaveCount(2);
@@ -152,7 +153,7 @@ test("the shared link is read-only, even in the browser that saved the result", 
 
   // Pasted from a share menu that copies the text too: still read-only.
   await page.goto(`${path}?view=shared%20I%20landed%20closest%20to%20Stewards`);
-  await page.getByRole("heading", { level: 2, name: copy.results.six_answers }).waitFor();
+  await page.getByRole("heading", { level: 2, name: copy.result_page.visitor_tracks_heading }).waitFor();
   await expect(page.getByRole("heading", { name: copy.research_consent.heading })).toHaveCount(0);
   await expect(page.getByText(copy.result_page.shared_anonymous)).toBeVisible();
 });
@@ -233,41 +234,165 @@ test("only the browser that saved a result can change it (edit token)", async ({
   expect((await request.post("/api/research-contact", { data: { ...consent, email: "owner@example.com" }, headers: own })).status()).toBe(204);
 });
 
-test("a visitor sees the result without the owner's controls", async ({ page, browser }) => {
+test("a visitor sees the shorter view, without the owner's controls or Go deeper", async ({ page, browser }) => {
   const path = await save(page, "steward", 4242);
   const visitor = await (await browser.newContext()).newPage();
   await visitor.goto(path);
-  await expect(visitor.getByRole("heading", { name: copy.results.six_answers })).toBeVisible();
+  await expect(visitor.getByRole("heading", { name: copy.result_page.visitor_tracks_heading })).toBeVisible();
   await expect(visitor.getByRole("heading", { name: copy.result_page.take_it_heading })).toHaveCount(2);
   await expect(visitor.getByText(copy.fit.section_heading, { exact: true })).toHaveCount(0);
   await expect(visitor.getByRole("heading", { name: copy.share.heading })).toHaveCount(0);
-  // Visitors see "Elsewhere you might hear" too (issue #39).
-  await expect(visitor.locator("summary", { hasText: copy.results.elsewhere })).toHaveCount(1);
+  // Issue #91: Go deeper and the earlier-version note are the owner's only.
+  await expect(visitor.getByRole("heading", { name: copy.results.go_deeper })).toHaveCount(0);
+  await expect(visitor.locator("summary")).toHaveCount(0);
+  await expect(visitor.getByText(copy.result_page.old_version.slice(0, 40))).toHaveCount(0);
+  await audit(visitor);
 });
 
-// A shared result reads the same for a visitor as for its owner, with a banner
-// on top saying it was shared (issue #37: a mix of "you" and "they" confused people).
-for (const vector of ["steward", "mixed_between", "all_neither_settled"] as const) {
-  test(`a shared ${vector} result: the banner for visitors, and the owner's wording for everyone`, async ({ page, browser }) => {
-    await page.setViewportSize({ width: 390, height: 844 });
+// Issue #91: visitors see the sharer's result by name and tagline only, then
+// the six tracks, between two invitations; nothing on the page speaks to them
+// as if the result were theirs. The owner's page is unchanged.
+const visitorCases = [
+  { vector: "steward", outcome: "matched" },
+  { vector: "mixed_between", outcome: "mixed_between" },
+  { vector: "mixed_unmatched", outcome: "mixed_unmatched" },
+  { vector: "undecided_confidence", outcome: "undecided" },
+  { vector: "all_neither_settled", outcome: "undecided_middle" },
+  { vector: "indifferent", outcome: "indifferent" },
+] as const;
+const PHONE = { width: 390, height: 660 };
+for (const { vector, outcome } of visitorCases) {
+  test(`a shared ${vector} result: the visitor's shorter view, and the owner's page unchanged`, async ({ page, browser }) => {
+    await page.setViewportSize(PHONE);
     const path = await save(page, vector, 4242);
+    // The owner's page: their own result in full, no visitor parts.
     await expect(page.getByRole("heading", { level: 2, name: copy.results.six_answers })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 2, name: copy.results.go_deeper })).toBeVisible();
     await expect(page.getByText(copy.result_page.shared_anonymous)).toHaveCount(0);
-    const ownerHeadline = await page.getByRole("heading", { level: 1 }).innerText();
+    await expect(page.getByRole("heading", { name: copy.result_page.visitor_tracks_heading })).toHaveCount(0);
+    await expect(page.getByText(copy.result_page.visitor_label, { exact: true })).toHaveCount(0);
 
-    const visitor = await (await browser.newContext({ viewport: { width: 390, height: 844 } })).newPage();
+    const visitor = await (await browser.newContext({ viewport: PHONE })).newPage();
     await visitor.goto(path);
-    await expect(visitor.getByText(copy.result_page.shared_anonymous)).toBeVisible();
-    expect(await visitor.getByRole("heading", { level: 1 }).innerText()).toBe(ownerHeadline);
-    await expect(visitor.getByRole("heading", { level: 2, name: copy.results.six_answers })).toBeVisible();
-    expect(await visitor.locator("main").innerText()).not.toMatch(/\bTheir (result|six answers|closest)\b|\bThey sit\b/);
-    // The banner comes first.
-    const banner = await visitor.getByText(copy.result_page.shared_anonymous).boundingBox();
-    const h1 = await visitor.getByRole("heading", { level: 1 }).boundingBox();
-    expect(banner!.y).toBeLessThan(h1!.y);
+    const tracks = visitor.getByRole("heading", { level: 2, name: copy.result_page.visitor_tracks_heading });
+    await expect(tracks).toBeVisible();
+    await expect(visitor.getByText(copy.result_page.visitor_tracks_intro)).toBeVisible();
+
+    // "Their result", with the name and tagline the share image uses.
+    const card = copy.share.card;
+    const h1 = visitor.getByRole("heading", { level: 1 });
+    const title = await h1.getAttribute("aria-label");
+    expect(title).toMatch(new RegExp(`^${copy.result_page.visitor_label}: `));
+    if (outcome === "matched") {
+      const p = content.perspectives.perspectives.find((x) => x.id === "stewards")!;
+      expect(title).toBe(`${copy.result_page.visitor_label}: ${p.name}`);
+      await expect(visitor.getByText(p.tagline, { exact: true })).toBeVisible();
+      await expect(visitor.getByText(p.description)).toHaveCount(0);
+      await expect(visitor.getByText(copy.results.strongest_objection)).toHaveCount(0);
+    } else if (outcome === "mixed_between") {
+      expect(title).toMatch(/: Between .+ and .+$/);
+      await expect(visitor.getByText(card.subtitle.mixed_between, { exact: true })).toBeVisible();
+    } else {
+      expect(title).toBe(`${copy.result_page.visitor_label}: ${card.title[outcome]}`);
+      await expect(visitor.getByText(card.subtitle[outcome], { exact: true })).toBeVisible();
+    }
+
+    // No "you" or "your" about the sharer's result: only the invitations speak to the visitor.
+    const allowed = [
+      copy.result_page.shared_anonymous,
+      copy.result_page.take_it_heading,
+      copy.result_page.compare_body.replace("{n}", String(screenCount(content))),
+      copy.result_page.compare_button,
+      copy.result_page.visitor_tracks_intro,
+    ];
+    let text = await visitor.locator("main").innerText();
+    for (const a of allowed) text = text.replaceAll(a, "");
+    expect(text).not.toMatch(/\byou(r|rs|rself)?\b/i);
+    for (const hidden of [copy.results.closest_label, copy.results.six_answers, copy.results.go_deeper, copy.results.other_label]) {
+      await expect(visitor.getByText(hidden, { exact: true })).toHaveCount(0);
+    }
+
+    // Order: the notice, the box, the card, the tracks, the box again; the tracks start within two screens.
+    const y = async (l: ReturnType<Page["locator"]>) => (await l.boundingBox())!.y;
+    const boxes = visitor.getByRole("region", { name: copy.result_page.take_it_heading });
+    const order = [
+      await y(visitor.getByText(copy.result_page.shared_anonymous)),
+      await y(boxes.first()),
+      await y(h1),
+      await y(tracks),
+      await y(boxes.last()),
+    ];
+    expect([...order].sort((a, b) => a - b)).toEqual(order);
+    expect(order[3]).toBeLessThan(2 * PHONE.height);
+    await audit(visitor);
     await visitor.context().close();
   });
 }
+
+/** Analytics events sent so far (window.va collects them). */
+async function events(page: Page) {
+  const all = await page.evaluate(() => (window as unknown as { events: [string, { name?: string; data?: unknown }][] }).events);
+  return all.map(([, e]) => ({ name: e?.name, data: e?.data }));
+}
+const collectEvents = (page: Page) =>
+  page.addInitScript(() => {
+    const w = window as unknown as { va: (...a: unknown[]) => void; events: unknown[] };
+    w.events = [];
+    w.va = (...a: unknown[]) => void w.events.push(a);
+  });
+
+/** Click a shared result's compare button: the top box, the end box, or the phone bar (shown mid-page on a smaller phone). */
+async function clickCompare(page: Page, position: "top" | "bottom" | "bar") {
+  const boxes = page.getByRole("region", { name: copy.result_page.take_it_heading });
+  if (position === "bar") {
+    await page.setViewportSize({ width: 390, height: 480 });
+    await page.getByText(content.narratives.constructs.C3.question).evaluate((el) => el.scrollIntoView({ block: "center" }));
+    const bar = page.getByTestId("compare-bar").getByRole("button");
+    await expect(bar).toBeVisible();
+    await bar.click();
+  } else {
+    await (position === "top" ? boxes.first() : boxes.last()).getByRole("button").click();
+  }
+  // A client-side move to /start, so the page's record of events carries over.
+  await page.waitForURL(/\/start$/);
+}
+
+test("only visitors are counted: a view once, and which compare button or the phone bar, never with the result ID (issue #91)", async ({ page, browser }) => {
+  await collectEvents(page);
+  const path = await save(page, "steward", 4242);
+  const id = path.split("/").pop()!;
+  // The owner, on their page and on their own shared link: never counted as a visitor.
+  await expect(page.getByRole("heading", { name: copy.share.heading })).toBeVisible();
+  await page.goto(`${path}?view=shared`);
+  await page.getByRole("heading", { name: copy.result_page.visitor_tracks_heading }).waitFor();
+  await settled(page);
+  expect((await events(page)).filter((e) => e.name === "shared_result_viewed")).toEqual([]);
+  // Nor are their clicks on the compare buttons, from any of the three.
+  for (const position of ["top", "bottom", "bar"] as const) {
+    await page.setViewportSize({ width: 390, height: 660 });
+    await page.goto(`${path}?view=shared`);
+    await page.getByRole("heading", { name: copy.result_page.visitor_tracks_heading }).waitFor();
+    await settled(page);
+    await clickCompare(page, position);
+    const sent = (await events(page)).map((e) => e.name);
+    expect(sent).not.toContain("compare_cta_clicked");
+    expect(sent).not.toContain("shared_result_viewed");
+  }
+
+  for (const position of ["top", "bottom", "bar"] as const) {
+    const visitor = await friendBrowser(browser);
+    await collectEvents(visitor);
+    await visitor.goto(path);
+    await visitor.getByRole("heading", { name: copy.result_page.visitor_tracks_heading }).waitFor();
+    await settled(visitor);
+    expect((await events(visitor)).filter((e) => e.name === "shared_result_viewed")).toHaveLength(1);
+    await clickCompare(visitor, position);
+    const sent = await events(visitor);
+    expect(sent.filter((e) => e.name === "compare_cta_clicked")).toEqual([{ name: "compare_cta_clicked", data: { position } }]);
+    expect(JSON.stringify(sent)).not.toContain(id);
+    await visitor.context().close();
+  }
+});
 
 test("a first name can't be added to a result, even by its owner", async ({ page, request }) => {
   const path = await save(page, "steward", 4242);

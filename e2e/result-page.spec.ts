@@ -296,13 +296,13 @@ test.describe("stored", () => {
   });
 
   for (const vector of ["steward", "mixed_between", "all_neither_settled"]) {
-    test(`a visitor to a ${vector} result: invited to compare at the top and the end, and only the result, six answers and Go deeper`, async ({
+    test(`a visitor to a ${vector} result: invited to compare at the top and the end, around the result's name and six tracks`, async ({
       browser,
     }) => {
       const owner = await saved(browser, vector, `203.0.113.${50 + vector.length}`);
       const visitor = await (await browser.newContext({ viewport: { width: 390, height: 660 } })).newPage();
       await visitor.goto(new URL(owner.url()).pathname);
-      await visitor.getByRole("heading", { level: 2, name: r.six_answers }).waitFor();
+      await visitor.getByRole("heading", { level: 2, name: copy.result_page.visitor_tracks_heading }).waitFor();
       await visitor.screenshot({ path: `test-results/result-v2-visitor-${vector}.png`, fullPage: true });
 
       const boxes = visitor.getByRole("region", { name: copy.result_page.take_it_heading });
@@ -319,22 +319,20 @@ test.describe("stored", () => {
       expect(await y(top)).toBeLessThan(await y(visitor.getByRole("heading", { level: 1 })));
       const button = (await top.getByRole("button").boundingBox())!;
       expect(button.y + button.height).toBeLessThanOrEqual(660);
-      // The end box comes after Go deeper.
-      expect(await y(boxes.last())).toBeGreaterThan(await y(visitor.getByRole("heading", { name: r.go_deeper })));
+      // The end box comes after the six tracks; Go deeper is the owner's only (issue #91).
+      expect(await y(boxes.last())).toBeGreaterThan(await y(visitor.getByRole("heading", { name: copy.result_page.visitor_tracks_heading })));
+      await expect(visitor.getByRole("heading", { name: r.go_deeper })).toHaveCount(0);
 
-      await expect(visitor.getByText(r.six_intro)).toBeVisible();
+      await expect(visitor.getByText(copy.result_page.visitor_tracks_intro)).toBeVisible();
       for (const name of [copy.share.heading, copy.fit.heading, copy.research_consent.heading]) {
         await expect(visitor.getByRole("heading", { name })).toHaveCount(0);
       }
       await expect(visitor.getByRole("button", { name: copy.compare.heading })).toHaveCount(0);
       await expect(visitor.getByRole("link", { name: copy.result_page.again_link })).toHaveCount(0);
       await expect(visitor.getByText(/Something off\?/)).toHaveCount(0);
-      const names = await rowNames(visitor);
-      expect(names).not.toContain(copy.fit.section_heading);
-      expect(names).toContain(r.you_and_others);
-      expect(names.at(-1)).toBe(r.why);
-      // One wording for everyone (issue #37): the visitor reads the result as written for its owner.
-      expect(await visitor.getByRole("heading", { level: 1 }).innerText()).toBe(await owner.getByRole("heading", { level: 1 }).innerText());
+      expect(await rowNames(visitor)).toEqual([]);
+      // Issue #91: the visitor reads "Their result", not the owner's "you" wording.
+      expect(await visitor.getByRole("heading", { level: 1 }).getAttribute("aria-label")).toMatch(new RegExp(`^${copy.result_page.visitor_label}: `));
       await audit(visitor);
       await visitor.context().close();
     });
@@ -346,11 +344,13 @@ test.describe("stored", () => {
     await visitor.goto(new URL(owner.url()).pathname);
     const bar = visitor.getByTestId("compare-bar");
     const barButton = bar.getByRole("button", { name: copy.result_page.compare_button });
-    await visitor.getByRole("heading", { level: 2, name: r.six_answers }).waitFor();
+    const tracks = visitor.getByRole("heading", { level: 2, name: copy.result_page.visitor_tracks_heading });
+    await tracks.waitFor();
     await expect(barButton).toBeHidden();
 
-    await visitor.getByRole("heading", { level: 2, name: r.six_answers }).scrollIntoViewIfNeeded();
-    await visitor.evaluate(() => window.scrollBy(0, 200));
+    // The visitor's view is short (issue #91): on a smaller phone, the middle of the six tracks has neither box in view.
+    await visitor.setViewportSize({ width: 390, height: 480 });
+    await visitor.getByText(content.narratives.constructs.C3.question).evaluate((el) => el.scrollIntoView({ block: "center" }));
     await expect(barButton).toBeVisible();
     const height = (await bar.boundingBox())!.height;
     expect(await visitor.evaluate(() => parseFloat(getComputedStyle(document.body).paddingBottom))).toBeCloseTo(height, 0);
@@ -363,7 +363,7 @@ test.describe("stored", () => {
 
     // Never on wider screens.
     await visitor.setViewportSize({ width: 1024, height: 700 });
-    await visitor.getByRole("heading", { level: 2, name: r.six_answers }).scrollIntoViewIfNeeded();
+    await tracks.scrollIntoViewIfNeeded();
     await expect(bar).toBeHidden();
     await visitor.context().close();
   });

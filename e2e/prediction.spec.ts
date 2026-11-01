@@ -283,7 +283,7 @@ test("a saved guess shows to the owner only, and never on the public page", asyn
 
   const visitor = await (await browser.newContext()).newPage();
   await visitor.goto(path);
-  await expect(visitor.getByRole("heading", { name: "Your six answers" })).toBeVisible();
+  await expect(visitor.getByRole("heading", { name: copy.result_page.visitor_tracks_heading })).toBeVisible();
   await expect(visitor.getByRole("heading", { name: copy.reflection.heading })).toHaveCount(0);
   for (const url of [path, `${path}/image`]) {
     const body = await (await request.get(url)).text();

@@ -31,9 +31,9 @@ export function Card({ children }: { children: React.ReactNode }) {
  * sending a comparison back). `owner` comes after the six answers (fit, share
  * and research cards); `help` is the "Help us get this right" row, already
  * limited to the owner by the caller. `end` closes the page (take the quiz
- * again or the visitor's invitation, then the earlier-version note). The
- * wording is the same for everyone: a visitor reads the result as written for
- * its owner, after a banner saying it was shared with them (issue #37).
+ * again, then the earlier-version note). This is the owner's page and an
+ * unsaved result; visitors to a shared result get the shorter view in
+ * visitor.tsx (issue #91).
  */
 export function ResultBody({
   view,
@@ -60,19 +60,7 @@ export function ResultBody({
       <div className="flex flex-col gap-4">{view.perspective ? <MatchedTop view={view} /> : <OutcomeTop view={view} />}</div>
       {afterTop}
 
-      <section aria-labelledby="six" className="flex flex-col gap-3">
-        <div className="flex flex-col gap-1">
-          <h2 id="six" className="type-title">
-            {r.six_answers}
-          </h2>
-          <p className="type-small text-ink-muted">{r.six_intro}</p>
-        </div>
-        <div className="flex flex-col rounded-md border border-line bg-surface-raised px-4">
-          {view.tracks.map((t, i) => (
-            <AnswerRow key={t.construct} t={t} first={i === 0} />
-          ))}
-        </div>
-      </section>
+      <SixAnswers heading={r.six_answers} intro={r.six_intro} tracks={view.tracks} />
 
       {owner}
 
@@ -163,6 +151,25 @@ function deeperRows(view: ResultView): Row[] {
     });
   }
   return rows;
+}
+
+/** The six questions, each a track with the person's marker: on a result, and on a visitor's view of one (issue #91). */
+export function SixAnswers({ heading, intro, tracks }: { heading: string; intro: string; tracks: TrackView[] }) {
+  return (
+    <section aria-labelledby="six" className="flex flex-col gap-3">
+      <div className="flex flex-col gap-1">
+        <h2 id="six" className="type-title">
+          {heading}
+        </h2>
+        <p className="type-small text-ink-muted">{intro}</p>
+      </div>
+      <div className="flex flex-col rounded-md border border-line bg-surface-raised px-4">
+        {tracks.map((t, i) => (
+          <AnswerRow key={t.construct} t={t} first={i === 0} />
+        ))}
+      </div>
+    </section>
+  );
 }
 
 /** One of the six answers: the question, a track with the person's marker, and the band in words. */

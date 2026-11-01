@@ -138,6 +138,10 @@ export const copyFileSchema = z.strictObject({
     /** The visitor's box at the top and end of a shared result, and the sticky bar on phones (issue #37). */
     compare_body: z.string().includes("{n}"),
     compare_button: text,
+    /** The visitor's shorter view of a shared result (issue #91): the card's label, and the six tracks' heading and line. */
+    visitor_label: text,
+    visitor_tracks_heading: text,
+    visitor_tracks_intro: text,
     /** "Take the quiz again" at the end of your own result, with its confirmation when the result isn't saved. */
     again_link: text,
     again_unsaved: text,

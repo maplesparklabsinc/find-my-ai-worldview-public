@@ -67,9 +67,20 @@ export function useIsMine(id: string): boolean {
  * ownership is known, so the visitor's banner and invitation never flash on
  * the owner's page when it loads (issue #37).
  */
-export function OwnerOnly({ id, children, otherwise = null }: { id: string; children: React.ReactNode; otherwise?: React.ReactNode }) {
+export function OwnerOnly({
+  id,
+  children,
+  otherwise = null,
+  pending = null,
+}: {
+  id: string;
+  children: React.ReactNode;
+  otherwise?: React.ReactNode;
+  /** Shown until ownership is known (on the server and while the page hydrates). */
+  pending?: React.ReactNode;
+}) {
   const who = useOwnership(id);
-  return who === "unknown" ? null : who === "mine" ? children : otherwise;
+  return who === "unknown" ? pending : who === "mine" ? children : otherwise;
 }
 
 function useOrigin(): string {
@@ -562,10 +573,16 @@ export function ResearchSignup({ id }: { id: string }) {
 
 // ---------- For visitors ----------
 
-/** Start a fresh quiz that is compared with response `id` when it is saved, as a compare link (/c/{id}) does. */
-function useStartCompare(id: string): () => void {
+/**
+ * Start a fresh quiz that is compared with response `id` when it is saved, as a
+ * compare link (/c/{id}) does. The click counts only for visitors: like
+ * shared_result_viewed, never in the browser that saved the result, even on
+ * its own shared link (?view=shared).
+ */
+function useStartCompare(id: string, position: "top" | "bottom" | "bar"): () => void {
   const router = useRouter();
   return () => {
+    if (!isMine(id)) track("compare_cta_clicked", { position });
     clearQuiz();
     saveCompareWith(id);
     track("compare_started");
@@ -584,7 +601,7 @@ const COMPARE_BOX = { top: "take-quiz-top", end: "take-quiz-end" } as const;
 export function VisitorCompare({ id, place }: { id: string; place: keyof typeof COMPARE_BOX }) {
   const p = getCopy().result_page;
   const headingId = useId();
-  const start = useStartCompare(id);
+  const start = useStartCompare(id, place === "top" ? "top" : "bottom");
   return (
     <section
       id={COMPARE_BOX[place]}
@@ -607,7 +624,7 @@ export function VisitorCompare({ id, place }: { id: string; place: keyof typeof 
  */
 export function CompareBar({ id }: { id: string }) {
   const p = getCopy().result_page;
-  const start = useStartCompare(id);
+  const start = useStartCompare(id, "bar");
   const bar = useRef<HTMLDivElement>(null);
   const [onScreen, setOnScreen] = useState<Record<string, boolean>>({ [COMPARE_BOX.top]: true });
 
@@ -652,6 +669,21 @@ export function CompareBar({ id }: { id: string }) {
       </Button>
     </div>
   );
+}
+
+/**
+ * Counts a visitor's view of a shared result (issue #91), once per page load.
+ * Rendered only in the visitor's view, and never counted in the browser that
+ * saved the result, even on its own shared link (?view=shared).
+ */
+export function SharedResultViewed({ id }: { id: string }) {
+  const sent = useRef(false);
+  useEffect(() => {
+    if (sent.current || isMine(id)) return;
+    sent.current = true;
+    track("shared_result_viewed");
+  }, [id]);
+  return null;
 }
 
 /** For a result that can't be shown in full: an invitation to take the quiz, without a comparison. */
